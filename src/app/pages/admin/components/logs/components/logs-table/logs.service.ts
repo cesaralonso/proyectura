@@ -1,0 +1,103 @@
+import { Observable } from 'rxjs/Observable';
+import { LogsInterface } from './logs.interface';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+import { Configuration } from '../../../../../../app.constants';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+@Injectable()
+export class LogsService {
+
+    private actionUrl: string;
+    private headers: Headers;
+
+
+    constructor(private _http: Http, private _configuration: Configuration) {
+        this.headers = new Headers();
+        this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+    }
+
+    addLogs = (logs: LogsInterface): Observable<any> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarLog`;
+        const toAdd = JSON.stringify(logs);
+        console.log('toAdd', toAdd);
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <any>response.json())
+            .catch(this.handleError);
+    }
+
+    editLogs = (logs: LogsInterface): Observable<any> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}EditarLog`;
+        const toAdd = JSON.stringify(logs);
+        console.log('toAdd', toAdd);
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <any>response.json())
+            .catch(this.handleError);
+    }
+
+    logsData = [
+        {
+            id: 3,
+            idempresa: 44,
+            idrol: 12,
+            usuario: 'Magaña',
+            contrasena: '12345',
+            nombre: 'Cesar',
+            email: 'cesar@cesar.com',
+            telefono: '123456',
+            costo: 23456,
+            idstatususuario: 1,
+            emailsms: 'cesar@x.com',
+            bfechainicial: true,
+            fechainicial: '12/12/12'
+        },
+        {
+            id: 2,
+            idempresa: 31,
+            idrol: 12,
+            usuario: 'Alonso',
+            contrasena: '12345',
+            nombre: 'Cesar',
+            email: 'cesar@cesar.com',
+            telefono: '123456',
+            costo: 23456,
+            idstatususuario: 1,
+            emailsms: 'string',
+            bfechainicial: false,
+            fechainicial: '11/12/17'
+        },
+        {
+            id: 3,
+            idempresa: 34,
+            idrol: 12,
+            usuario: 'Cesar',
+            contrasena: '12345',
+            nombre: 'Cesar',
+            email: 'cesar@cesar.com',
+            telefono: '123456',
+            costo: 23456,
+            idstatususuario: 1,
+            emailsms: 'string',
+            bfechainicial: true,
+            fechainicial: '10/10/10'
+        }
+    ];
+
+    getAllLogs(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(this.logsData);
+            }, 1000);
+        });
+    }
+
+    private handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
+
+}
+
+

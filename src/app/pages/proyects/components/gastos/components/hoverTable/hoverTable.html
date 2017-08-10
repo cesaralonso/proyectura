@@ -1,0 +1,24 @@
+<div class="horizontal-scroll">
+  <table class="table table-hover">
+    <thead>
+    <tr class="black-muted-bg">
+      <th>Proveedor</th>
+      <th class="align-center">Folio</th>
+      <th class="align-center">Importe</th>
+      <th class="align-center">File</th>
+      <th class="align-center">Pdf</th>
+      <th class="align-center">Xml</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of metricsTableData" class="no-top-border">
+      <td class="align-right">{{item.proveedor}}</td>
+      <td ngClass="nowrap">{{item.folio}}</td>
+      <td class="align-right">$ {{item.importe}}</td>
+      <td class="table-arr"><i [ngClass]="{'list-up': item.file, 'list-down': !item.file }"></i></td>
+      <td class="table-arr"><i [ngClass]="{'pdf-up': item.file, 'pdf-down': !item.file }"></i></td>
+      <td class="table-arr"><i [ngClass]="{'xml-up': item.file, 'xml-down': !item.file }"></i></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

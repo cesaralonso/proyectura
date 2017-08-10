@@ -1,0 +1,106 @@
+<div class="modal-content">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+      <div class="modal-header">
+        <h4 class="modal-title">{{modalHeader}} - {{id}}</h4>
+        <button class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <ba-card cardTitle="Información de Razón Social">
+
+            <div class="form-group row" [ngClass]="{'has-error': (!idempresa.valid && idempresa.touched), 'has-success': (idempresa.valid && idempresa.touched)}">
+              <label for="inputidempresa" class="col-sm-2 form-control-label">Id Empresa</label>
+              <div class="col-sm-10">
+                <input [formControl]="idempresa" type="number" class="form-control" id="inputidempresa" placeholder="idempresa">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!idrol.valid && idrol.touched), 'has-success': (idrol.valid && idrol.touched)}">
+              <label for="inputidrol" class="col-sm-2 form-control-label">Id Rol</label>
+              <div class="col-sm-10">
+                <input [formControl]="idrol" type="number" class="form-control" id="inputidrol" placeholder="idrol">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!usuario.valid && usuario.touched), 'has-success': (usuario.valid && usuario.touched)}">
+              <label for="inputusuario" class="col-sm-2 form-control-label">Usuario</label>
+              <div class="col-sm-10">
+                <input [formControl]="usuario" type="text" class="form-control" id="inputusuario" placeholder="usuario">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!contrasena.valid && contrasena.touched), 'has-success': (contrasena.valid && contrasena.touched)}">
+              <label for="inputcontrasena" class="col-sm-2 form-control-label">Contraseña</label>
+              <div class="col-sm-10">
+                <input [formControl]="contrasena" type="text" class="form-control" id="inputcontrasena" placeholder="contraseña">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
+              <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
+              <div class="col-sm-10">
+                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="nombre">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
+              <label for="inputemail" class="col-sm-2 form-control-label">Email</label>
+              <div class="col-sm-10">
+                <input [formControl]="email" type="email" class="form-control" id="inputemail" placeholder="email">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!telefono.valid && telefono.touched), 'has-success': (telefono.valid && telefono.touched)}">
+              <label for="inputtelefono" class="col-sm-2 form-control-label">Teléfono</label>
+              <div class="col-sm-10">
+                <input [formControl]="telefono" type="text" class="form-control" id="inputtelefono" placeholder="teléfono">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!costo.valid && costo.touched), 'has-success': (costo.valid && costo.touched)}">
+              <label for="inputcosto" class="col-sm-2 form-control-label">Costo</label>
+              <div class="col-sm-10">
+                <input [formControl]="costo" type="number" class="form-control" id="inputcosto" placeholder="costo">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!idstatususuario.valid && idstatususuario.touched), 'has-success': (idstatususuario.valid && idstatususuario.touched)}">
+              <label for="inputidstatususuario" class="col-sm-2 form-control-label">Id Status Usuario</label>
+              <div class="col-sm-10">
+                <input [formControl]="idstatususuario" type="number" class="form-control" id="inputidstatususuario" placeholder="idstatususuario">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!emailsms.valid && emailsms.touched), 'has-success': (emailsms.valid && emailsms.touched)}">
+              <label for="inputemailsms" class="col-sm-2 form-control-label">Email SMS</label>
+              <div class="col-sm-10">
+                <input [formControl]="emailsms" type="email" class="form-control" id="inputemailsms" placeholder="emailsms">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!bfechainicial.valid && bfechainicial.touched), 'has-success': (bfechainicial.valid && bfechainicial.touched)}">
+              <label for="inputbfechainicial" class="col-sm-2 form-control-label">Fecha Inicial?</label>
+              <div class="col-sm-10">
+                <input [formControl]="bfechainicial" type="checkbox" class="form-control" id="inputbfechainicial">
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!fechainicial.valid && fechainicial.touched), 'has-success': (fechainicial.valid && fechainicial.touched)}">
+              <label for="inputfechainicial" class="col-sm-2 form-control-label">Fecha Inicial</label>
+              <div class="col-sm-10">
+                <input [formControl]="fechainicial" type="date" class="form-control" id="inputfechainicial" placeholder="12/12/2012">
+              </div>
+            </div>
+
+        </ba-card>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger cancel-btn" (click)="closeModal()">Cancelar</button>
+        <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" type="submit">Aceptar</button>
+      </div>
+  </form>
+</div>
