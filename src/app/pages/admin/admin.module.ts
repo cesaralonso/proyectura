@@ -19,7 +19,7 @@ import { UserAddModalComponent } from './components/users/components/usuarios-ta
 import { UserEditModalComponent } from './components/users/components/usuarios-table/user-edit-modal/user-edit-modal.component';
 import { UserService } from './components/users/components/usuarios-table/user.service';
 
-import { DataFilterPipe } from './components/users/components/usuarios-table/data-filter.pipe';
+import { DataFilterPipe } from './data-filter.pipe';
 
 import { GroupsComponent } from './components/groups/groups.component';
 import { GroupsService } from './components/groups/components/groups-table/groups.service';
