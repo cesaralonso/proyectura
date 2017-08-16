@@ -1,0 +1,36 @@
+<div class="modal-content">
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+  <div class="modal-header">
+    <h4 class="modal-title">{{modalHeader}}</h4>
+    <button class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <ba-card cardTitle="Información de tipo de obra">
+
+        <div class="form-group row" [ngClass]="{'has-error': (!clavetipoobra.valid && clavetipoobra.touched), 'has-success': (clavetipoobra.valid && clavetipoobra.touched)}">
+          <label for="inputclavetipoobra" class="col-sm-2 form-control-label">Clave</label>
+          <div class="col-sm-10">
+            <input [formControl]="clavetipoobra" type="text" class="form-control" id="inputclavetipoobra" placeholder="clavetipoobra">
+          </div>
+        </div>
+
+        <div class="form-group row" [ngClass]="{'has-error': (!descripcion.valid && descripcion.touched), 'has-success': (descripcion.valid && descripcion.touched)}">
+          <label for="inputdescripcion" class="col-sm-2 form-control-label">Descripción</label>
+          <div class="col-sm-10">
+            <input [formControl]="descripcion" type="text" class="form-control" id="inputdescripcion" placeholder="descripción">
+          </div>
+        </div>
+
+    </ba-card>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger cancel-btn" (click)="closeModal()">Cancelar</button>
+    <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" type="submit">Aceptar</button>
+  </div>
+      </form>
+</div>

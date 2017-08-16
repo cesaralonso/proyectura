@@ -85,7 +85,8 @@
       "grupos": "Roles",
       "permisos": "Permisos",
       "bitacora": "Bitácora",
-      "razones": "Razones Sociales"
+      "razones": "Razones Sociales",
+      "tipo-obra": "Tipos de Obra"
     },
     "created_with": "Created with"
   },

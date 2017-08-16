@@ -45,6 +45,13 @@ import { ReasonsTableComponent } from './components/reasons/components/reasons-t
 import { ReasonsEditModalComponent } from './components/reasons/components/reasons-table/reasons-edit-modal/reasons-edit-modal.component';
 import { ReasonsAddModalComponent } from './components/reasons/components/reasons-table/reasons-add-modal/reasons-add-modal.component';
 
+import { TipoObraComponent } from './components/tipo-obra/tipo-obra.component';
+import { TipoObraService } from './components/tipo-obra/components/tipo-obra-table/tipo-obra.service';
+import { TipoObraTableComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-table.component';
+import { TipoObraEditModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-edit-modal/tipo-obra-edit-modal.component';
+import { TipoObraAddModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-add-modal/tipo-obra-add-modal.component';
+
+
 
 @NgModule({
   imports: [
@@ -82,7 +89,11 @@ import { ReasonsAddModalComponent } from './components/reasons/components/reason
     ReasonsComponent,
     ReasonsTableComponent,
     ReasonsAddModalComponent,
-    ReasonsEditModalComponent
+    ReasonsEditModalComponent,
+    TipoObraComponent,
+    TipoObraTableComponent,
+    TipoObraAddModalComponent,
+    TipoObraEditModalComponent
   ],
   entryComponents: [
     UserAddModalComponent,
@@ -94,14 +105,17 @@ import { ReasonsAddModalComponent } from './components/reasons/components/reason
     LogsAddModalComponent,
     LogsEditModalComponent,
     ReasonsAddModalComponent,
-    ReasonsEditModalComponent
+    ReasonsEditModalComponent,
+    TipoObraAddModalComponent,
+    TipoObraEditModalComponent
   ],
   providers: [
     UserService,
     GroupsService,
     PermissionsService,
     LogsService,
-    ReasonsService
+    ReasonsService,
+    TipoObraService
   ]
 })
 export class AdminModule {

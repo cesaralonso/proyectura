@@ -44,7 +44,6 @@ export class ObrasAddModal implements OnInit {
               private toastrService: ToastrService) {
 
     this.form = fb.group({
-
       'clave': ['2058'],
       'nickname': ['@Ideasys'],
       'usuarioauth': ['super'],
@@ -61,7 +60,6 @@ export class ObrasAddModal implements OnInit {
       'emailsms': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'bfechainicial': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       'fechainicial': ['', Validators.compose([Validators.required, Validators.minLength(2)])]
-
     });
 
     this.idempresa = this.form.controls['idempresa'];

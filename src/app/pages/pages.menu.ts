@@ -169,6 +169,18 @@ export const PAGES_MENU = [
                 order: 3
               }
             }
+          },
+          {
+            path: 'tipo-obra',
+            data: {
+              menu: {
+                title: 'general.menu.tipo-obra',
+                icon: 'ion-social-buffer',
+                selected: false,
+                expanded: false,
+                order: 3
+              }
+            }
           }
         ]
       }
