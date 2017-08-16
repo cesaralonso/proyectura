@@ -1,8 +1,12 @@
+import { AuthLocalstorage } from './../../../../shared/auth-localstorage.service';
+import { ObrasResponseInterface } from './obras-response.interface';
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';
-import { Obras } from './obras.interface';
+import { ObrasInterface } from './obras.interface';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Configuration } from '../../../../app.constants';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -14,121 +18,233 @@ export class ObrasService {
     private headers: Headers;
 
 
-    constructor(private _http: Http, private _configuration: Configuration) {
+    constructor(
+        private _http: Http, 
+        private _configuration: Configuration, 
+        private localStorageService: LocalStorageService,
+        private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
 
-    AddObras = (obras: Obras): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarUsuario`;
+    addObras = (obras: ObrasInterface): Observable<ObrasResponseInterface> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarObra`;
         const toAdd = JSON.stringify(obras);
         console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <any>response.json())
+            .map((response: Response) => <ObrasResponseInterface>response.json())
             .catch(this.handleError);
     }
 
-    EditObras = (obras: Obras): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}EditarUsuario`;
+    editObras = (obras: ObrasInterface): Observable<ObrasResponseInterface> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarObra`;
         const toAdd = JSON.stringify(obras);
         console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <any>response.json())
+            .map((response: Response) => <ObrasResponseInterface>response.json())
             .catch(this.handleError);
     }
 
-    obrasData = [
-        {
-            id: 3,
-            idempresa: 44,
-            idrol: 12,
-            usuario: 'Magaña',
-            contrasena: '12345',
-            nombre: 'Cesar',
-            email: 'cesar@cesar.com',
-            telefono: '123456',
-            costo: 23456,
-            idstatususuario: 1,
-            emailsms: 'cesar@x.com',
-            bfechainicial: true,
-            fechainicial: '12/12/12'
-        },
-        {
-            id: 2,
-            idempresa: 31,
-            idrol: 12,
-            usuario: 'Alonso',
-            contrasena: '12345',
-            nombre: 'Cesar',
-            email: 'cesar@cesar.com',
-            telefono: '123456',
-            costo: 23456,
-            idstatususuario: 1,
-            emailsms: 'string',
-            bfechainicial: false,
-            fechainicial: '11/12/17'
-        },
-        {
-            id: 3,
-            idempresa: 34,
-            idrol: 12,
-            usuario: 'Cesar',
-            contrasena: '12345',
-            nombre: 'Cesar',
-            email: 'cesar@cesar.com',
-            telefono: '123456',
-            costo: 23456,
-            idstatususuario: 1,
-            emailsms: 'string',
-            bfechainicial: true,
-            fechainicial: '10/10/10'
-        }
-    ];
-
-    getAllObrass(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(this.obrasData);
-            }, 1000);
+    getObras = (idObra: number): Observable<ObrasInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObrasPorIDObra`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idobra: idObra, // cambiado por idusuario
         });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    getAllObras = (): Observable<ObrasInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObras`;
+       
+        const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
+
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <ObrasInterface[]>response.json())
+            .catch(this.handleError);
+    }
+    // No hay delete
+    deleteObras = (id: string): Observable<ObrasResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaObras`;
+       
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toSend = JSON.stringify({
+            'nicknameauth': credenciales.nicknameauth,
+            'usuarioauth': credenciales.usuarioauth,
+            'claveauth': credenciales.claveauth,
+            'idusuario': id,
+        });
+
+        return this._http.post(this.actionUrl, toSend, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
+    }
+
+    autorizarObra = (idObra: number): Observable<ObrasResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}autorizarObra`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idobra: idObra,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasResponseInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    bloquearObra = (idObra: number): Observable<ObrasResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bloquearObra`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idobra: idObra,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasResponseInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    cancelarObra = (idObra: number): Observable<ObrasResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}CancelarObra`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idobra: idObra,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasResponseInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    finalizarObra = (idObra: number): Observable<ObrasResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}FinalizarObra`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idobra: idObra,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasResponseInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    cambiarEstatusPorIdObra = (idObra: number, idEstatusObra: number): Observable<ObrasResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}cambiarEstatusPorIDObra`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idobra: idObra,
+            idestatusobra: idEstatusObra,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasResponseInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerObrasPorIdRazonSocialCliente = (idRazonSocialCliente: number): Observable<ObrasInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObrasPorIDRazonSocialCliente`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idrazonsocialcliente: idRazonSocialCliente,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerObrasPorIdRazonSocialContratista = (idRazonSocialContratista: number): Observable<ObrasInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObrasPorIDRazonSocialContratista`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idrazonsocialcontratista: idRazonSocialContratista,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerObrasPorIdRazonSocialConstructor = (idRazonSocialConstructor: number): Observable<ObrasInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObrasPorIDRazonSocialConstructor`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idrazonsocialconstructor: idRazonSocialConstructor,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerObrasPorIdRazonSocialAsociado = (idRazonSocialAsociado: number): Observable<ObrasInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObrasPorIDRazonSocialAsociado`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idrazonsocialasociado: idRazonSocialAsociado,
+        });
+
+        console.log('credenciales', toAdd);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ObrasInterface[]>response.json())
+            .catch(this.handleError);
     }
 
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
-    /*
-    public GetAll = (): Observable<MyTypedItem[]> => {
-        return this._http.get(this.actionUrl)
-            .map((response: Response) => <MyTypedItem[]>response.json())
-            .catch(this.handleError);
-    }
 
-    public GetSingle = (id: number): Observable<MyTypedItem> => {
-        return this._http.get(this.actionUrl + id)
-            .map((response: Response) => <MyTypedItem>response.json())
-            .catch(this.handleError);
-    }
-
-    public Add = (itemName: string): Observable<MyTypedItem> => {
-        let toAdd = JSON.stringify({ ItemName: itemName });
-
-        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <MyTypedItem>response.json())
-            .catch(this.handleError);
-    }
-
-    public Update = (id: number, itemToUpdate: MyTypedItem): Observable<MyTypedItem> => {
-        return this._http.put(this.actionUrl + id, JSON.stringify(itemToUpdate), { headers: this.headers })
-            .map((response: Response) => <MyTypedItem>response.json())
-            .catch(this.handleError);
-    }
-
-    public Delete = (id: number): Observable<Response> => {
-        return this._http.delete(this.actionUrl + id)
-            .catch(this.handleError);
-    }
-    */
 }
-
-
