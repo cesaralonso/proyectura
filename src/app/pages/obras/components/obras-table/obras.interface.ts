@@ -1,20 +1,25 @@
-export interface Obras {
-    nickname: string;
-    usuarioauth: string;
-    claveauth: string;
-    idempresa: number;
-    idrol: number;
-    usuario: string;
-    contrasena: string;
-    nombre: string;
-    email: string;
-    telefono: string;
-    costo: number;
-    idstatususuario: number;
-    emailsms: string;
-    bfechainicial: boolean;
-    fechainicial: string;
+export interface ObrasInterface {
+    idobra: number;
+    descripcion: string;
+    direccion: string;
+    medidasterreno: string;
+    medidasconstruccion: string;
+    fechainicio: string;
+    fechafin: string;
+    idtipoobra: number;
+    presupuesto: number;
+    idrazonsocialcliente: number;
+    idrazonsocialcontratista: number;
+    idrazonsocialconstructor: number;
+    idrazonsocialasociado: number;
+    posiciongps: string;
+    idestatusobra: number;
+    observaciones: string;
+    desctipoobra?: string;
+    direccioncliente?: string;
+    razonsocialcontratista?: string;
+    razonsocialconstructor?: string;
+    razonsocialasociado?: string;
+    claveestatusobra?: string;
+    tipoobra?: string;
 }
-
-
-
