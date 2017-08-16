@@ -46,63 +46,22 @@ export class ReasonsService {
             .catch(this.handleError);
     }
 
-    /*
-    reasonsData = [
-        {
-            id: 3,
-            idempresa: 44,
-            idrol: 12,
-            usuario: 'Magaña',
-            contrasena: '12345',
-            nombre: 'Cesar',
-            email: 'cesar@cesar.com',
-            telefono: '123456',
-            costo: 23456,
-            idstatususuario: 1,
-            emailsms: 'cesar@x.com',
-            bfechainicial: true,
-            fechainicial: '12/12/12'
-        },
-        {
-            id: 2,
-            idempresa: 31,
-            idrol: 12,
-            usuario: 'Alonso',
-            contrasena: '12345',
-            nombre: 'Cesar',
-            email: 'cesar@cesar.com',
-            telefono: '123456',
-            costo: 23456,
-            idstatususuario: 1,
-            emailsms: 'string',
-            bfechainicial: false,
-            fechainicial: '11/12/17'
-        },
-        {
-            id: 3,
-            idempresa: 34,
-            idrol: 12,
-            usuario: 'Cesar',
-            contrasena: '12345',
-            nombre: 'Cesar',
-            email: 'cesar@cesar.com',
-            telefono: '123456',
-            costo: 23456,
-            idstatususuario: 1,
-            emailsms: 'string',
-            bfechainicial: true,
-            fechainicial: '10/10/10'
-        }
-    ];
-
-    getAllReasons(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(this.reasonsData);
-            }, 1000);
+    deleteReasons = (id: string): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaUsuario`;
+       
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toSend = JSON.stringify({
+            'nicknameauth': credenciales.nicknameauth,
+            'usuarioauth': credenciales.usuarioauth,
+            'claveauth': credenciales.claveauth,
+            'idrazonsocial': id,
         });
+
+        return this._http.post(this.actionUrl, toSend, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
     }
-    */
+
 
     private credentials: CredentialsInterface = this.authLocalstorage.getCredentials();
 

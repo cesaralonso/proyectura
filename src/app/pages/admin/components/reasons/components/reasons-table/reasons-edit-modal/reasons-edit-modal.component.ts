@@ -1,3 +1,4 @@
+import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ReasonsService } from './../reasons.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
@@ -22,7 +23,7 @@ export class ReasonsEditModalComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
 
-  nickname: AbstractControl;
+  nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
   idempresa: AbstractControl;
@@ -41,23 +42,26 @@ export class ReasonsEditModalComponent implements OnInit {
 
   private _claveauth: string;
   private _usuarioauth: string;
-  private _nickname: string;
+  private _nicknameauth: string;
 
 
   constructor(private service: ReasonsService,
               private activeModal: NgbActiveModal,
               fb: FormBuilder,
               private toastrService: ToastrService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private authLocalstorage: AuthLocalstorage) {
 
-    this._claveauth = this.localStorageService.get('claveauth').toString();
-    this._usuarioauth = this.localStorageService.get('usuarioauth').toString();
-    this._nickname = this.localStorageService.get('nickname').toString();
- 
+    const credenciales = this.authLocalstorage.getCredentials();
+
+    this._claveauth = credenciales.claveauth;
+    this._usuarioauth = credenciales.usuarioauth;
+    this._nicknameauth = credenciales.nicknameauth;
+
     this.form = fb.group({
 
       'claveauth': this._claveauth,
-      'nickname': this._nickname,
+      'nickname': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
       'idempresa': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'idrol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],

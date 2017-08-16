@@ -60,13 +60,13 @@ export class UserAddModalComponent implements OnInit {
       'usuarioauth': this._usuarioauth,
       'idempresa': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'idrol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'usuario': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'contrasena': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'nombre': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'telefono': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'usuario': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'contrasena': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'nombre': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'email': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'telefono': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'idstatususuario': [''],
-      'emailsms': ['']
+      'emailsms': [''],
     });
 
     this.idempresa = this.form.controls['idempresa'];
@@ -90,8 +90,6 @@ export class UserAddModalComponent implements OnInit {
   onSubmit(values: UserInterface): void {
     this.submitted = true;
 
-    console.log("values", values);
-
     if (this.form.valid) {
       this.service
         .addUser(values)
@@ -109,7 +107,6 @@ export class UserAddModalComponent implements OnInit {
 
     if (data.idRespuesta === -1) {
       this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
     }
   }
 

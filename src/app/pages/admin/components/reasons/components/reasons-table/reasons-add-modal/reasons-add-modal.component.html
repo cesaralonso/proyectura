@@ -11,87 +11,94 @@
 
         <ba-card cardTitle="Información de Razón Social">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!idempresa.valid && idempresa.touched), 'has-success': (idempresa.valid && idempresa.touched)}">
-              <label for="inputidempresa" class="col-sm-2 form-control-label">Id Empresa</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocial.valid && idrazonsocial.touched), 'has-success': (idrazonsocial.valid && idrazonsocial.touched)}">
+              <label for="idrazonsocial" class="col-sm-2 form-control-label">idrazonsocial</label>
               <div class="col-sm-10">
-                <input [formControl]="idempresa" type="number" class="form-control" id="inputidempresa" placeholder="idempresa">
+                <input [formControl]="idrazonsocial" type="number" class="form-control" id="idrazonsocial" placeholder="idrazonsocial">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!idrol.valid && idrol.touched), 'has-success': (idrol.valid && idrol.touched)}">
-              <label for="inputidrol" class="col-sm-2 form-control-label">Id Rol</label>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!razonsocial.valid && razonsocial.touched), 'has-success': (razonsocial.valid && razonsocial.touched)}">
+              <label for="razonsocial" class="col-sm-2 form-control-label">razonsocial</label>
               <div class="col-sm-10">
-                <input [formControl]="idrol" type="number" class="form-control" id="inputidrol" placeholder="idrol">
+                <input [formControl]="razonsocial" type="number" class="form-control" id="razonsocial" placeholder="razonsocial">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!usuario.valid && usuario.touched), 'has-success': (usuario.valid && usuario.touched)}">
-              <label for="inputusuario" class="col-sm-2 form-control-label">Usuario</label>
-              <div class="col-sm-10">
-                <input [formControl]="usuario" type="text" class="form-control" id="inputusuario" placeholder="usuario">
-              </div>
-            </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!contrasena.valid && contrasena.touched), 'has-success': (contrasena.valid && contrasena.touched)}">
-              <label for="inputcontrasena" class="col-sm-2 form-control-label">Contraseña</label>
-              <div class="col-sm-10">
-                <input [formControl]="contrasena" type="text" class="form-control" id="inputcontrasena" placeholder="contraseña">
-              </div>
-            </div>
-
+            
             <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
-              <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
+              <label for="nombre" class="col-sm-2 form-control-label">nombre</label>
               <div class="col-sm-10">
-                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="nombre">
+                <input [formControl]="nombre" type="number" class="form-control" id="nombre" placeholder="nombre">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
-              <label for="inputemail" class="col-sm-2 form-control-label">Email</label>
+             
+            <div class="form-group row" [ngClass]="{'has-error': (!rfc.valid && rfc.touched), 'has-success': (rfc.valid && rfc.touched)}">
+              <label for="rfc" class="col-sm-2 form-control-label">rfc</label>
               <div class="col-sm-10">
-                <input [formControl]="email" type="email" class="form-control" id="inputemail" placeholder="email">
+                <input [formControl]="rfc" type="number" class="form-control" id="rfc" placeholder="rfc">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!telefono.valid && telefono.touched), 'has-success': (telefono.valid && telefono.touched)}">
-              <label for="inputtelefono" class="col-sm-2 form-control-label">Teléfono</label>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!direccion.valid && direccion.touched), 'has-success': (direccion.valid && direccion.touched)}">
+              <label for="inputdireccion" class="col-sm-2 form-control-label">direccion</label>
               <div class="col-sm-10">
-                <input [formControl]="telefono" type="text" class="form-control" id="inputtelefono" placeholder="teléfono">
+                <input [formControl]="direccion" type="number" class="form-control" id="inputdireccion" placeholder="direccion">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!costo.valid && costo.touched), 'has-success': (costo.valid && costo.touched)}">
-              <label for="inputcosto" class="col-sm-2 form-control-label">Costo</label>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!calle.valid && calle.touched), 'has-success': (calle.valid && calle.touched)}">
+              <label for="inputcalle" class="col-sm-2 form-control-label">inputcalle</label>
               <div class="col-sm-10">
-                <input [formControl]="costo" type="number" class="form-control" id="inputcosto" placeholder="costo">
+                <input [formControl]="calle" type="number" class="form-control" id="inputcalle" placeholder="calle">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!idstatususuario.valid && idstatususuario.touched), 'has-success': (idstatususuario.valid && idstatususuario.touched)}">
-              <label for="inputidstatususuario" class="col-sm-2 form-control-label">Id Status Usuario</label>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!numexterior.valid && numexterior.touched), 'has-success': (numexterior.valid && numexterior.touched)}">
+              <label for="inputnumexterior" class="col-sm-2 form-control-label">numexterior</label>
               <div class="col-sm-10">
-                <input [formControl]="idstatususuario" type="number" class="form-control" id="inputidstatususuario" placeholder="idstatususuario">
+                <input [formControl]="numexterior" type="number" class="form-control" id="inputnumexterior" placeholder="numexterior">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!emailsms.valid && emailsms.touched), 'has-success': (emailsms.valid && emailsms.touched)}">
-              <label for="inputemailsms" class="col-sm-2 form-control-label">Email SMS</label>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!numinterior.valid && numinterior.touched), 'has-success': (numinterior.valid && numinterior.touched)}">
+              <label for="inputnuminterior" class="col-sm-2 form-control-label">numinterior</label>
               <div class="col-sm-10">
-                <input [formControl]="emailsms" type="email" class="form-control" id="inputemailsms" placeholder="emailsms">
+                <input [formControl]="numinterior" type="number" class="form-control" id="inputnuminterior" placeholder="numinterior">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!bfechainicial.valid && bfechainicial.touched), 'has-success': (bfechainicial.valid && bfechainicial.touched)}">
-              <label for="inputbfechainicial" class="col-sm-2 form-control-label">Fecha Inicial?</label>
+             
+            <div class="form-group row" [ngClass]="{'has-error': (!colonia.valid && colonia.touched), 'has-success': (colonia.valid && colonia.touched)}">
+              <label for="inputcolonia" class="col-sm-2 form-control-label">colonia</label>
               <div class="col-sm-10">
-                <input [formControl]="bfechainicial" type="checkbox" class="form-control" id="inputbfechainicial">
+                <input [formControl]="colonia" type="number" class="form-control" id="inputcolonia" placeholder="colonia">
               </div>
             </div>
-
-            <div class="form-group row" [ngClass]="{'has-error': (!fechainicial.valid && fechainicial.touched), 'has-success': (fechainicial.valid && fechainicial.touched)}">
-              <label for="inputfechainicial" class="col-sm-2 form-control-label">Fecha Inicial</label>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!municipio.valid && municipio.touched), 'has-success': (municipio.valid && municipio.touched)}">
+              <label for="inputmunicipio" class="col-sm-2 form-control-label">municipio</label>
               <div class="col-sm-10">
-                <input [formControl]="fechainicial" type="date" class="form-control" id="inputfechainicial" placeholder="12/12/2012">
+                <input [formControl]="municipio" type="number" class="form-control" id="inputmunicipio" placeholder="municipio">
+              </div>
+            </div>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!ciudad.valid && ciudad.touched), 'has-success': (ciudad.valid && ciudad.touched)}">
+              <label for="inputciudad" class="col-sm-2 form-control-label">ciudad</label>
+              <div class="col-sm-10">
+                <input [formControl]="ciudad" type="number" class="form-control" id="inputciudad" placeholder="ciudad">
+              </div>
+            </div>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!estado.valid && estado.touched), 'has-success': (estado.valid && estado.touched)}">
+              <label for="inputestado" class="col-sm-2 form-control-label">estado</label>
+              <div class="col-sm-10">
+                <input [formControl]="estado" type="number" class="form-control" id="inputestado" placeholder="estado">
+              </div>
+            </div>
+            
+            <div class="form-group row" [ngClass]="{'has-error': (!pais.valid && pais.touched), 'has-success': (pais.valid && pais.touched)}">
+              <label for="inputpais" class="col-sm-2 form-control-label">pais</label>
+              <div class="col-sm-10">
+                <input [formControl]="pais" type="number" class="form-control" id="inputpais" placeholder="pais">
               </div>
             </div>
 

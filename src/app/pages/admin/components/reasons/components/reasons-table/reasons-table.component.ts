@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { ReasonsService } from './reasons.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,12 +13,12 @@ import { ReasonsEditModalComponent } from './reasons-edit-modal/reasons-edit-mod
 export class ReasonsTableComponent implements OnInit {
 
     data;
-    filterQuery = "";
+    filterQuery = '';
     rowsOnPage = 10;
-    sortBy = "nombre";
-    sortOrder = "asc";
+    sortBy = 'idrazonsocial';
+    sortOrder = 'asc';
 
-    constructor(private service: ReasonsService, private modalService: NgbModal) {
+    constructor(private service: ReasonsService, private modalService: NgbModal, private toastrService: ToastrService) {
     }
 
     toInt(num: string) {
@@ -37,31 +38,39 @@ export class ReasonsTableComponent implements OnInit {
 
     }
     
-    onDeleteConfirm(event, item): void {
+    onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        console.log('item.id a borrar', item.id);
+        console.log('item.id a borrar', id);
+          this.service.deleteReasons(id)
+          .subscribe(
+            (data) => this.showToast(data),
+            error => console.log(error),
+            () => console.log('Delete completed')
+          );
+
       } else {
-        console.log('item.id cancelando', item.id);
+        console.log('item.id cancelando', id);
       }
     }
 
+    showToast(data) {
+      if (data.idRespuesta === 0) {
+        this.toastrService.success(data.mensajeRespuesta);
+        this.getAllReasons();
+      } else {
+        this.toastrService.error(data.mensajeRespuesta);
+      }
+    }
 
     ngOnInit() {
         this.getAllReasons();
     }
     
     private getAllReasons(): void {
-
-      /*
-      this.service.getAllReasons().then((data) => {
-        this.data = data;
-      });
-      */
-
       this.service
           .getAll()
           .subscribe(
-              (data:any[]) => console.log(data),
+              (data: any[]) => this.data = data,
               error => console.log(error),
               () => console.log('Get all Items complete'));
     }

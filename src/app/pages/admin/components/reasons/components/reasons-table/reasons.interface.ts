@@ -5,8 +5,8 @@ export interface ReasonsInterface {
     rfc: string;
     direccion: string;
     calle: string;
-    numeroexterior: string;
-    numerointerior: string;
+    numexterior: string;
+    numinterior: string;
     colonia: string;
     municipio: string;
     ciudad: string;

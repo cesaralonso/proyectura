@@ -51,9 +51,13 @@ export class UserEditModalComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private authLocalstorage: AuthLocalstorage) {
 
-    this._claveauth = this.localStorageService.get('claveauth').toString();
-    this._usuarioauth = this.localStorageService.get('usuarioauth').toString();
-    this._nicknameauth = this.localStorageService.get('nicknameauth').toString();
+
+    const credenciales = this.authLocalstorage.getCredentials();
+
+    this._claveauth = credenciales.claveauth;
+    this._usuarioauth = credenciales.usuarioauth;
+    this._nicknameauth = credenciales.nicknameauth;
+
 
     this.form = fb.group({
       'claveauth': this._claveauth,
