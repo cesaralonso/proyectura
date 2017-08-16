@@ -1,85 +1,78 @@
 <div class="widgets">
     <div class="row">
         <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
-            <!--
-            <div class="row">
-                <div class="col-sm-2">
-                    <label class="label-control">Registros por página</label>
-                    <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
-                        <option [ngValue]="5">5</option>
-                        <option [ngValue]="10">10</option>
-                        <option [ngValue]="15">15</option>
-                    </select>
-                </div>
-                <div class="col-sm-4">
-                    <div class="row">
-                        <label class="col-sm-12 label-control">Ordenar por</label>
-                    </div>
-                    <div class="row">
-                        <div class="offset-sm-1 col-sm-5">
-                            <div class="row">
-                                <select class="form-control input-sm" [(ngModel)]="sortBy">
-                                    <option ngValue="nombre">Nombre de Obra</option>
-                                    <option ngValue="contacto_direccion">Nombre de contacto</option>
-                                    <option ngValue="contacto_correo">Correo de contacto</option>
-                                    <option ngValue="tipo">Tipo de Proyecto</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="offset-sm-1 col-sm-5">
-                            <div class="row">
-                                <select class="form-control input-sm" [(ngModel)]="sortOrder">
-                                    <option ngValue="asc">Ascendente</option>
-                                    <option ngValue="desc">Descendente</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
             <div class="panel panel-default">
-                <div class="panel-heading">Información de Usuarios</div>
+                <div class="panel-heading">Información de Obras</div>
 
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
                             <th style="width: 10%"></th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">Empresa</mfDefaultSorter>
+                                <mfDefaultSorter by="descripcion">Descripción</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idrol">Rol</mfDefaultSorter>
+                                <mfDefaultSorter by="direccion">Dirección</mfDefaultSorter>
                             </th>
                             <th style="width: 10%">
-                                <mfDefaultSorter by="usuario">Usuario</mfDefaultSorter>
+                                <mfDefaultSorter by="medidasterreno">Medidas de Terreno</mfDefaultSorter>
                             </th>
                             <th style="width: 10%">
-                                <mfDefaultSorter by="contrasena">Contraseña</mfDefaultSorter>
+                                <mfDefaultSorter by="medidasconstruccion">Medidas de Construcción</mfDefaultSorter>
                             </th>
                             <th style="width: 10%">
-                                <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+                                <mfDefaultSorter by="fechainicio">Fecha de Inicio</mfDefaultSorter>
                             </th>
                             <th style="width: 10%">
-                                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                                <mfDefaultSorter by="fechafin">Fecha de Fin</mfDefaultSorter>
                             </th>
                             <th style="width: 10%">
-                                <mfDefaultSorter by="telefono">Teléfono</mfDefaultSorter>
+                                <mfDefaultSorter by="idtipoobra">ID Tipo Obra</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="costo">Costo</mfDefaultSorter>
+                                <mfDefaultSorter by="presupuesto">Presupuesto</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idstatususuario">Status usuario</mfDefaultSorter>
+                                <mfDefaultSorter by="idrazonsocialcliente">ID Razón Social Cliente</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="emailsms">Email sms</mfDefaultSorter>
+                                <mfDefaultSorter by="idrazonsocialcontratista">ID Razón Social Contratista</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="bfechainicial">bFecha inicial</mfDefaultSorter>
+                                <mfDefaultSorter by="razonsocialcontratista">Razón Social Contratista</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="fechainicial">Fecha inicial</mfDefaultSorter>
+                                <mfDefaultSorter by="idrazonsocialconstructor">ID Razón Social Constructor</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="razonsocialconstructor">Razón Social Constructor</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="idrazonsocialasociado">ID Razón Social Asociado</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="razonsocialasociado">Razón Social Asociado</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="posiciongps">Posición GPS</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="idestatusobra">ID Estatus Obra</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="observaciones">Observaciones</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="desctipoobra">Desc Tipo Obra</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="direccioncliente">Dirección del Cliente</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="claveestatusobra">Clave Estatus Obra</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="tipoobra">Tipo Obra</mfDefaultSorter>
                             </th>
                         </tr>
                         <!--
@@ -92,23 +85,31 @@
                         -->
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of mf.data">
-                            <td>
-                                <button (click)="editObrasModalShow(item.id)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
-                                <button (click)="onDeleteConfirm($event, item)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                            </td>
-                            <td>{{item.idempresa}}</td>
-                            <td>{{item.idrol}}</td>
-                            <td>{{item.usuario}}</td>
-                            <td>{{item.contrasena}}</td>
-                            <td>{{item.nombre}}</td>
-                            <td>{{item.email}}</td>
-                            <td>{{item.telefono}}</td>
-                            <td>{{item.costo}}</td>
-                            <td>{{item.idstatususuario}}</td>
-                            <td>{{item.emailsms}}</td>
-                            <td><i [ngClass]="{'xml-up': item.bfechainicial, 'xml-down': !item.bfechainicial }"></i></td>
-                            <td class="table-arr">{{item.fechainicial}}</td>
+                        <tr *ngFor="let item of mf.data;  let i = index">
+                            <td>{{ item.idobra }}</td>
+                            <td>{{ item.descripcion }}</td>
+                            <td>{{ item.direccion }}</td>
+                            <td>{{ item.medidasterreno }}</td>
+                            <td>{{ item.medidasconstruccion }}</td>
+                            <td>{{ item.fechainicio | date }}</td>
+                            <td>{{ item.fechafin | date }}</td>
+                            <td>{{ item.idtipoobra }}</td>
+                            <td>{{ item.presupuesto }}</td>
+                            <td>{{ item.idrazonsocialcliente }}</td>
+                            <td>{{ item.idrazonsocialcontratista }}</td>
+                            <td>{{ item.razonsocialcontratista }}</td>
+                            <td>{{ item.idrazonsocialconstructor }}</td>
+                            <td>{{ item.razonsocialconstructor }}</td>
+                            <td>{{ item.idrazonsocialasociado }}</td>
+                            <td>{{ item.razonsocialasociado }}</td>
+                            <td>{{ item.posiciongps }}</td>
+                            <td>{{ item.idestatusobra }}</td>
+                            <td>{{ item.observaciones }}</td>
+                            <td>{{ item.desctipoobra }}</td>
+                            <td>{{ item.direccioncliente }}</td>
+                            <td>{{ item.claveestatusobra }}</td>
+                            <td>{{ item.tipoobra }}</td>
+                            
                         </tr>
                     </tbody>
                     <tfoot>
@@ -127,4 +128,5 @@
             <button (click)="addObrasModalShow()" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
         </div>
     </div>
+    
 </div>

@@ -9,91 +9,141 @@
   </div>
   <div class="modal-body">
 
-    <ba-card cardTitle="Información de Usuario">
+    <ba-card cardTitle="Información de la Obra">
 
-        <div class="form-group row" [ngClass]="{'has-error': (!idempresa.valid && idempresa.touched), 'has-success': (idempresa.valid && idempresa.touched)}">
-          <label for="inputidempresa" class="col-sm-2 form-control-label">idempresa</label>
+        <div class="form-group row" [ngClass]="{'has-error': (!descripcion.valid && descripcion.touched), 'has-success': (descripcion.valid && descripcion.touched)}">
+          <label for="inputdescripcion" class="col-sm-2 form-control-label">Descripción</label>
           <div class="col-sm-10">
-            <input [formControl]="idempresa" type="text" class="form-control" id="inputidempresa" placeholder="idempresa">
+            <input [formControl]="descripcion" type="text" class="form-control" id="inputdescripcion" placeholder="Descripción">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!direccion.valid && direccion.touched), 'has-success': (direccion.valid && direccion.touched)}">
+          <label for="inputdireccion" class="col-sm-2 form-control-label">Dirección</label>
+          <div class="col-sm-10">
+            <input [formControl]="direccion" type="text" class="form-control" id="inputdireccion" placeholder="Dirección">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!medidasterreno.valid && medidasterreno.touched), 'has-success': (medidasterreno.valid && medidasterreno.touched)}">
+          <label for="inputmedidasterreno" class="col-sm-2 form-control-label">Medidas del Terreno</label>
+          <div class="col-sm-10">
+            <input [formControl]="medidasterreno" type="text" class="form-control" id="inputmedidasterreno" placeholder="Medidas del Terreno">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!medidasconstruccion.valid && medidasconstruccion.touched), 'has-success': (medidasconstruccion.valid && medidasconstruccion.touched)}">
+          <label for="inputmedidasconstruccion" class="col-sm-2 form-control-label">Medidas de Construcción</label>
+          <div class="col-sm-10">
+            <input [formControl]="medidasconstruccion" type="text" class="form-control" id="inputmedidasconstruccion" placeholder="Medidas de Construcción">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!fechainicio.valid && fechainicio.touched), 'has-success': (fechainicio.valid && fechainicio.touched)}">
+          <label for="inputfechainicio" class="col-sm-2 form-control-label">Fecha de inicio</label>
+          <div class="col-sm-10">
+            <input [formControl]="fechainicio" type="date" class="form-control" id="inputfechainicio" placeholder="Fecha de inicio">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!fechafin.valid && fechafin.touched), 'has-success': (fechafin.valid && fechafin.touched)}">
+          <label for="inputfechafin" class="col-sm-2 form-control-label">Fecha de Fin</label>
+          <div class="col-sm-10">
+            <input [formControl]="fechafin" type="date" class="form-control" id="inputfechafin" placeholder="Fecha de Fin">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!idtipoobra.valid && idtipoobra.touched), 'has-success': (idtipoobra.valid && idtipoobra.touched)}">
+          <label for="inputidtipoobra" class="col-sm-2 form-control-label">ID Tipo Obra</label>
+          <div class="col-sm-10">
+            <input [formControl]="idtipoobra" type="number" class="form-control" id="inputidtipoobra" placeholder="ID Tipo Obra">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!presupuesto.valid && presupuesto.touched), 'has-success': (presupuesto.valid && presupuesto.touched)}">
+          <label for="inputpresupuesto" class="col-sm-2 form-control-label">Presupuesto</label>
+          <div class="col-sm-10">
+            <input [formControl]="presupuesto" type="text" class="form-control" id="inputpresupuesto" placeholder="Presupuesto">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialcliente.valid && idrazonsocialcliente.touched), 'has-success': (idrazonsocialcliente.valid && idrazonsocialcliente.touched)}">
+          <label for="inputidrazonsocialcliente" class="col-sm-2 form-control-label">ID Razon Social Cliente</label>
+          <div class="col-sm-10">
+            <input [formControl]="idrazonsocialcliente" type="number" class="form-control" id="inputidrazonsocialcliente" placeholder="ID Razon Social Cliente">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialcontratista.valid && idrazonsocialcontratista.touched), 'has-success': (idrazonsocialcontratista.valid && idrazonsocialcontratista.touched)}">
+          <label for="inputidrazonsocialcontratista" class="col-sm-2 form-control-label">ID Razon Social Contratista</label>
+          <div class="col-sm-10">
+            <input [formControl]="idrazonsocialcontratista" type="number" class="form-control" id="inputidrazonsocialcontratista" placeholder="ID Razon Social Contratista">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!razonsocialcontratista.valid && razonsocialcontratista.touched), 'has-success': (razonsocialcontratista.valid && razonsocialcontratista.touched)}">
+          <label for="inputrazonsocialcontratista" class="col-sm-2 form-control-label">Razon Social Contratista</label>
+          <div class="col-sm-10">
+            <input [formControl]="razonsocialcontratista" type="text" class="form-control" id="inputrazonsocialcontratista" placeholder="Razon Social Contratista">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialconstructor.valid && idrazonsocialconstructor.touched), 'has-success': (idrazonsocialconstructor.valid && idrazonsocialconstructor.touched)}">
+          <label for="inputidrazonsocialconstructor" class="col-sm-2 form-control-label">ID Razon Social Constructor</label>
+          <div class="col-sm-10">
+            <input [formControl]="idrazonsocialconstructor" type="number" class="form-control" id="inputidrazonsocialconstructor" placeholder="ID Razon Social Constructor">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!razonsocialconstructor.valid && razonsocialconstructor.touched), 'has-success': (razonsocialconstructor.valid && razonsocialconstructor.touched)}">
+          <label for="inputrazonsocialconstructor" class="col-sm-2 form-control-label">Razon Social Constructor</label>
+          <div class="col-sm-10">
+            <input [formControl]="razonsocialconstructor" type="text" class="form-control" id="inputrazonsocialconstructor" placeholder="Razon Social Constructor">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialasociado.valid && idrazonsocialasociado.touched), 'has-success': (idrazonsocialasociado.valid && idrazonsocialasociado.touched)}">
+          <label for="inputidrazonsocialasociado" class="col-sm-2 form-control-label">ID Razon Social Asociado</label>
+          <div class="col-sm-10">
+            <input [formControl]="idrazonsocialasociado" type="number" class="form-control" id="inputidrazonsocialasociado" placeholder="ID Razon Social Asociado">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!razonsocialasociado.valid && razonsocialasociado.touched), 'has-success': (razonsocialasociado.valid && razonsocialasociado.touched)}">
+          <label for="inputrazonsocialasociado" class="col-sm-2 form-control-label">Razon Social Asociado</label>
+          <div class="col-sm-10">
+            <input [formControl]="razonsocialasociado" type="text" class="form-control" id="inputrazonsocialasociado" placeholder="Razon Social Asociado">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!posiciongps.valid && posiciongps.touched), 'has-success': (posiciongps.valid && posiciongps.touched)}">
+          <label for="inputposiciongps" class="col-sm-2 form-control-label">Posición GPS</label>
+          <div class="col-sm-10">
+            <input [formControl]="posiciongps" type="text" class="form-control" id="inputposiciongps" placeholder="Posición GPS">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!idestatusobra.valid && idestatusobra.touched), 'has-success': (idestatusobra.valid && idestatusobra.touched)}">
+          <label for="inputidestatusobra" class="col-sm-2 form-control-label">ID Estatus Obra</label>
+          <div class="col-sm-10">
+            <input [formControl]="idestatusobra" type="number" class="form-control" id="inputidestatusobra" placeholder="ID Estatus Obra">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!observaciones.valid && observaciones.touched), 'has-success': (observaciones.valid && observaciones.touched)}">
+          <label for="inputobservaciones" class="col-sm-2 form-control-label">Observaciones</label>
+          <div class="col-sm-10">
+            <input [formControl]="observaciones" type="text" class="form-control" id="inputobservaciones" placeholder="Observaciones">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!desctipoobra.valid && desctipoobra.touched), 'has-success': (desctipoobra.valid && desctipoobra.touched)}">
+          <label for="inputdesctipoobra" class="col-sm-2 form-control-label">Desc Tipo Obra</label>
+          <div class="col-sm-10">
+            <input [formControl]="desctipoobra" type="text" class="form-control" id="inputdesctipoobra" placeholder="Desc Tipo Obra">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!direccioncliente.valid && direccioncliente.touched), 'has-success': (direccioncliente.valid && direccioncliente.touched)}">
+          <label for="inputdireccioncliente" class="col-sm-2 form-control-label">Dirección Cliente</label>
+          <div class="col-sm-10">
+            <input [formControl]="direccioncliente" type="text" class="form-control" id="inputdireccioncliente" placeholder="Dirección Cliente">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!claveestatusobra.valid && claveestatusobra.touched), 'has-success': (claveestatusobra.valid && claveestatusobra.touched)}">
+          <label for="inputclaveestatusobra" class="col-sm-2 form-control-label">Clave Estatus Obra</label>
+          <div class="col-sm-10">
+            <input [formControl]="claveestatusobra" type="text" class="form-control" id="inputclaveestatusobra" placeholder="Clave Estatus Obra">
+          </div>
+        </div>
+        <div class="form-group row" [ngClass]="{'has-error': (!tipoobra.valid && tipoobra.touched), 'has-success': (tipoobra.valid && tipoobra.touched)}">
+          <label for="inputtipoobra" class="col-sm-2 form-control-label">Tipo Obra</label>
+          <div class="col-sm-10">
+            <input [formControl]="tipoobra" type="text" class="form-control" id="inputtipoobra" placeholder="Tipo Obra">
           </div>
         </div>
 
-        <div class="form-group row" [ngClass]="{'has-error': (!idrol.valid && idrol.touched), 'has-success': (idrol.valid && idrol.touched)}">
-          <label for="inputidrol" class="col-sm-2 form-control-label">idrol</label>
-          <div class="col-sm-10">
-            <input [formControl]="idrol" type="text" class="form-control" id="inputidrol" placeholder="idrol">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!usuario.valid && usuario.touched), 'has-success': (usuario.valid && usuario.touched)}">
-          <label for="inputusuario" class="col-sm-2 form-control-label">usuario</label>
-          <div class="col-sm-10">
-            <input [formControl]="usuario" type="text" class="form-control" id="inputusuario" placeholder="usuario">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!contrasena.valid && contrasena.touched), 'has-success': (contrasena.valid && contrasena.touched)}">
-          <label for="inputcontrasena" class="col-sm-2 form-control-label">contraseña</label>
-          <div class="col-sm-10">
-            <input [formControl]="contrasena" type="text" class="form-control" id="inputcontrasena" placeholder="contraseña">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
-          <label for="inputnombre" class="col-sm-2 form-control-label">nombre</label>
-          <div class="col-sm-10">
-            <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="nombre">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
-          <label for="inputemail" class="col-sm-2 form-control-label">email</label>
-          <div class="col-sm-10">
-            <input [formControl]="email" type="text" class="form-control" id="inputemail" placeholder="email">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!telefono.valid && telefono.touched), 'has-success': (telefono.valid && telefono.touched)}">
-          <label for="inputtelefono" class="col-sm-2 form-control-label">teléfono</label>
-          <div class="col-sm-10">
-            <input [formControl]="telefono" type="text" class="form-control" id="inputtelefono" placeholder="teléfono">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!costo.valid && costo.touched), 'has-success': (costo.valid && costo.touched)}">
-          <label for="inputcosto" class="col-sm-2 form-control-label">costo</label>
-          <div class="col-sm-10">
-            <input [formControl]="costo" type="text" class="form-control" id="inputcosto" placeholder="costo">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!idstatususuario.valid && idstatususuario.touched), 'has-success': (idstatususuario.valid && idstatususuario.touched)}">
-          <label for="inputidstatususuario" class="col-sm-2 form-control-label">idstatususuario</label>
-          <div class="col-sm-10">
-            <input [formControl]="idstatususuario" type="text" class="form-control" id="inputidstatususuario" placeholder="idstatususuario">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!emailsms.valid && emailsms.touched), 'has-success': (emailsms.valid && emailsms.touched)}">
-          <label for="inputemailsms" class="col-sm-2 form-control-label">emailsms</label>
-          <div class="col-sm-10">
-            <input [formControl]="emailsms" type="text" class="form-control" id="inputemailsms" placeholder="emailsms">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!bfechainicial.valid && bfechainicial.touched), 'has-success': (bfechainicial.valid && bfechainicial.touched)}">
-          <label for="inputbfechainicial" class="col-sm-2 form-control-label">bfechainicial</label>
-          <div class="col-sm-10">
-            <input [formControl]="bfechainicial" type="text" class="form-control" id="inputbfechainicial" placeholder="bfechainicial">
-          </div>
-        </div>
-
-        <div class="form-group row" [ngClass]="{'has-error': (!fechainicial.valid && fechainicial.touched), 'has-success': (fechainicial.valid && fechainicial.touched)}">
-          <label for="inputfechainicial" class="col-sm-2 form-control-label">fechainicial</label>
-          <div class="col-sm-10">
-            <input [formControl]="fechainicial" type="text" class="form-control" id="inputfechainicial" placeholder="fechainicial">
-          </div>
-        </div>
 
     </ba-card>
 

@@ -1,6 +1,6 @@
 import { ObrasService } from './../obras.service';
 import { Modals } from './../../../../ui/components/modals/modals.component';
-import { Obras } from './../obras.interface';
+import { ObrasInterface } from './../obras.interface';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
@@ -88,17 +88,17 @@ export class ObrasEditModal implements OnInit {
     this.activeModal.close();
   }
 
-  onSubmit(values: Obras): void {
+  onSubmit(values: ObrasInterface): void {
     this.submitted = true;
     if (this.form.valid) {
       this.service
-        .EditObras(values)
+        .editObras(values)
         .subscribe(
             (data: any) => this.showToast(data, values));
     }
   }
 
-  private showToast(data: any, values: Obras) {
+  private showToast(data: any, values: ObrasInterface) {
     if (data.idRespuesta === 0) {
 
       this.toastrService.success(data.mensajeRespuesta);
