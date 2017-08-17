@@ -75,17 +75,13 @@
                                 <mfDefaultSorter by="tipoobra">Tipo Obra</mfDefaultSorter>
                             </th>
                         </tr>
-                        <!--
-                        <tr>
-                            <th colspan="9">
-                                Filtrar por nombre:
-                                <input class="form-control" [(ngModel)]="filterQuery" />
-                            </th>
-                        </tr>
-                        -->
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of mf.data;  let i = index">
+                            <td>
+                                <button (click)="editObrasModalShow(item.idobra)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <button (click)="onDeleteConfirm($event, item.idobra)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                            </td>
                             <td>{{ item.idobra }}</td>
                             <td>{{ item.descripcion }}</td>
                             <td>{{ item.direccion }}</td>

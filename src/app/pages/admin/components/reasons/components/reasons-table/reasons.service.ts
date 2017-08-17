@@ -29,7 +29,7 @@ export class ReasonsService {
     }
 
     addReasons = (reasons: ReasonsInterface): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarRazón Social`;
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarRazonSocial`;
         const toAdd = JSON.stringify(reasons);
         console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
@@ -38,7 +38,7 @@ export class ReasonsService {
     }
 
     editReasons = (reasons: ReasonsInterface): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}EditarRazón Social`;
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}EditarRazonSocial`;
         const toAdd = JSON.stringify(reasons);
         console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

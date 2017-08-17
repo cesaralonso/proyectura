@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ObrasInterface } from './obras.interface';
 import { ObrasResponseInterface } from './obras-response.interface';
 import { Component, OnInit } from '@angular/core';
@@ -19,7 +20,7 @@ export class ObrasTable implements OnInit {
     sortBy = 'idobra';
     sortOrder = 'asc';
 
-    constructor(private service: ObrasService, private modalService: NgbModal) {
+    constructor(private service: ObrasService, private modalService: NgbModal, private toastrService: ToastrService) {
     }
 
     toInt(num: string) {
@@ -39,15 +40,30 @@ export class ObrasTable implements OnInit {
       // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS DEL USUARIO Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
 
     }
-    
+
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        console.log('item.id a borrar', id);
+
+        this.service.cancelarObra(id)
+          .subscribe(
+            (data) => this.showToast(data),
+            error => console.log(error),
+            () => console.log('Delete completed')
+          );
+
       } else {
         console.log('item.id cancelando', id);
       }
     }
 
+    showToast(data) {
+      if (data.idRespuesta === 0) {
+        this.toastrService.success(data.mensajeRespuesta);
+        this.getAllObras();
+      } else {
+        this.toastrService.error(data.mensajeRespuesta);
+      }
+    }
 
     ngOnInit() {
         this.getAllObras();

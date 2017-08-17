@@ -14,14 +14,14 @@
         <div class="form-group row" [ngClass]="{'has-success': (!clavetipoobra.valid && clavetipoobra.touched), 'has-success': (clavetipoobra.valid && clavetipoobra.touched)}">
           <label for="inputclavetipoobra" class="col-sm-3 form-control-label">Clave</label>
           <div class="col-sm-9">
-            <input [formControl]="clavetipoobra" type="text" class="form-control" id="inputclavetipoobra" placeholder="clavetipoobra" value="{{tipo-obra.clavetipoobra}}">
+            <input [formControl]="clavetipoobra" type="text" class="form-control" id="inputclavetipoobra" placeholder="clavetipoobra" value="{{tipoobra.clavetipoobra}}">
           </div>
         </div>
 
         <div class="form-group row" [ngClass]="{'has-success': (!descripcion.valid && descripcion.touched), 'has-success': (descripcion.valid && descripcion.touched)}">
           <label for="inputdescripcion" class="col-sm-3 form-control-label">Descripción</label>
           <div class="col-sm-9">
-            <input [formControl]="descripcion" type="text" class="form-control" id="inputdescripcion" placeholder="descripcion" value="{{tipo-obra.descripcion}}">
+            <input [formControl]="descripcion" type="text" class="form-control" id="inputdescripcion" placeholder="descripcion" value="{{tipoobra.descripcion}}">
           </div>
         </div>
 
