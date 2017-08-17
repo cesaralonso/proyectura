@@ -45,7 +45,7 @@ export class ObrasService {
             .catch(this.handleError);
     }
 
-    getObras = (idObra: number): Observable<ObrasInterface[]> => {
+    getObras = (idObra: number): Observable<ObrasInterface> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerObrasPorIDObra`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
@@ -58,8 +58,9 @@ export class ObrasService {
         console.log('credenciales', toAdd);
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <ObrasInterface[]>response.json())
+            .map((response: Response) => <ObrasInterface>response.json())
             .catch(this.handleError);
+            
     }
 
     getAllObras = (): Observable<ObrasInterface[]> => {

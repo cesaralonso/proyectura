@@ -21,7 +21,6 @@ export class ObrasAddModal implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
 
-  idobra: AbstractControl;
   descripcion: AbstractControl;
   direccion: AbstractControl;
   medidasterreno: AbstractControl;
@@ -68,7 +67,6 @@ export class ObrasAddModal implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'descripcion' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'direccion' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'medidasterreno' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -94,7 +92,6 @@ export class ObrasAddModal implements OnInit {
       
     });
 
-    this.idobra = this.form.controls['idobra'];
     this.descripcion = this.form.controls['descripcion'];
     this.direccion = this.form.controls['direccion'];
     this.medidasterreno = this.form.controls['medidasterreno'];
