@@ -29,7 +29,6 @@ export class UserEditModalComponent implements OnInit {
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
   idusuario: AbstractControl;
-  idempresa: AbstractControl;
   idrol: AbstractControl;
   usuario: AbstractControl;
   contrasena: AbstractControl;
@@ -64,7 +63,6 @@ export class UserEditModalComponent implements OnInit {
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
       'idusuario': [this.id],
-      'idempresa': [''],
       'idrol': [''],
       'usuario': [''],
       'contrasena': [''],
@@ -76,7 +74,6 @@ export class UserEditModalComponent implements OnInit {
     });
 
     this.idrol = this.form.controls['idrol'];
-    this.idempresa = this.form.controls['idempresa'];
     this.usuario = this.form.controls['usuario'];
     this.contrasena = this.form.controls['contrasena'];
     this.nombre = this.form.controls['nombre'];

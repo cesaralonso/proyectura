@@ -11,13 +11,6 @@
 
     <ba-card cardTitle="Información de Usuario">
 
-        <div class="form-group row" [ngClass]="{'has-success': (!idempresa.valid && idempresa.touched), 'has-success': (idempresa.valid && idempresa.touched)}">
-          <label for="inputidempresa" class="col-sm-3 form-control-label">Id Empresa</label>
-          <div class="col-sm-9">
-            <input [formControl]="idempresa" type="number" class="form-control" id="inputidempresa" placeholder="idempresa" value="{{user.idempresa}}">
-          </div>
-        </div>
-
         <div class="form-group row" [ngClass]="{'has-success': (!idrol.valid && idrol.touched), 'has-success': (idrol.valid && idrol.touched)}">
           <label for="inputidrol" class="col-sm-3 form-control-label">Id Rol</label>
           <div class="col-sm-9">

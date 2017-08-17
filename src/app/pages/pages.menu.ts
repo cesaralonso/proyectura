@@ -147,30 +147,6 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'permissions',
-            data: {
-              menu: {
-                title: 'general.menu.permisos',
-                icon: 'ion-ribbon-b',
-                selected: false,
-                expanded: false,
-                order: 2
-              }
-            }
-          },
-          {
-            path: 'logs',
-            data: {
-              menu: {
-                title: 'general.menu.bitacora',
-                icon: 'ion-ios-list',
-                selected: false,
-                expanded: false,
-                order: 3
-              }
-            }
-          },
-          {
             path: 'tipo-obra',
             data: {
               menu: {

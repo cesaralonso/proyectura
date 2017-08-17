@@ -45,17 +45,17 @@ export class GroupsService {
             .catch(this.handleError);
     }
 
-    getGroups = (id: number): Observable<GroupsResponseInterface[]> => {
+    getGroups = (id: number): Observable<GroupsInterface> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRol`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idusuario: id,
+            idrol: id,
         });
 
-        console.log('credenciales', toAdd);
+        console.log('toAdd', toAdd);
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <GroupsResponseInterface[]>response.json())

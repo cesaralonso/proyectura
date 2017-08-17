@@ -28,6 +28,8 @@ export class ReasonsService {
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
 
+    private credentials: CredentialsInterface = this.authLocalstorage.getCredentials();
+
     addReasons = (reasons: ReasonsInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarRazonSocial`;
         const toAdd = JSON.stringify(reasons);
@@ -62,21 +64,30 @@ export class ReasonsService {
             .catch(this.handleError);
     }
 
+    getReasons = (id: number): Observable<ReasonsInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerUsuario`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            idrazonsocial: id,
+        });
 
-    private credentials: CredentialsInterface = this.authLocalstorage.getCredentials();
-
+        console.log('toAdd', toAdd);
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <ReasonsInterface[]>response.json())
+            .catch(this.handleError);
+    }
     
     getAll = (): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRazonesSociales`;
 
         const _credentials = JSON.stringify(this.credentials);
-
-        console.log('_credentials', _credentials);
         return this._http.post(this.actionUrl, _credentials, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
     }
-
 
     private handleError(error: Response) {
         console.error(error);

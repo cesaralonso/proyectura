@@ -25,7 +25,6 @@ export class UserAddModalComponent implements OnInit {
   nickname: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
-  idempresa: AbstractControl;
   idrol: AbstractControl;
   usuario: AbstractControl;
   contrasena: AbstractControl;
@@ -58,7 +57,6 @@ export class UserAddModalComponent implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idempresa': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'idrol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'usuario': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'contrasena': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -69,7 +67,6 @@ export class UserAddModalComponent implements OnInit {
       'emailsms': [''],
     });
 
-    this.idempresa = this.form.controls['idempresa'];
     this.idrol = this.form.controls['idrol'];
     this.usuario = this.form.controls['usuario'];
     this.contrasena = this.form.controls['contrasena'];

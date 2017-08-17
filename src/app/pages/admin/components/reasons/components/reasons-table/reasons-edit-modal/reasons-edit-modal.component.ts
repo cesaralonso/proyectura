@@ -19,6 +19,7 @@ export class ReasonsEditModalComponent implements OnInit {
 
   modalHeader: string;
   id: number;
+  reasons: ReasonsInterface;
 
   form: FormGroup;
   submitted: boolean = false;
@@ -26,19 +27,21 @@ export class ReasonsEditModalComponent implements OnInit {
   nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
-  idempresa: AbstractControl;
-  idrol: AbstractControl;
-  usuario: AbstractControl;
-  contrasena: AbstractControl;
+
+  idrazonsocial: AbstractControl;
+  razonsocial: AbstractControl;
   nombre: AbstractControl;
-  email: AbstractControl;
-  telefono: AbstractControl;
-  costo: AbstractControl;
-  idstatususuario: AbstractControl;
-  emailsms: AbstractControl;
-  bfechainicial: AbstractControl;
-  fechainicial: AbstractControl;
-  clave: AbstractControl;
+  rfc: AbstractControl;
+  direccion: AbstractControl;
+  calle: AbstractControl;
+  numexterior: AbstractControl;
+  numinterior: AbstractControl;
+  colonia: AbstractControl;
+  municipio: AbstractControl;
+  ciudad: AbstractControl;
+  estado: AbstractControl;
+  pais: AbstractControl;
+
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -59,42 +62,54 @@ export class ReasonsEditModalComponent implements OnInit {
     this._nicknameauth = credenciales.nicknameauth;
 
     this.form = fb.group({
-
       'claveauth': this._claveauth,
-      'nickname': this._nicknameauth,
+      'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idempresa': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'idrol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'usuario': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'contrasena': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'nombre': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'telefono': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'costo': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'idstatususuario': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'emailsms': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'bfechainicial': [''],
-      'fechainicial': ['', Validators.compose([Validators.required, Validators.minLength(8)])]
+      'idrazonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'razonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'nombre': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'rfc': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'direccion': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'calle': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'numexterior': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'numinterior': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'colonia': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'municipio': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'ciudad': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'estado': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'pais': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
-    this.idempresa = this.form.controls['idempresa'];
-    this.idrol = this.form.controls['idrol'];
-    this.usuario = this.form.controls['usuario'];
-    this.contrasena = this.form.controls['contrasena'];
+    this.idrazonsocial = this.form.controls['idrazonsocial'];
+    this.razonsocial = this.form.controls['razonsocial'];
     this.nombre = this.form.controls['nombre'];
-    this.email = this.form.controls['email'];
-    this.telefono = this.form.controls['telefono'];
-    this.costo = this.form.controls['costo'];
-    this.idstatususuario = this.form.controls['idstatususuario'];
-    this.emailsms = this.form.controls['emailsms'];
-    this.bfechainicial = this.form.controls['bfechainicial'];
-    this.fechainicial = this.form.controls['fechainicial'];
-
+    this.rfc = this.form.controls['rfc'];
+    this.direccion = this.form.controls['direccion'];
+    this.calle = this.form.controls['calle'];
+    this.numexterior = this.form.controls['numexterior'];
+    this.numinterior = this.form.controls['numinterior'];
+    this.colonia = this.form.controls['colonia'];
+    this.municipio = this.form.controls['municipio'];
+    this.ciudad = this.form.controls['ciudad'];
+    this.estado = this.form.controls['estado'];
+    this.pais = this.form.controls['pais'];
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getReasons();
+  }
+
+  getReasons() {
+    this.service
+      .getReasons(this.id)
+      .subscribe(
+        (reasons: ReasonsInterface[]) => {
+          this.reasons = reasons[1];
+          console.log('reasons', reasons[1]);
+        });
+  }
 
   closeModal() {
     this.activeModal.close();

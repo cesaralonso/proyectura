@@ -9,12 +9,6 @@
                     <thead>
                         <tr>
                             <th style="width: 10%"></th>
-                            <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">IdRol</mfDefaultSorter>
-                            </th>
-                            <th style="width: 5%">
-                                <mfDefaultSorter by="idrol">IdEmpresa</mfDefaultSorter>
-                            </th>
                             <th style="width: 10%">
                                 <mfDefaultSorter by="usuario">Rol</mfDefaultSorter>
                             </th>
@@ -25,14 +19,6 @@
                                 <mfDefaultSorter by="nombre">Visible</mfDefaultSorter>
                             </th>
                         </tr>
-                        <!--
-                        <tr>
-                            <th colspan="9">
-                                Filtrar por nombre:
-                                <input class="form-control" [(ngModel)]="filterQuery" />
-                            </th>
-                        </tr>
-                        -->
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of mf.data">
@@ -40,8 +26,6 @@
                                 <button (click)="editGroupsModalShow(item.id)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
-                            <td>{{item.idrol}}</td>
-                            <td>{{item.idempresa}}</td>
                             <td>{{item.rol}}</td>
                             <td>{{item.descripcion}}</td>
                             <td>{{item.visible}}</td>

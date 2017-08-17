@@ -3,15 +3,12 @@
         <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
 
             <div class="panel panel-default">
-                <div class="panel-heading">Información de tipo de obra</div>
+                <!--<div class="panel-heading">Información de tipo de obra</div>-->
 
                 <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
                             <th style="width: 10%"></th>
-                            <th style="width: 20%">
-                                <mfDefaultSorter by="idusuario">Id</mfDefaultSorter>
-                            </th>
                             <th style="width: 20%">
                                 <mfDefaultSorter by="idempresa">Clave</mfDefaultSorter>
                             </th>
@@ -26,7 +23,6 @@
                                 <button (click)="editTipoObraModalShow(item.idtipoobra)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idtipoobra)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
-                            <td>{{item.idtipoobra}}</td>
                             <td>{{item.clavetipoobra}}</td>
                             <td>{{item.descripcion}}</td>
                         </tr>

@@ -4,14 +4,17 @@
 
             <div class="panel panel-default">
                 <!-- <div class="panel-heading">Información</div> -->
+
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th style="width: 10%"></th>
-
-                            <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">idrazonsocial</mfDefaultSorter>
+                            <th colspan="14">
+                                Filtrar por razón social:
+                                <input class="form-control" [(ngModel)]="filterQuery" />
                             </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 10%"></th>
     
                             <th style="width: 10%">
                                 <mfDefaultSorter by="idempresa">razonsocial</mfDefaultSorter>
@@ -68,7 +71,6 @@
                                 <button (click)="editReasonsModalShow(item.id)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
-                            <td>{{item.idrazonsocial}}</td>
                             <td>{{item.razonsocial}}</td>
                             <td>{{item.nombre}}</td>
                             <td>{{item.rfc}}</td>

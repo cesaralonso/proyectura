@@ -1,3 +1,4 @@
+import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { GroupsService } from './../groups.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
@@ -18,30 +19,21 @@ export class GroupsEditModalComponent implements OnInit {
 
   modalHeader: string;
   id: number;
+  item: GroupsInterface;
 
   form: FormGroup;
   submitted: boolean = false;
 
-  nickname: AbstractControl;
+  nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
-  idempresa: AbstractControl;
-  idrol: AbstractControl;
-  usuario: AbstractControl;
-  contrasena: AbstractControl;
-  nombre: AbstractControl;
-  email: AbstractControl;
-  telefono: AbstractControl;
-  costo: AbstractControl;
-  idstatususuario: AbstractControl;
-  emailsms: AbstractControl;
-  bfechainicial: AbstractControl;
-  fechainicial: AbstractControl;
-  clave: AbstractControl;
+  rol: AbstractControl;
+  descripcion: AbstractControl;
+  visible: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
-  private _nickname: string;
+  private _nicknameauth: string;
   private _idusuario: string;
 
 
@@ -49,50 +41,42 @@ export class GroupsEditModalComponent implements OnInit {
               private activeModal: NgbActiveModal,
               fb: FormBuilder,
               private toastrService: ToastrService,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private authLocalstorage: AuthLocalstorage) {
 
-    this._claveauth = this.localStorageService.get('claveauth').toString();
-    this._usuarioauth = this.localStorageService.get('usuarioauth').toString();
-    this._nickname = this.localStorageService.get('nickname').toString();
-    this._idusuario = this.localStorageService.get('idusuario').toString();
- 
+    this.item = {
+      idrol: 0,
+      rol: '',
+      descripcion: '',
+      visible: false,
+    }
+
+    const credenciales = this.authLocalstorage.getCredentials();
+
+    this._claveauth = credenciales.claveauth;
+    this._usuarioauth = credenciales.usuarioauth;
+    this._nicknameauth = credenciales.nicknameauth;
+
     this.form = fb.group({
-
       'claveauth': this._claveauth,
-      'nickname': this._nickname,
+      'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idempresa': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'idrol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'usuario': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'contrasena': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'nombre': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'email': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'telefono': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'costo': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'idstatususuario': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'emailsms': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-      'bfechainicial': [''],
-      'fechainicial': ['', Validators.compose([Validators.required, Validators.minLength(8)])]
-
+      'rol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'descripcion': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'visible': [''],
     });
 
-    this.idempresa = this.form.controls['idempresa'];
-    this.idrol = this.form.controls['idrol'];
-    this.usuario = this.form.controls['usuario'];
-    this.contrasena = this.form.controls['contrasena'];
-    this.nombre = this.form.controls['nombre'];
-    this.email = this.form.controls['email'];
-    this.telefono = this.form.controls['telefono'];
-    this.costo = this.form.controls['costo'];
-    this.idstatususuario = this.form.controls['idstatususuario'];
-    this.emailsms = this.form.controls['emailsms'];
-    this.bfechainicial = this.form.controls['bfechainicial'];
-    this.fechainicial = this.form.controls['fechainicial'];
-
+    this.rol = this.form.controls['rol'];
+    this.descripcion = this.form.controls['descripcion'];
+    this.visible = this.form.controls['visible'];
   }
 
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.service
+      .getGroups(this.id)
+      .subscribe(
+        (item: GroupsInterface) => this.item = item);
+  }
 
   closeModal() {
     this.activeModal.close();
@@ -115,7 +99,6 @@ export class GroupsEditModalComponent implements OnInit {
       this.closeModal();
     } else {
       this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
     }
   }
 

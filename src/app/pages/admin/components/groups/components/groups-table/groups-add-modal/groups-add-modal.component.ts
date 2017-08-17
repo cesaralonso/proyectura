@@ -25,7 +25,6 @@ export class GroupsAddModalComponent implements OnInit {
   nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
-  idempresa: AbstractControl;
   rol: AbstractControl;
   descripcion: AbstractControl;
   visible: AbstractControl;
@@ -53,13 +52,11 @@ export class GroupsAddModalComponent implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idempresa': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'rol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'descripcion': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'visible': [''],
     });
 
-    this.idempresa = this.form.controls['idempresa'];
     this.rol = this.form.controls['rol'];
     this.descripcion = this.form.controls['descripcion'];
     this.visible = this.form.controls['visible'];
