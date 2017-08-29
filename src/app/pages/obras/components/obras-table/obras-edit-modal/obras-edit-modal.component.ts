@@ -23,7 +23,7 @@ export class ObrasEditModal implements OnInit {
   form: FormGroup;
   submitted: boolean = false;
 
-  private obra: ObrasInterface = {
+  obra: ObrasInterface = {
     idobra: 0,
     descripcion: '',
     direccion: '',
