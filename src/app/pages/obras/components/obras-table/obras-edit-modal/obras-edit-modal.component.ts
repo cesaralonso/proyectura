@@ -97,7 +97,7 @@ export class ObrasEditModal implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'idobra' : this.id,
       'descripcion' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'direccion' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'medidasterreno' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -147,7 +147,6 @@ export class ObrasEditModal implements OnInit {
     this.razonsocialasociado = this.form.controls['razonsocialasociado'];
     this.claveestatusobra = this.form.controls['claveestatusobra'];
     this.tipoobra = this.form.controls['tipoobra'];
-
   }
 
 
@@ -192,9 +191,6 @@ export class ObrasEditModal implements OnInit {
         },
         error => console.log(error),
         () => console.log('Get obra complete'));
-      
-
   }
-
 
 }

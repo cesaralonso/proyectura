@@ -1,3 +1,4 @@
+import { ObracategoriesComponent } from './components/obracategories/obracategories.component';
 import { TipoObraComponent } from './components/tipo-obra/tipo-obra.component';
 import { ReasonsComponent } from './components/reasons/reasons.component';
 import { LogsComponent } from './components/logs/logs.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'permissions', component: PermissionsComponent },
       { path: 'logs', component: LogsComponent },
       { path: 'social-reasons', component: ReasonsComponent },
-      { path: 'tipo-obra', component: TipoObraComponent }
+      { path: 'tipo-obra', component: TipoObraComponent },
+      { path: 'obra-categories', component: ObracategoriesComponent }
     ]
   }
 ];

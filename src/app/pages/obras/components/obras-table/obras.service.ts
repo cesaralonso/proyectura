@@ -243,6 +243,15 @@ export class ObrasService {
             .catch(this.handleError);
     }
 
+    obtenerEstatusObras = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEstatusObras`;
+
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
+    }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');

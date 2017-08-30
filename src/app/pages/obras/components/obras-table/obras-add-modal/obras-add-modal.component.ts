@@ -16,6 +16,14 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ObrasAddModal implements OnInit {
 
+
+  estatusObras: string[];
+  _razonsocialasociado: string[];
+  _razonsocialconstructor: string[];
+  _razonsocialcontratista: string[];
+  _razonsocialcliente: string[];
+
+
   modalHeader: string;
 
   form: FormGroup;
@@ -54,6 +62,11 @@ export class ObrasAddModal implements OnInit {
               fb: FormBuilder,
               private toastrService: ToastrService,
               private authLocalstorage: AuthLocalstorage) {
+
+    this._razonsocialasociado = [];
+    this._razonsocialconstructor = [];
+    this._razonsocialcontratista = [];
+    this._razonsocialcliente = [];
 
 
     const credenciales = this.authLocalstorage.getCredentials();
@@ -114,11 +127,23 @@ export class ObrasAddModal implements OnInit {
     this.razonsocialasociado = this.form.controls['razonsocialasociado'];
     this.claveestatusobra = this.form.controls['claveestatusobra'];
     this.tipoobra = this.form.controls['tipoobra'];
-
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    // Obtiene Estatus de Obras
+    this.service.obtenerEstatusObras()
+      .subscribe(
+        (data: any) => this.estatusObras = data,
+      );
+
+      
+      
+      
+
+
+  }
 
   closeModal() {
     this.activeModal.close();

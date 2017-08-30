@@ -51,6 +51,12 @@ import { TipoObraTableComponent } from './components/tipo-obra/components/tipo-o
 import { TipoObraEditModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-edit-modal/tipo-obra-edit-modal.component';
 import { TipoObraAddModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-add-modal/tipo-obra-add-modal.component';
 
+import { ObracategoriesComponent } from './components/obracategories/obracategories.component';
+import { ObracategoriesService } from './components/obracategories/components/obracategories-table/obracategories.service';
+import { ObracategoriesTableComponent } from './components/obracategories/components/obracategories-table/obracategories-table.component';
+import { ObracategoriesEditModalComponent } from './components/obracategories/components/obracategories-table/obracategories-edit-modal/obracategories-edit-modal.component';
+import { ObracategoriesAddModalComponent } from './components/obracategories/components/obracategories-table/obracategories-add-modal/obracategories-add-modal.component';
+
 
 
 @NgModule({
@@ -93,7 +99,11 @@ import { TipoObraAddModalComponent } from './components/tipo-obra/components/tip
     TipoObraComponent,
     TipoObraTableComponent,
     TipoObraAddModalComponent,
-    TipoObraEditModalComponent
+    TipoObraEditModalComponent,
+    ObracategoriesComponent,
+    ObracategoriesTableComponent,
+    ObracategoriesAddModalComponent,
+    ObracategoriesEditModalComponent
   ],
   entryComponents: [
     UserAddModalComponent,
@@ -107,7 +117,9 @@ import { TipoObraAddModalComponent } from './components/tipo-obra/components/tip
     ReasonsAddModalComponent,
     ReasonsEditModalComponent,
     TipoObraAddModalComponent,
-    TipoObraEditModalComponent
+    TipoObraEditModalComponent,
+    ObracategoriesAddModalComponent,
+    ObracategoriesEditModalComponent
   ],
   providers: [
     UserService,
@@ -115,7 +127,8 @@ import { TipoObraAddModalComponent } from './components/tipo-obra/components/tip
     PermissionsService,
     LogsService,
     ReasonsService,
-    TipoObraService
+    TipoObraService,
+    ObracategoriesService
   ]
 })
 export class AdminModule {

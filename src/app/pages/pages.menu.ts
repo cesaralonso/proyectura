@@ -157,6 +157,18 @@ export const PAGES_MENU = [
                 order: 3
               }
             }
+          },
+          {
+            path: 'obra-categories',
+            data: {
+              menu: {
+                title: 'general.menu.obra-categories',
+                icon: 'ion-social-buffer',
+                selected: false,
+                expanded: false,
+                order: 3
+              }
+            }
           }
         ]
       }
