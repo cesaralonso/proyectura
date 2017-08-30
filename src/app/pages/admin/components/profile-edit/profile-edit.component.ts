@@ -16,9 +16,9 @@ export class ProfileEdit {
     url: '',
   };
 
-  public fileUploaderOptions:NgUploaderOptions = {
+  fileUploaderOptions: NgUploaderOptions = {
     // url: 'http://website.com/upload'
-    url: '',
+    url: 'http://aidihosting.com/proyectos/proyectura/uploads',
   };
   
   constructor() {
