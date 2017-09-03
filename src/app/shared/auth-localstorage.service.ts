@@ -6,12 +6,8 @@ import { LocalStorageService } from 'angular-2-local-storage';
 import { Injectable } from '@angular/core';
 
 
-
-
 @Injectable()
 export class AuthLocalstorage {
-
-  isLoggedIn: boolean = false;
 
   constructor(private localStorageService: LocalStorageService) {
   }
@@ -20,6 +16,9 @@ export class AuthLocalstorage {
       return +tochange;
   }
 
+  setAvatar(profileAvatar): void {
+      this.localStorageService.set('profileAvatar', profileAvatar);
+  }
 
   setCredentials(credentials: LoginInterface, loginResponseInterface: LoginResponseInterface): void {
       this.localStorageService.clearAll();

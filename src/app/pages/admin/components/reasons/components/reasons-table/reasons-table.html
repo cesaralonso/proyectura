@@ -3,73 +3,74 @@
         <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
 
             <div class="panel panel-default">
-                <!-- <div class="panel-heading">Información</div> -->
+                <!--<div class="panel-heading">Filtrar por razón social: <input class="form-control" [(ngModel)]="filterQuery" /></div>-->
 
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th colspan="14">
+                            <th colspan="4" class="text-left">
                                 Filtrar por razón social:
                                 <input class="form-control" [(ngModel)]="filterQuery" />
                             </th>
+                            <th colspan="10"></th>
                         </tr>
                         <tr>
                             <th style="width: 10%"></th>
     
                             <th style="width: 10%">
-                                <mfDefaultSorter by="idempresa">razonsocial</mfDefaultSorter>
+                                <mfDefaultSorter by="razonsocial">Razón social</mfDefaultSorter>
                             </th>
     
                             <th style="width: 10%">
-                                <mfDefaultSorter by="idempresa">nombre</mfDefaultSorter>
+                                <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
                             </th>
     
                             <th style="width: 10%">
-                                <mfDefaultSorter by="idempresa">rfc</mfDefaultSorter>
+                                <mfDefaultSorter by="rfc">RFC</mfDefaultSorter>
                             </th>
     
                             <th style="width: 10%">
-                                <mfDefaultSorter by="idempresa">direccion</mfDefaultSorter>
+                                <mfDefaultSorter by="direccion">Dirección</mfDefaultSorter>
                             </th>
     
                             <th style="width: 10%">
-                                <mfDefaultSorter by="idempresa">calle</mfDefaultSorter>
+                                <mfDefaultSorter by="calle">Calle</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">numeroexterior</mfDefaultSorter>
+                                <mfDefaultSorter by="numexterior">Núm exterior</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">numerointerior</mfDefaultSorter>
+                                <mfDefaultSorter by="numinterior">Núm interior</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">colonia</mfDefaultSorter>
+                                <mfDefaultSorter by="colonia">Colonia</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">municipio</mfDefaultSorter>
+                                <mfDefaultSorter by="municipio">Municipio</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">ciudad</mfDefaultSorter>
+                                <mfDefaultSorter by="ciudad">Ciudad</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">estado</mfDefaultSorter>
+                                <mfDefaultSorter by="estado">Estado</mfDefaultSorter>
                             </th>
     
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idempresa">pais</mfDefaultSorter>
+                                <mfDefaultSorter by="pais">Pais</mfDefaultSorter>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of mf.data">
                             <td>
-                                <button (click)="editReasonsModalShow(item.id)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
-                                <button (click)="onDeleteConfirm($event, item.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                <button (click)="editReasonsModalShow(item.idrazonsocial)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <button (click)="onDeleteConfirm($event, item.idrazonsocial)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
                             <td>{{item.razonsocial}}</td>
                             <td>{{item.nombre}}</td>

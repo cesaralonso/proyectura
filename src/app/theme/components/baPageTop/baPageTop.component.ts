@@ -17,6 +17,8 @@ export class BaPageTop {
 
   isAuth: boolean;
 
+  profileAvatar: string;
+
   constructor(
     private _state: GlobalState, 
     private authService: AuthService, 
@@ -27,6 +29,7 @@ export class BaPageTop {
     });
 
     this.isAuth = this.authService.isLoggedIn;
+    this.profileAvatar = this.authService.profileAvatar;
   }
 
   toggleMenu() {

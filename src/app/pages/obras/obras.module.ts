@@ -8,13 +8,13 @@ import { DataTableModule } from 'angular2-datatable';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { routing } from './obras.routing';
-import { Obras } from './obras.component';
+import { ObrasComponent } from './obras.component';
 
-import { ObrasAddModal } from './components/obras-table/obras-add-modal/obras-add-modal.component';
-import { ObrasEditModal } from './components/obras-table/obras-edit-modal/obras-edit-modal.component';
+import { ObrasAddModalComponent } from './components/obras-table/obras-add-modal/obras-add-modal.component';
+import { ObrasEditModalComponent } from './components/obras-table/obras-edit-modal/obras-edit-modal.component';
 import { ObrasService } from './components/obras-table/obras.service';
 
-import { ObrasTable } from './components/obras-table/obras-table.component';
+import { ObrasTableComponent } from './components/obras-table/obras-table.component';
 import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
 
 @NgModule({
@@ -30,15 +30,15 @@ import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
     NgbModalModule
   ],
   declarations: [
-    Obras,
-    ObrasTable,
+    ObrasComponent,
+    ObrasTableComponent,
     DataFilterPipe,
-    ObrasAddModal,
-    ObrasEditModal
+    ObrasAddModalComponent,
+    ObrasEditModalComponent
   ],
   entryComponents: [
-    ObrasAddModal,
-    ObrasEditModal
+    ObrasAddModalComponent,
+    ObrasEditModalComponent
   ],
   providers: [
     ObrasService

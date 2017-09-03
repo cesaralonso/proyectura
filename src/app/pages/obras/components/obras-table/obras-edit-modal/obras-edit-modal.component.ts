@@ -14,8 +14,14 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './obras-edit-modal.component.html'
 })
 
-export class ObrasEditModal implements OnInit {
+export class ObrasEditModalComponent implements OnInit {
 
+  _estatusobras: string[];
+  _razonsocialasociado: string[];
+  _razonsocialconstructor: string[];
+  _razonsocialcontratista: string[];
+  _razonsocialcliente: string[];
+  _tipoobra: string[];
   
   modalHeader: string;
   id: number;
@@ -40,15 +46,7 @@ export class ObrasEditModal implements OnInit {
     posiciongps: '',
     idestatusobra: 0,
     observaciones: '',
-    desctipoobra: '',
-    direccioncliente: '',
-    razonsocialcontratista: '',
-    razonsocialconstructor: '',
-    razonsocialasociado: '',
-    claveestatusobra: '',
-    tipoobra: '',
   };
-
 
   idobra: AbstractControl;
   descripcion: AbstractControl;
@@ -66,13 +64,6 @@ export class ObrasEditModal implements OnInit {
   posiciongps: AbstractControl;
   idestatusobra: AbstractControl;
   observaciones: AbstractControl;
-  desctipoobra: AbstractControl;
-  direccioncliente: AbstractControl;
-  razonsocialcontratista: AbstractControl;
-  razonsocialconstructor: AbstractControl;
-  razonsocialasociado: AbstractControl;
-  claveestatusobra: AbstractControl;
-  tipoobra: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -85,6 +76,13 @@ export class ObrasEditModal implements OnInit {
               fb: FormBuilder,
               private toastrService: ToastrService,
               private authLocalstorage: AuthLocalstorage) {
+
+    this._estatusobras = [];
+    this._razonsocialasociado = [];
+    this._razonsocialconstructor = [];
+    this._razonsocialcontratista = [];
+    this._razonsocialcliente = [];
+    this._tipoobra = [];
 
     const credenciales = this.authLocalstorage.getCredentials();
     
@@ -113,15 +111,6 @@ export class ObrasEditModal implements OnInit {
       'posiciongps' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'idestatusobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'observaciones' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'desctipoobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'direccioncliente' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'razonsocialcontratista' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'razonsocialconstructor' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'razonsocialasociado' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'claveestatusobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'tipoobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      
-
     });
 
     this.idobra = this.form.controls['idobra'];
@@ -140,19 +129,49 @@ export class ObrasEditModal implements OnInit {
     this.posiciongps = this.form.controls['posiciongps'];
     this.idestatusobra = this.form.controls['idestatusobra'];
     this.observaciones = this.form.controls['observaciones'];
-    this.desctipoobra = this.form.controls['desctipoobra'];
-    this.direccioncliente = this.form.controls['direccioncliente'];
-    this.razonsocialcontratista = this.form.controls['razonsocialcontratista'];
-    this.razonsocialconstructor = this.form.controls['razonsocialconstructor'];
-    this.razonsocialasociado = this.form.controls['razonsocialasociado'];
-    this.claveestatusobra = this.form.controls['claveestatusobra'];
-    this.tipoobra = this.form.controls['tipoobra'];
   }
 
 
   ngOnInit() {
+    // Obtiene una obra
     this.getObras();
-    console.log(`Descripcion: ${this.obra.descripcion}`);
+    
+    // Obtiene Estatus de Obras
+    this.obtenerEstatusObras();
+
+    // Obtiene Razones Sociales
+    this.obtenerRazonesSociales();
+
+    // Obtiene Tipos de Obras
+    this.obtenerTipoObras();
+  }
+
+  obtenerEstatusObras() {
+    this.service.obtenerEstatusObras()
+      .subscribe(
+        (data: any) => this._estatusobras = data,
+      );
+  }
+
+  obtenerTipoObras() {
+    this.service.obtenerTipoObras()
+      .subscribe(
+        (data: any) => {
+          this._tipoobra = data;
+        },
+      );
+  }
+
+  obtenerRazonesSociales() {
+    this.service.obtenerRazonesSociales()
+      .subscribe(
+        (data: any) => {
+          this._razonsocialasociado = data;
+          this._razonsocialconstructor = data;
+          this._razonsocialcontratista = data;
+          this._razonsocialcliente = data;
+        },
+      );
   }
 
   closeModal() {
@@ -183,11 +202,9 @@ export class ObrasEditModal implements OnInit {
   }
 
   private getObras(): void {
-    console.log(this.id);
     this.service.getObras(this.id)
         .subscribe( data => {
-          this.obra = data; 
-          console.log(data);
+          this.obra = data[1]; 
         },
         error => console.log(error),
         () => console.log('Get obra complete'));

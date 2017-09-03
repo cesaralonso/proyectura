@@ -1,6 +1,5 @@
 export interface UserInterface {
-    idusuario: number;
-    idempresa: number;
+    idusuario?: number;
     idrol: number;
     usuario: string;
     contrasena: string;
@@ -9,8 +8,8 @@ export interface UserInterface {
     telefono: string;
     idstatususuario: number;
     emailsms: string;
-    statususuario: string;
-    rol: string;
-    descripcion: string;
+    statususuario?: string;
+    rol?: string;
+    descripcion?: string;
+    urlimagenperfilusuario?: string;
 }
-

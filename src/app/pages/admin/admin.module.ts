@@ -20,6 +20,7 @@ import { UserEditModalComponent } from './components/users/components/usuarios-t
 import { UserService } from './components/users/components/usuarios-table/user.service';
 
 import { DataFilterPipe } from './data-filter.pipe';
+import { DataFilterReasonsPipe } from './data-filter-reasons.pipe';
 
 import { GroupsComponent } from './components/groups/groups.component';
 import { GroupsService } from './components/groups/components/groups-table/groups.service';
@@ -78,6 +79,7 @@ import { ObracategoriesAddModalComponent } from './components/obracategories/com
     UsuariosEditForm,
     UsuariosTable,
     DataFilterPipe,
+    DataFilterReasonsPipe,
     UserAddModalComponent,
     UserEditModalComponent,
     GroupsComponent,

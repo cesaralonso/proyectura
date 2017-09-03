@@ -49,7 +49,7 @@ export class ReasonsService {
     }
 
     deleteReasons = (id: string): Observable<any[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaUsuario`;
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaRazonSocial`;
        
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
@@ -65,7 +65,7 @@ export class ReasonsService {
     }
 
     getReasons = (id: number): Observable<ReasonsInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerUsuario`;
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRazonSocial`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -86,6 +86,24 @@ export class ReasonsService {
         const _credentials = JSON.stringify(this.credentials);
         return this._http.post(this.actionUrl, _credentials, { headers: this.headers })
             .map((response: Response) => <any>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerEstatusRazonSocial = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}ObtenerEstatusRazonSocial`;
+
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerTiposRazonSocial = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}ObtenerTiposRazonSocial`;
+
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
             .catch(this.handleError);
     }
 

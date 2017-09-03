@@ -30,7 +30,6 @@ export class GroupsService {
     addGroups = (groups: GroupsInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarRol`;
         const toAdd = JSON.stringify(groups);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
@@ -39,7 +38,6 @@ export class GroupsService {
     editGroups = (groups: GroupsInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}ModificarRol`;
         const toAdd = JSON.stringify(groups);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
@@ -54,9 +52,6 @@ export class GroupsService {
             claveauth: credenciales.claveauth,
             idrol: id,
         });
-
-        console.log('toAdd', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <GroupsResponseInterface[]>response.json())
             .catch(this.handleError);
@@ -66,8 +61,6 @@ export class GroupsService {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRoles`;
        
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
-        console.log('credenciales', credenciales);
-
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <GroupsInterface[]>response.json())
             .catch(this.handleError);
@@ -81,7 +74,7 @@ export class GroupsService {
             'nicknameauth': credenciales.nicknameauth,
             'usuarioauth': credenciales.usuarioauth,
             'claveauth': credenciales.claveauth,
-            'idusuario': id,
+            'idrol': id,
         });
 
         return this._http.post(this.actionUrl, toSend, { headers: this.headers })

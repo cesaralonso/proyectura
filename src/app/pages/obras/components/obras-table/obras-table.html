@@ -26,38 +26,23 @@
                             <th style="width: 10%">
                                 <mfDefaultSorter by="fechafin">Fecha de Fin</mfDefaultSorter>
                             </th>
-                            <th style="width: 10%">
-                                <mfDefaultSorter by="idtipoobra">ID Tipo Obra</mfDefaultSorter>
-                            </th>
                             <th style="width: 5%">
                                 <mfDefaultSorter by="presupuesto">Presupuesto</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idrazonsocialcliente">ID Razón Social Cliente</mfDefaultSorter>
-                            </th>
-                            <th style="width: 5%">
-                                <mfDefaultSorter by="idrazonsocialcontratista">ID Razón Social Contratista</mfDefaultSorter>
+                                <mfDefaultSorter by="idrazonsocialcliente">Razón Social Cliente</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
                                 <mfDefaultSorter by="razonsocialcontratista">Razón Social Contratista</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
-                                <mfDefaultSorter by="idrazonsocialconstructor">ID Razón Social Constructor</mfDefaultSorter>
-                            </th>
-                            <th style="width: 5%">
                                 <mfDefaultSorter by="razonsocialconstructor">Razón Social Constructor</mfDefaultSorter>
-                            </th>
-                            <th style="width: 5%">
-                                <mfDefaultSorter by="idrazonsocialasociado">ID Razón Social Asociado</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
                                 <mfDefaultSorter by="razonsocialasociado">Razón Social Asociado</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
                                 <mfDefaultSorter by="posiciongps">Posición GPS</mfDefaultSorter>
-                            </th>
-                            <th style="width: 5%">
-                                <mfDefaultSorter by="idestatusobra">ID Estatus Obra</mfDefaultSorter>
                             </th>
                             <th style="width: 5%">
                                 <mfDefaultSorter by="observaciones">Observaciones</mfDefaultSorter>
@@ -86,25 +71,19 @@
                             <td>{{ item.direccion }}</td>
                             <td>{{ item.medidasterreno }}</td>
                             <td>{{ item.medidasconstruccion }}</td>
-                            <td>{{ item.fechainicio | date }}</td>
-                            <td>{{ item.fechafin | date }}</td>
-                            <td>{{ item.idtipoobra }}</td>
+                            <td>{{ item.fechainicio | date:'dd/MM/y' }}</td>
+                            <td>{{ item.fechafin | date:'dd/MM/y' }}</td>
                             <td>{{ item.presupuesto }}</td>
-                            <td>{{ item.idrazonsocialcliente }}</td>
-                            <td>{{ item.idrazonsocialcontratista }}</td>
+                            <td>{{ item.razonsocialcliente }}</td>
                             <td>{{ item.razonsocialcontratista }}</td>
-                            <td>{{ item.idrazonsocialconstructor }}</td>
                             <td>{{ item.razonsocialconstructor }}</td>
-                            <td>{{ item.idrazonsocialasociado }}</td>
                             <td>{{ item.razonsocialasociado }}</td>
                             <td>{{ item.posiciongps }}</td>
-                            <td>{{ item.idestatusobra }}</td>
                             <td>{{ item.observaciones }}</td>
                             <td>{{ item.desctipoobra }}</td>
                             <td>{{ item.direccioncliente }}</td>
                             <td>{{ item.claveestatusobra }}</td>
                             <td>{{ item.tipoobra }}</td>
-                            
                         </tr>
                     </tbody>
                     <tfoot>

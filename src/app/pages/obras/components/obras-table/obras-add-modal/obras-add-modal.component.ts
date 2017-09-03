@@ -14,15 +14,14 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './obras-add-modal.component.html'
 })
 
-export class ObrasAddModal implements OnInit {
+export class ObrasAddModalComponent implements OnInit {s
 
-
-  estatusObras: string[];
+  _estatusobras: string[];
   _razonsocialasociado: string[];
   _razonsocialconstructor: string[];
   _razonsocialcontratista: string[];
   _razonsocialcliente: string[];
-
+  _tipoobra: string[];
 
   modalHeader: string;
 
@@ -44,13 +43,6 @@ export class ObrasAddModal implements OnInit {
   posiciongps: AbstractControl;
   idestatusobra: AbstractControl;
   observaciones: AbstractControl;
-  desctipoobra: AbstractControl;
-  direccioncliente: AbstractControl;
-  razonsocialcontratista: AbstractControl;
-  razonsocialconstructor: AbstractControl;
-  razonsocialasociado: AbstractControl;
-  claveestatusobra: AbstractControl;
-  tipoobra: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -62,12 +54,13 @@ export class ObrasAddModal implements OnInit {
               fb: FormBuilder,
               private toastrService: ToastrService,
               private authLocalstorage: AuthLocalstorage) {
-
+    
+    this._estatusobras = [];
     this._razonsocialasociado = [];
     this._razonsocialconstructor = [];
     this._razonsocialcontratista = [];
     this._razonsocialcliente = [];
-
+    this._tipoobra = [];
 
     const credenciales = this.authLocalstorage.getCredentials();
     
@@ -95,13 +88,6 @@ export class ObrasAddModal implements OnInit {
       'posiciongps' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'idestatusobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'observaciones' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'desctipoobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'direccioncliente' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'razonsocialcontratista' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'razonsocialconstructor' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'razonsocialasociado' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'claveestatusobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'tipoobra' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       
     });
 
@@ -120,13 +106,6 @@ export class ObrasAddModal implements OnInit {
     this.posiciongps = this.form.controls['posiciongps'];
     this.idestatusobra = this.form.controls['idestatusobra'];
     this.observaciones = this.form.controls['observaciones'];
-    this.desctipoobra = this.form.controls['desctipoobra'];
-    this.direccioncliente = this.form.controls['direccioncliente'];
-    this.razonsocialcontratista = this.form.controls['razonsocialcontratista'];
-    this.razonsocialconstructor = this.form.controls['razonsocialconstructor'];
-    this.razonsocialasociado = this.form.controls['razonsocialasociado'];
-    this.claveestatusobra = this.form.controls['claveestatusobra'];
-    this.tipoobra = this.form.controls['tipoobra'];
   }
 
 
@@ -135,13 +114,28 @@ export class ObrasAddModal implements OnInit {
     // Obtiene Estatus de Obras
     this.service.obtenerEstatusObras()
       .subscribe(
-        (data: any) => this.estatusObras = data,
+        (data: any) => this._estatusobras = data,
       );
 
-      
-      
-      
+     
+    // Obtiene Razones Sociales
+    this.service.obtenerRazonesSociales()
+      .subscribe(
+        (data: any) => {
+          this._razonsocialasociado = data;
+          this._razonsocialconstructor = data;
+          this._razonsocialcontratista = data;
+          this._razonsocialcliente = data;
+        },
+      );
 
+    // Obtiene Tipos de Obras
+    this.service.obtenerTipoObras()
+      .subscribe(
+        (data: any) => {
+          this._tipoobra = data;
+        },
+      );
 
   }
 

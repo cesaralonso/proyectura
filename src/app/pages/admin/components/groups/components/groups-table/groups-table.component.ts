@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { GroupsService } from './groups.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,7 +20,7 @@ export class GroupsTableComponent implements OnInit {
     sortBy = "nombre";
     sortOrder = "asc";
 
-    constructor(private service: GroupsService, private modalService: NgbModal) {
+    constructor(private service: GroupsService, private modalService: NgbModal, private toastrService: ToastrService) {
     }
 
     toInt(num: string) {
@@ -36,17 +37,31 @@ export class GroupsTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Editar Rol';
       activeModal.componentInstance.id = id;
       // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
-
     }
     
-    onDeleteConfirm(event, item): void {
+    onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        console.log('item.id a borrar', item.id);
+
+        this.service.deleteGroups(id)
+          .subscribe(
+            (data) => this.showToast(data),
+            error => console.log(error),
+            () => console.log('Delete completed')
+          );
+
       } else {
-        console.log('item.id cancelando', item.id);
+        console.log('item.id cancelando', id);
       }
     }
 
+    showToast(data) {
+      if (data.idRespuesta === 0) {
+        this.toastrService.success(data.mensajeRespuesta);
+        this.getAllGroups();
+      } else {
+        this.toastrService.error(data.mensajeRespuesta);
+      }
+    }
 
     ngOnInit() {
         this.getAllGroups();

@@ -8,12 +8,6 @@
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th colspan="14">
-                                Filtrar por Categoría de Obra:
-                                <input class="form-control" [(ngModel)]="filterQuery" />
-                            </th>
-                        </tr>
-                        <tr>
                             <th style="width: 10%"></th>
                             <th style="width: 40%">
                                 <mfDefaultSorter by="clavecategoria">Clave Categoria</mfDefaultSorter>

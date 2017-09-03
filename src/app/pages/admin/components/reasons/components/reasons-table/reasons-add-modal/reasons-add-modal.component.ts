@@ -17,6 +17,9 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ReasonsAddModalComponent implements OnInit {
 
+  _tiporazonsocial: string[];
+  _estatusrazonsocial: string[];
+
   modalHeader: string;
 
   form: FormGroup;
@@ -26,22 +29,20 @@ export class ReasonsAddModalComponent implements OnInit {
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
 
-    idrazonsocial: AbstractControl;
-    razonsocial: AbstractControl;
-    nombre: AbstractControl;
-    rfc: AbstractControl;
-    direccion: AbstractControl;
-    calle: AbstractControl;
-    numexterior: AbstractControl;
-    numinterior: AbstractControl;
-    colonia: AbstractControl;
-    municipio: AbstractControl;
-    ciudad: AbstractControl;
-    estado: AbstractControl;
-    pais: AbstractControl;
-
-
-
+  razonsocial: AbstractControl;
+  nombre: AbstractControl;
+  rfc: AbstractControl;
+  direccion: AbstractControl;
+  calle: AbstractControl;
+  numeroexterior: AbstractControl;
+  numerointerior: AbstractControl;
+  colonia: AbstractControl;
+  municipio: AbstractControl;
+  ciudad: AbstractControl;
+  estado: AbstractControl;
+  pais: AbstractControl;
+  idstatusrazonsocial: AbstractControl;
+  idtiporazonsocial: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -54,6 +55,9 @@ export class ReasonsAddModalComponent implements OnInit {
               private toastrService: ToastrService,
               private localStorageService: LocalStorageService,
               private authLocalstorage: AuthLocalstorage) {
+                
+    this._tiporazonsocial = [];
+    this._estatusrazonsocial = [];
 
     const credenciales = this.authLocalstorage.getCredentials();
 
@@ -66,40 +70,54 @@ export class ReasonsAddModalComponent implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idrazonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'razonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'nombre': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'rfc': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'direccion': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'calle': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'numexterior': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'numinterior': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'numeroexterior': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'numerointerior': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'colonia': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'municipio': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'ciudad': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'estado': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'pais': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'idstatusrazonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'idtiporazonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
-
-
-    this.idrazonsocial = this.form.controls['idrazonsocial'];
     this.razonsocial = this.form.controls['razonsocial'];
     this.nombre = this.form.controls['nombre'];
     this.rfc = this.form.controls['rfc'];
     this.direccion = this.form.controls['direccion'];
     this.calle = this.form.controls['calle'];
-    this.numexterior = this.form.controls['numexterior'];
-    this.numinterior = this.form.controls['numinterior'];
+    this.numeroexterior = this.form.controls['numeroexterior'];
+    this.numerointerior = this.form.controls['numerointerior'];
     this.colonia = this.form.controls['colonia'];
     this.municipio = this.form.controls['municipio'];
     this.ciudad = this.form.controls['ciudad'];
     this.estado = this.form.controls['estado'];
     this.pais = this.form.controls['pais'];
+    this.idstatusrazonsocial = this.form.controls['idstatusrazonsocial'];
+    this.idtiporazonsocial = this.form.controls['idtiporazonsocial'];
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    // Obtiene Tipos de Razón Social
+    this.service.obtenerTiposRazonSocial()
+      .subscribe(
+        (data: any) => this._tiporazonsocial = data,
+      );
+
+    // Obtiene Estatus de Razón Social
+    this.service.obtenerEstatusRazonSocial()
+      .subscribe(
+        (data: any) => this._estatusrazonsocial = data,
+      );
+
+  }
 
   closeModal() {
     this.activeModal.close();

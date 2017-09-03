@@ -1,3 +1,5 @@
+import { UserResponseInterface } from './../admin/components/users/components/usuarios-table/user-response.interface';
+import { UserService } from './../admin/components/users/components/usuarios-table/user.service';
 import { LoginResponseInterface } from './login-response.interface';
 import { LoginInterface } from './login.interface';
 import { AuthService } from './../../shared/auth.service';
@@ -29,6 +31,7 @@ export class LoginComponent {
               protected service: AuthService, 
               private authLocalstorage: AuthLocalstorage,
               private toastrService: ToastrService,
+              private userService: UserService,
               private router: Router) {
     this.form = fb.group({
       'usuarioauth': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
@@ -50,8 +53,25 @@ export class LoginComponent {
     }
   }
 
+  toInt(tochange: any): number {
+      return +tochange;
+  }
+
+  private setAvatarInLocalStorage(response) {
+      const userId = this.toInt(response.valorRespuesta.split('|')[1]);
+
+      this.userService
+        .getUser(userId)
+        .subscribe(
+          (data: any) => this.authLocalstorage.setAvatar(data.urlimagenperfilusuario));
+  }
+
   private showModal(response: LoginResponseInterface, credentials: LoginInterface) {
     if (response.idRespuesta === 0) {
+
+      // Cargar datos de usuario logeado para guardar en Localstorage su imagen de perfil
+      this.setAvatarInLocalStorage(response);
+
       this.toastrService.success(response.mensajeRespuesta);
       this.authLocalstorage.setCredentials(credentials, response);
       this.router.navigate(['pages/dashboard']);

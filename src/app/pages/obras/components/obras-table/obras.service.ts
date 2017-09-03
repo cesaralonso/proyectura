@@ -30,7 +30,6 @@ export class ObrasService {
     addObras = (obras: ObrasInterface): Observable<ObrasResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarObra`;
         const toAdd = JSON.stringify(obras);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface>response.json())
             .catch(this.handleError);
@@ -39,7 +38,6 @@ export class ObrasService {
     editObras = (obras: ObrasInterface): Observable<ObrasResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarObra`;
         const toAdd = JSON.stringify(obras);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface>response.json())
             .catch(this.handleError);
@@ -52,15 +50,12 @@ export class ObrasService {
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idobra: idObra, // cambiado por idusuario
+            idobra: idObra,
         });
-
-        console.log('credenciales', toAdd);
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasInterface>response.json())
             .catch(this.handleError);
-            
     }
 
     getAllObras = (): Observable<ObrasInterface[]> => {
@@ -72,7 +67,7 @@ export class ObrasService {
             .map((response: Response) => <ObrasInterface[]>response.json())
             .catch(this.handleError);
     }
-    // No hay delete
+
     deleteObras = (id: string): Observable<ObrasResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaObras`;
        
@@ -98,9 +93,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idobra: idObra,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface[]>response.json())
             .catch(this.handleError);
@@ -115,16 +107,13 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idobra: idObra,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
     cancelarObra = (idObra: number): Observable<ObrasResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}CancelarObra`;
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}cancelarObra`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -132,9 +121,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idobra: idObra,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface[]>response.json())
             .catch(this.handleError);
@@ -149,9 +135,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idobra: idObra,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface[]>response.json())
             .catch(this.handleError);
@@ -167,9 +150,6 @@ export class ObrasService {
             idobra: idObra,
             idestatusobra: idEstatusObra,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasResponseInterface[]>response.json())
             .catch(this.handleError);
@@ -184,9 +164,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idrazonsocialcliente: idRazonSocialCliente,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasInterface[]>response.json())
             .catch(this.handleError);
@@ -201,9 +178,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idrazonsocialcontratista: idRazonSocialContratista,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasInterface[]>response.json())
             .catch(this.handleError);
@@ -218,9 +192,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idrazonsocialconstructor: idRazonSocialConstructor,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasInterface[]>response.json())
             .catch(this.handleError);
@@ -235,9 +206,6 @@ export class ObrasService {
             claveauth: credenciales.claveauth,
             idrazonsocialasociado: idRazonSocialAsociado,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObrasInterface[]>response.json())
             .catch(this.handleError);
@@ -245,7 +213,22 @@ export class ObrasService {
 
     obtenerEstatusObras = (): Observable<any[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEstatusObras`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
+    }
 
+    obtenerRazonesSociales = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRazonesSociales`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerTipoObras = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerTipoObras`;
         const credenciales = this.authLocalstorage.getCredentials();
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <any[]>response.json())

@@ -27,6 +27,7 @@ export class GroupsEditModalComponent implements OnInit {
   nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
+  idrol: AbstractControl;
   rol: AbstractControl;
   descripcion: AbstractControl;
   visible: AbstractControl;
@@ -61,6 +62,7 @@ export class GroupsEditModalComponent implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
+      'idrol': this.id,
       'rol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'descripcion': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'visible': [''],
@@ -75,7 +77,7 @@ export class GroupsEditModalComponent implements OnInit {
     this.service
       .getGroups(this.id)
       .subscribe(
-        (item: GroupsInterface) => this.item = item);
+        (item: GroupsInterface) => this.item = item[1]);
   }
 
   closeModal() {

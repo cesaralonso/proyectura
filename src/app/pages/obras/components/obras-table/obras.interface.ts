@@ -1,5 +1,5 @@
 export interface ObrasInterface {
-    idobra: number;
+    idobra?: number;
     descripcion: string;
     direccion: string;
     medidasterreno: string;

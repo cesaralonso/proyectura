@@ -20,6 +20,10 @@ export class AuthService {
         )
     );
 
+    profileAvatar: string = (
+        this.localStorageService.get('profileAvatar') ? this.localStorageService.get('isLoggedIn').toString() : ''
+    );
+
     toBoolean(object: any): boolean {
         return (object.toString() === 'true') ? true : false;
     }

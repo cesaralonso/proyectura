@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class UserAddModalComponent implements OnInit {
 
+  _estatususuarios: string[];
   modalHeader: string;
 
   form: FormGroup;
@@ -46,6 +47,7 @@ export class UserAddModalComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private authLocalstorage: AuthLocalstorage) {
 
+    this._estatususuarios = [];
 
     const credenciales = this.authLocalstorage.getCredentials();
 
@@ -78,7 +80,17 @@ export class UserAddModalComponent implements OnInit {
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.obtenerEstatusUsuarios();
+  }
+
+  obtenerEstatusUsuarios() {
+    // Obtiene Estatus de Usuarios
+    this.service.obtenerEstatusUsuarios()
+      .subscribe(
+        (data: any) => this._estatususuarios = data,
+      );
+  }
 
   closeModal() {
     this.activeModal.close();

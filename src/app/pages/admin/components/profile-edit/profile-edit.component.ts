@@ -1,26 +1,22 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgUploaderOptions } from 'ngx-uploader';
 
 @Component({
   selector: 'profile-edit',
   templateUrl: './profile-edit.html',
 })
-export class ProfileEdit {
+export class ProfileEdit implements OnInit {
 
-  public defaultPicture = 'assets/img/theme/no-photo.png';
-  public profile:any = {
-    picture: 'assets/img/app/profile/Cesar.png'
-  };
-  public uploaderOptions:NgUploaderOptions = {
-    // url: 'http://website.com/upload'
-    url: '',
+  defaultPicture = 'assets/img/theme/no-photo.png';
+
+  profile: any = {
+    picture: 'assets/img/app/profile/Cesar.png',
   };
 
   fileUploaderOptions: NgUploaderOptions = {
-    // url: 'http://website.com/upload'
-    url: 'http://aidihosting.com/proyectos/proyectura/uploads',
+    url: 'http://localhost/slim/v1/uploadImagen/123',
   };
-  
+
   constructor() {
   }
 

@@ -25,16 +25,11 @@ export class UserService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-
-        
-        console.log('localStorageService', this.localStorageService);
-
     }
 
     addUser = (user: UserInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarUsuario`;
         const toAdd = JSON.stringify(user);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
@@ -43,7 +38,6 @@ export class UserService {
     editUser = (user: UserInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}ModificarUsuario`;
         const toAdd = JSON.stringify(user);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
@@ -58,9 +52,6 @@ export class UserService {
             claveauth: credenciales.claveauth,
             idusuario: id,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <UserResponseInterface[]>response.json())
             .catch(this.handleError);
@@ -70,10 +61,16 @@ export class UserService {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerUsuarios`;
        
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
-        console.log('credenciales', credenciales);
-
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <UserResponseInterface[]>response.json())
+            .catch(this.handleError);
+    }
+
+    obtenerEstatusUsuarios = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerStatusUsuarios`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
             .catch(this.handleError);
     }
 

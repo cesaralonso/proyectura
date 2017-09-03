@@ -11,97 +11,109 @@
 
         <ba-card cardTitle="Información de Razón Social">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocial.valid && idrazonsocial.touched), 'has-success': (idrazonsocial.valid && idrazonsocial.touched)}">
-              <label for="idrazonsocial" class="col-sm-2 form-control-label">idrazonsocial</label>
-              <div class="col-sm-10">
-                <input [formControl]="idrazonsocial" type="number" class="form-control" id="idrazonsocial" placeholder="idrazonsocial">
-              </div>
-            </div>
-            
             <div class="form-group row" [ngClass]="{'has-error': (!razonsocial.valid && razonsocial.touched), 'has-success': (razonsocial.valid && razonsocial.touched)}">
-              <label for="razonsocial" class="col-sm-2 form-control-label">razonsocial</label>
+              <label for="inputrazonsocial" class="col-sm-2 form-control-label">Razón social</label>
               <div class="col-sm-10">
-                <input [formControl]="razonsocial" type="number" class="form-control" id="razonsocial" placeholder="razonsocial">
+                <input [formControl]="razonsocial" type="text" class="form-control" id="inputrazonsocial" placeholder="razonsocial">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
-              <label for="nombre" class="col-sm-2 form-control-label">nombre</label>
+              <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
               <div class="col-sm-10">
-                <input [formControl]="nombre" type="number" class="form-control" id="nombre" placeholder="nombre">
+                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="nombre">
               </div>
             </div>
              
             <div class="form-group row" [ngClass]="{'has-error': (!rfc.valid && rfc.touched), 'has-success': (rfc.valid && rfc.touched)}">
-              <label for="rfc" class="col-sm-2 form-control-label">rfc</label>
+              <label for="inputrfc" class="col-sm-2 form-control-label">RFC</label>
               <div class="col-sm-10">
-                <input [formControl]="rfc" type="number" class="form-control" id="rfc" placeholder="rfc">
+                <input [formControl]="rfc" type="text" class="form-control" id="inputrfc" placeholder="rfc">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!direccion.valid && direccion.touched), 'has-success': (direccion.valid && direccion.touched)}">
-              <label for="inputdireccion" class="col-sm-2 form-control-label">direccion</label>
+              <label for="inputdireccion" class="col-sm-2 form-control-label">Dirección</label>
               <div class="col-sm-10">
-                <input [formControl]="direccion" type="number" class="form-control" id="inputdireccion" placeholder="direccion">
+                <input [formControl]="direccion" type="text" class="form-control" id="inputdireccion" placeholder="direccion">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!calle.valid && calle.touched), 'has-success': (calle.valid && calle.touched)}">
-              <label for="inputcalle" class="col-sm-2 form-control-label">inputcalle</label>
+              <label for="inputcalle" class="col-sm-2 form-control-label">Calle</label>
               <div class="col-sm-10">
-                <input [formControl]="calle" type="number" class="form-control" id="inputcalle" placeholder="calle">
+                <input [formControl]="calle" type="text" class="form-control" id="inputcalle" placeholder="calle">
               </div>
             </div>
             
-            <div class="form-group row" [ngClass]="{'has-error': (!numexterior.valid && numexterior.touched), 'has-success': (numexterior.valid && numexterior.touched)}">
-              <label for="inputnumexterior" class="col-sm-2 form-control-label">numexterior</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!numeroexterior.valid && numeroexterior.touched), 'has-success': (numeroexterior.valid && numeroexterior.touched)}">
+              <label for="inputnumeroexterior" class="col-sm-2 form-control-label">Núm exterior</label>
               <div class="col-sm-10">
-                <input [formControl]="numexterior" type="number" class="form-control" id="inputnumexterior" placeholder="numexterior">
+                <input [formControl]="numeroexterior" type="number" class="form-control" id="inputnumeroexterior" placeholder="numeroexterior">
               </div>
             </div>
             
-            <div class="form-group row" [ngClass]="{'has-error': (!numinterior.valid && numinterior.touched), 'has-success': (numinterior.valid && numinterior.touched)}">
-              <label for="inputnuminterior" class="col-sm-2 form-control-label">numinterior</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!numerointerior.valid && numerointerior.touched), 'has-success': (numerointerior.valid && numerointerior.touched)}">
+              <label for="inputnumerointerior" class="col-sm-2 form-control-label">Núm interior</label>
               <div class="col-sm-10">
-                <input [formControl]="numinterior" type="number" class="form-control" id="inputnuminterior" placeholder="numinterior">
+                <input [formControl]="numerointerior" type="text" class="form-control" id="inputnumerointerior" placeholder="numerointerior">
               </div>
             </div>
              
             <div class="form-group row" [ngClass]="{'has-error': (!colonia.valid && colonia.touched), 'has-success': (colonia.valid && colonia.touched)}">
-              <label for="inputcolonia" class="col-sm-2 form-control-label">colonia</label>
+              <label for="inputcolonia" class="col-sm-2 form-control-label">Colonia</label>
               <div class="col-sm-10">
-                <input [formControl]="colonia" type="number" class="form-control" id="inputcolonia" placeholder="colonia">
+                <input [formControl]="colonia" type="text" class="form-control" id="inputcolonia" placeholder="colonia">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!municipio.valid && municipio.touched), 'has-success': (municipio.valid && municipio.touched)}">
-              <label for="inputmunicipio" class="col-sm-2 form-control-label">municipio</label>
+              <label for="inputmunicipio" class="col-sm-2 form-control-label">Municipio</label>
               <div class="col-sm-10">
-                <input [formControl]="municipio" type="number" class="form-control" id="inputmunicipio" placeholder="municipio">
+                <input [formControl]="municipio" type="text" class="form-control" id="inputmunicipio" placeholder="municipio">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!ciudad.valid && ciudad.touched), 'has-success': (ciudad.valid && ciudad.touched)}">
-              <label for="inputciudad" class="col-sm-2 form-control-label">ciudad</label>
+              <label for="inputciudad" class="col-sm-2 form-control-label">Ciudad</label>
               <div class="col-sm-10">
-                <input [formControl]="ciudad" type="number" class="form-control" id="inputciudad" placeholder="ciudad">
+                <input [formControl]="ciudad" type="text" class="form-control" id="inputciudad" placeholder="ciudad">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!estado.valid && estado.touched), 'has-success': (estado.valid && estado.touched)}">
-              <label for="inputestado" class="col-sm-2 form-control-label">estado</label>
+              <label for="inputestado" class="col-sm-2 form-control-label">Estado</label>
               <div class="col-sm-10">
-                <input [formControl]="estado" type="number" class="form-control" id="inputestado" placeholder="estado">
+                <input [formControl]="estado" type="text" class="form-control" id="inputestado" placeholder="estado">
               </div>
             </div>
             
             <div class="form-group row" [ngClass]="{'has-error': (!pais.valid && pais.touched), 'has-success': (pais.valid && pais.touched)}">
-              <label for="inputpais" class="col-sm-2 form-control-label">pais</label>
+              <label for="inputpais" class="col-sm-2 form-control-label">Pais</label>
               <div class="col-sm-10">
-                <input [formControl]="pais" type="number" class="form-control" id="inputpais" placeholder="pais">
+                <input [formControl]="pais" type="text" class="form-control" id="inputpais" placeholder="pais">
               </div>
             </div>
-
+            <div class="form-group row" [ngClass]="{'has-error': (!idtiporazonsocial.valid && idtiporazonsocial.touched), 'has-success': (idtiporazonsocial.valid && idtiporazonsocial.touched)}">
+              <label for="inputidtiporazonsocial" class="col-sm-2 form-control-label">Tipo de obra</label>
+              <div class="col-sm-10">
+                <select id="idtiporazonsocial" class="form-control" [formControl]="idtiporazonsocial">
+                  <option value="{{value.idtiporazonsocial}}" *ngFor="let value of _tiporazonsocial">
+                    {{value.descripcion}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row" [ngClass]="{'has-error': (!idstatusrazonsocial.valid && idstatusrazonsocial.touched), 'has-success': (idstatusrazonsocial.valid && idstatusrazonsocial.touched)}">
+              <label for="inputidstatusrazonsocial" class="col-sm-2 form-control-label">Estatus razón social</label>
+              <div class="col-sm-10">
+                <select id="idstatusrazonsocial" class="form-control" [formControl]="idstatusrazonsocial">
+                  <option value="{{value.idstatusrazonsocial}}" *ngFor="let value of _estatusrazonsocial">
+                    {{value.descripcion}}
+                  </option>
+                </select>
+              </div>
+            </div>
         </ba-card>
 
       </div>

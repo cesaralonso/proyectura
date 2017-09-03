@@ -4,15 +4,15 @@ import { ObrasResponseInterface } from './obras-response.interface';
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from './obras.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ObrasAddModal } from './obras-add-modal/obras-add-modal.component';
-import { ObrasEditModal } from './obras-edit-modal/obras-edit-modal.component';
+import { ObrasAddModalComponent } from './obras-add-modal/obras-add-modal.component';
+import { ObrasEditModalComponent } from './obras-edit-modal/obras-edit-modal.component';
 
 @Component({
   selector: 'obras-table',
   templateUrl: './obras-table.html',
   styleUrls: ['./obras-table.scss'],
 })
-export class ObrasTable implements OnInit {
+export class ObrasTableComponent implements OnInit {
 
     data;
     filterQuery = '';
@@ -28,29 +28,26 @@ export class ObrasTable implements OnInit {
     }
 
     addObrasModalShow() {
-      const activeModal = this.modalService.open(ObrasAddModal, { size: 'lg' });
+      const activeModal = this.modalService.open(ObrasAddModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Agregar Obra';
       console.log('Add Modal opened');
     }
 
     editObrasModalShow(id: any) {
-      const activeModal = this.modalService.open(ObrasEditModal, { size: 'lg' });
+      const activeModal = this.modalService.open(ObrasEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Obra';
       activeModal.componentInstance.id = id;
       // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS DEL USUARIO Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
-
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-
         this.service.cancelarObra(id)
           .subscribe(
             (data) => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
-
       } else {
         console.log('item.id cancelando', id);
       }
@@ -70,13 +67,11 @@ export class ObrasTable implements OnInit {
     }
     
     private getAllObras(): void {
-
       this.service
           .getAllObras()
           .subscribe(
               (data: ObrasInterface[]) =>  {
                 this.data = data;
-                console.log(this.data);
               },
               error => console.log(error),
               () => console.log('Get all Items complete'));
