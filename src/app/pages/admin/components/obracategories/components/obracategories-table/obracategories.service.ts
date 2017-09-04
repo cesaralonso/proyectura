@@ -33,7 +33,6 @@ export class ObracategoriesService {
     addObracategories = (obracategories: ObracategoriesInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarCategoria`;
         const toAdd = JSON.stringify(obracategories);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
@@ -42,7 +41,6 @@ export class ObracategoriesService {
     editObracategories = (obracategories: ObracategoriesInterface): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}ModificarCategoria`;
         const toAdd = JSON.stringify(obracategories);
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
             .catch(this.handleError);
@@ -71,10 +69,8 @@ export class ObracategoriesService {
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idrazonsocial: id,
+            idcategoria: id,
         });
-
-        console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ObracategoriesInterface[]>response.json())
             .catch(this.handleError);
@@ -82,7 +78,6 @@ export class ObracategoriesService {
     
     getAll = (): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerCategorias`;
-
         const _credentials = JSON.stringify(this.credentials);
         return this._http.post(this.actionUrl, _credentials, { headers: this.headers })
             .map((response: Response) => <any>response.json())

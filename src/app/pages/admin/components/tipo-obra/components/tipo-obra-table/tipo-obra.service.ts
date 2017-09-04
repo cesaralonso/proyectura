@@ -25,10 +25,6 @@ export class TipoObraService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-
-        
-        console.log('localStorageService', this.localStorageService);
-
     }
 
     addTipoObra = (tipoobra: TipoObraInterface): Observable<any> =>  {
@@ -56,11 +52,8 @@ export class TipoObraService {
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idusuario: id,
+            idtipoobra: id,
         });
-
-        console.log('credenciales', toAdd);
-
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <TipoObraInterface[]>response.json())
             .catch(this.handleError);
