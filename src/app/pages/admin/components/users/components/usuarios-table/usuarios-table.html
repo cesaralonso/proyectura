@@ -45,13 +45,6 @@
                     <thead>
                         <tr>
                             <th style="width: 10%"></th>
-
-                            <th style="width: 2%">
-                                <mfDefaultSorter by="idempresa">Id Empresa</mfDefaultSorter>
-                            </th>
-                            <th style="width: 2%">
-                                <mfDefaultSorter by="idrol">Rol</mfDefaultSorter>
-                            </th>
                             <th style="width: 10%">
                                 <mfDefaultSorter by="usuario">Usuario</mfDefaultSorter>
                             </th>
@@ -63,9 +56,6 @@
                             </th>
                             <th style="width: 10%">
                                 <mfDefaultSorter by="telefono">Teléfono</mfDefaultSorter>
-                            </th>
-                            <th style="width: 9%">
-                                <mfDefaultSorter by="idstatususuario">Id Status usuario</mfDefaultSorter>
                             </th>
                             <th style="width: 10%">
                                 <mfDefaultSorter by="statususuario">statususuario</mfDefaultSorter>
@@ -84,16 +74,13 @@
                     <tbody>
                         <tr *ngFor="let item of mf.data">
                             <td>
-                                <button (click)="editUserModalShow(item.idusuario)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <button (click)="editUserModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idusuario)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
-                            <td>{{item.idempresa}}</td>
-                            <td>{{item.idrol}}</td>
                             <td>{{item.usuario}}</td>
                             <td>{{item.nombre}}</td>
                             <td>{{item.email}}</td>
                             <td>{{item.telefono}}</td>
-                            <td>{{item.idstatususuario}}</td>
                             <td>{{item.statususuario}}</td>
                             <td>{{item.emailsms}}</td>
                             <td>{{item.rol}}</td>

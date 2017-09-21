@@ -29,7 +29,7 @@ export class LogsTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Log';
     }
 
-    editLogsModalShow(id: any) {
+    editLogsModalShow(id: number) {
       const activeModal = this.modalService.open(LogsEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Log';
       activeModal.componentInstance.id = id;

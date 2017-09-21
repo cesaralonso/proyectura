@@ -6,7 +6,7 @@ import { TipoObraService } from './tipo-obra.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TipoObraAddModalComponent } from './tipo-obra-add-modal/tipo-obra-add-modal.component';
 import { TipoObraEditModalComponent } from './tipo-obra-edit-modal/tipo-obra-edit-modal.component';
-
+import { TipoObraUploadModalComponent } from './tipo-obra-upload-modal/tipo-obra-upload-modal.component';
 
 @Component({
   selector: 'tipo-obra-table',
@@ -35,12 +35,20 @@ export class TipoObraTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Tipo de Obra';
     }
 
-    editTipoObraModalShow(id: any) {
+    editTipoObraModalShow(id: number) {
       const activeModal = this.modalService.open(TipoObraEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Tipo de Obra';
       activeModal.componentInstance.id = id;
     }
-    
+
+    uploadTipoObraModalShow(id: number) {
+      const activeModal = this.modalService.open(TipoObraUploadModalComponent, { size: 'lg' });
+      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Tipo de Obra';
+      activeModal.componentInstance.id = id;
+      console.log('Upload Modal opened');
+    }
+
+
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
         this.service.deleteTipoObra(id)

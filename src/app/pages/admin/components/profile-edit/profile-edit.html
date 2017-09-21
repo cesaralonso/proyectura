@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-md-6">
       <ba-card cardTitle="Carga de Avatar" baCardClass="with-scroll">
-        <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" [uploaderOptions]="fileUploaderOptions" ></ba-picture-uploader>
+        <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" [uploaderOptions]="fileUploaderOptions"  (onUploadCompleted)="uploadCompled($event)" ></ba-picture-uploader>
       </ba-card>
     </div>
   </div>

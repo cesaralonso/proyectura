@@ -8,8 +8,4 @@ export interface UserInterface {
     telefono: string;
     idstatususuario: number;
     emailsms: string;
-    statususuario?: string;
-    rol?: string;
-    descripcion?: string;
-    urlimagenperfilusuario?: string;
 }

@@ -1,5 +1,5 @@
 export interface ReasonsInterface {
-    idrazonsocial?: number;
+    idrazonsocial: number;
     razonsocial: string;
     nombre: string;
     rfc: string;

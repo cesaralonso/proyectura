@@ -1,156 +1,126 @@
-import { UserResponseInterface } from './../user-response.interface';
 import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { UserService } from './../user.service';
-import { Modals } from './../../../../../../ui/components/modals/modals.component';
-import { UserInterface } from './../user.interface';
+import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
+import { UserInterface } from './../user.interface';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
-  selector: 'edit-service-modal',
-  styleUrls: [('./user-edit-modal.component.scss')],
-  templateUrl: './user-edit-modal.component.html'
+    selector: 'edit-service-modal',
+    templateUrl: './user-edit-modal.component.html'
 })
 
-export class UserEditModalComponent implements OnInit {
+export class UserEditModalComponent extends DialogComponent<UserInterface, any> implements OnInit, UserInterface {
 
-  _estatususuarios: string[];
-  modalHeader: string;
-  id: number;
-  user: UserResponseInterface;
+    idusuario: 0;
+    idrol: 0;
+    usuario: '';
+    contrasena: '';
+    nombre: '';
+    email: '';
+    telefono: '';
+    idstatususuario: 0;
+    emailsms: '';
 
+     _estatususuarios: string[];
 
-  form: FormGroup;
-  submitted: boolean = false;
-  nicknameauth: AbstractControl;
-  usuarioauth: AbstractControl;
-  claveauth: AbstractControl;
-  idusuario: AbstractControl;
-  idrol: AbstractControl;
-  usuario: AbstractControl;
-  contrasena: AbstractControl;
-  nombre: AbstractControl;
-  email: AbstractControl;
-  telefono: AbstractControl;
-  idstatususuario: AbstractControl;
-  emailsms: AbstractControl;
+    form: FormGroup;
+    submitted: boolean = false;
+    idrolAC: AbstractControl;
+    usuarioAC: AbstractControl;
+    contrasenaAC: AbstractControl;
+    nombreAC: AbstractControl;
+    emailAC: AbstractControl;
+    telefonoAC: AbstractControl;
+    idstatususuarioAC: AbstractControl;
+    emailsmsAC: AbstractControl;
 
-  private _claveauth: string;
-  private _usuarioauth: string;
-  private _nicknameauth: string;
+    private _claveauth: string;
+    private _usuarioauth: string;
+    private _nicknameauth: string;
 
-
-  constructor(private service: UserService,
-              private activeModal: NgbActiveModal,
-              fb: FormBuilder,
-              private toastrService: ToastrService,
-              private localStorageService: LocalStorageService,
-              private authLocalstorage: AuthLocalstorage) {
-
-
-    this._estatususuarios = [];
-
-    const credenciales = this.authLocalstorage.getCredentials();
-
-    this._claveauth = credenciales.claveauth;
-    this._usuarioauth = credenciales.usuarioauth;
-    this._nicknameauth = credenciales.nicknameauth;
-
-
-    this.form = fb.group({
-      'claveauth': this._claveauth,
-      'nicknameauth': this._nicknameauth,
-      'usuarioauth': this._usuarioauth,
-      'idusuario': [this.id],
-      'idrol': [''],
-      'usuario': [''],
-      'contrasena': [''],
-      'nombre': [''],
-      'email': [''],
-      'telefono': [''],
-      'idstatususuario': [''],
-      'emailsms': [''],
-    });
-
-    this.idrol = this.form.controls['idrol'];
-    this.usuario = this.form.controls['usuario'];
-    this.contrasena = this.form.controls['contrasena'];
-    this.nombre = this.form.controls['nombre'];
-    this.email = this.form.controls['email'];
-    this.telefono = this.form.controls['telefono'];
-    this.idstatususuario = this.form.controls['idstatususuario'];
-    this.emailsms = this.form.controls['emailsms'];
-  }
-
-
-  ngOnInit() {
-    this.getUser();
-    this.obtenerEstatusUsuarios();
-  }
-
-  obtenerEstatusUsuarios() {
-    // Obtiene Estatus de Usuarios
-    this.service.obtenerEstatusUsuarios()
-      .subscribe(
-        (data: any) => this._estatususuarios = data,
-      );
-  }
-
-  getUser() {
-    this.service
-      .getUser(this.id)
-      .subscribe(
-        (user: UserResponseInterface[]) => {
-          this.user = user[1];
-          console.log('user', user[1]);
+    constructor( 
+        dialogService: DialogService,
+        fb: FormBuilder,
+        private userService: UserService,
+        private toastrService: ToastrService,
+        private authLocalstorage: AuthLocalstorage,
+    ) {
+        super(dialogService);
+        this.form = fb.group({     
+          'idrolAC': [''],
+          'usuarioAC': [''],
+          'contrasenaAC': [''],
+          'nombreAC': [''],
+          'emailAC': [''],
+          'telefonoAC': [''],
+          'idstatususuarioAC': [''],
+          'emailsmsAC': [''],
         });
-  }
 
-  closeModal() {
-    this.activeModal.close();
-  }
+        this.usuarioAC = this.form.controls['usuarioAC'];
+        this.contrasenaAC = this.form.controls['contrasenaAC'];
+        this.nombreAC = this.form.controls['nombreAC'];
+        this.emailAC = this.form.controls['emailAC'];
+        this.telefonoAC = this.form.controls['telefonoAC'];
+        this.idstatususuarioAC = this.form.controls['idstatususuarioAC'];
+        this.emailsmsAC = this.form.controls['emailsmsAC'];
 
-  onSubmit(values: UserInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editUser(values)
+        const credenciales = this.authLocalstorage.getCredentials();
+        this._claveauth = credenciales.claveauth;
+        this._usuarioauth = credenciales.usuarioauth;
+        this._nicknameauth = credenciales.nicknameauth;
+        this._estatususuarios = [];
+     }
+
+    ngOnInit() {
+      this.obtenerEstatusUsuarios();
+    }
+
+    obtenerEstatusUsuarios() {
+      // Obtiene Estatus de Usuarios
+      this.userService.obtenerEstatusUsuarios()
         .subscribe(
-            (data: any) => this.showToast(data, values));
+          (data: any) => this._estatususuarios = data,
+        );
     }
-  }
 
-  private showToast(data: any, values: UserInterface) {
-    if (data.idRespuesta === 0) {
-      this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
-    } else {
-      this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
+    confirm( data ) {
+        this.result = data;
+        this.close();
     }
-  }
 
+    onSubmit(form): void {
+      this.submitted = true;
+      if (this.form.valid) {
+        this.userService
+          .editUser({
+                claveauth: this._claveauth,
+                nicknameauth: this._nicknameauth,
+                usuarioauth: this._usuarioauth,
+                idusuario: this.idusuario,
+                idrol: this.idrol,
+                usuario: this.usuario,
+                contrasena: this.contrasena,
+                nombre: this.nombre,
+                email: this.email,
+                telefono: this.telefono,
+                idstatususuario: this.idstatususuario,
+                emailsms: this.emailsms,
+                
+            })
+          .subscribe((data: any) => this.showToast(data));
+      }
+    }  
+    
+    private showToast(data: any) {
+      if (data.idRespuesta === 0) {
+        this.toastrService.success(data.mensajeRespuesta);
+        this.close();
+      } else {
+        this.toastrService.error(data.mensajeRespuesta);
+      }
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

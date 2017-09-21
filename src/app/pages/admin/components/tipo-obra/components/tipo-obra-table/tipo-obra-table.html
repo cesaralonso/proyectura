@@ -20,6 +20,7 @@
                     <tbody>
                         <tr *ngFor="let item of mf.data">
                             <td>
+                                <button (click)="uploadTipoObraModalShow(item.idtipoobra)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
                                 <button (click)="editTipoObraModalShow(item.idtipoobra)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idtipoobra)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>

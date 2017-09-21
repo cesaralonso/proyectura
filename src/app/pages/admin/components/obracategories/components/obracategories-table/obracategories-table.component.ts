@@ -30,7 +30,7 @@ export class ObracategoriesTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Categoría de Obra';
     }
 
-    editObracategoriesModalShow(id: any) {
+    editObracategoriesModalShow(id: number) {
       const activeModal = this.modalService.open(ObracategoriesEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Categoría de Obra';
       activeModal.componentInstance.id = id;

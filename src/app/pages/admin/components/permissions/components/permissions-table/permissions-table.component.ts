@@ -29,7 +29,7 @@ export class PermissionsTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Permiso';
     }
 
-    editPermissionsModalShow(id: any) {
+    editPermissionsModalShow(id: number) {
       const activeModal = this.modalService.open(PermissionsEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Permiso';
       activeModal.componentInstance.id = id;

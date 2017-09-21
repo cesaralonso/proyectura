@@ -64,17 +64,15 @@ export class ReasonsEditModalComponent implements OnInit {
     this._estatusrazonsocial = [];
 
     const credenciales = this.authLocalstorage.getCredentials();
-
     this._claveauth = credenciales.claveauth;
     this._usuarioauth = credenciales.usuarioauth;
     this._nicknameauth = credenciales.nicknameauth;
 
     this.form = fb.group({
-
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idrazonsocial': this.id,
+      'idrazonsocial': [''],
       'razonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'nombre': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'rfc': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -91,6 +89,7 @@ export class ReasonsEditModalComponent implements OnInit {
       'idtiporazonsocial': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
+    this.idrazonsocial = this.form.controls['idrazonsocial'];
     this.razonsocial = this.form.controls['razonsocial'];
     this.nombre = this.form.controls['nombre'];
     this.rfc = this.form.controls['rfc'];
@@ -130,13 +129,11 @@ export class ReasonsEditModalComponent implements OnInit {
     this.activeModal.close();
   }
 
-
   getReasons() {
     this.service
         .getReasons(this.id)
         .subscribe(
             (data: any) => this.reasons = data[1]);
-
   }
 
   onSubmit(values: ReasonsInterface): void {
@@ -151,12 +148,9 @@ export class ReasonsEditModalComponent implements OnInit {
 
   private showToast(data: any, values: ReasonsInterface) {
     if (data.idRespuesta === 0) {
-
       this.toastrService.success(data.mensajeRespuesta);
       this.closeModal();
-    }
-
-    if (data.idRespuesta === -1) {
+    } else {
       this.toastrService.error(data.mensajeRespuesta);
     }
   }

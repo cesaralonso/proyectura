@@ -70,7 +70,7 @@ export class LoginComponent {
     if (response.idRespuesta === 0) {
 
       // Cargar datos de usuario logeado para guardar en Localstorage su imagen de perfil
-      this.setAvatarInLocalStorage(response);
+      // this.setAvatarInLocalStorage(response);
 
       this.toastrService.success(response.mensajeRespuesta);
       this.authLocalstorage.setCredentials(credentials, response);

@@ -71,12 +71,15 @@ export class GroupsAddModalComponent implements OnInit {
 
   onSubmit(values: GroupsInterface): void {
     this.submitted = true;
-
-    console.log("values", values);
-
     if (this.form.valid) {
+
+      const group: GroupsInterface = {
+        rol: values.rol,
+        descripcion: values.descripcion,
+        visible: ((!values.visible) ? false : true),
+      }
       this.service
-        .addGroups(values)
+        .addGroups(group)
         .subscribe(
             (data: any) => this.showToast(data, values));
     }

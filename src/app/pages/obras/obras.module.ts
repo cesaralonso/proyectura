@@ -12,6 +12,9 @@ import { ObrasComponent } from './obras.component';
 
 import { ObrasAddModalComponent } from './components/obras-table/obras-add-modal/obras-add-modal.component';
 import { ObrasEditModalComponent } from './components/obras-table/obras-edit-modal/obras-edit-modal.component';
+import { ObrasUploadModalComponent } from './components/obras-table/obras-upload-modal/obras-upload-modal.component';
+import { FilesUploadModalComponent } from './components/obras-table/files-upload-modal/files-upload-modal.component';
+
 import { ObrasService } from './components/obras-table/obras.service';
 
 import { ObrasTableComponent } from './components/obras-table/obras-table.component';
@@ -34,11 +37,15 @@ import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
     ObrasTableComponent,
     DataFilterPipe,
     ObrasAddModalComponent,
-    ObrasEditModalComponent
+    ObrasEditModalComponent,
+    ObrasUploadModalComponent,
+    FilesUploadModalComponent
   ],
   entryComponents: [
     ObrasAddModalComponent,
-    ObrasEditModalComponent
+    ObrasEditModalComponent,
+    ObrasUploadModalComponent,
+    FilesUploadModalComponent
   ],
   providers: [
     ObrasService

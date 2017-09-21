@@ -1,3 +1,5 @@
+import { FilesUploadModalComponent } from './files-upload-modal/files-upload-modal.component';
+import { ObrasUploadModalComponent } from './obras-upload-modal/obras-upload-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { ObrasInterface } from './obras.interface';
 import { ObrasResponseInterface } from './obras-response.interface';
@@ -6,6 +8,7 @@ import { ObrasService } from './obras.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObrasAddModalComponent } from './obras-add-modal/obras-add-modal.component';
 import { ObrasEditModalComponent } from './obras-edit-modal/obras-edit-modal.component';
+
 
 @Component({
   selector: 'obras-table',
@@ -30,14 +33,26 @@ export class ObrasTableComponent implements OnInit {
     addObrasModalShow() {
       const activeModal = this.modalService.open(ObrasAddModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Agregar Obra';
-      console.log('Add Modal opened');
     }
 
-    editObrasModalShow(id: any) {
+    editObrasModalShow(id: number) {
       const activeModal = this.modalService.open(ObrasEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Obra';
       activeModal.componentInstance.id = id;
       // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS DEL USUARIO Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
+    }
+
+    uploadObrasModalShow(id: number) {
+      const activeModal = this.modalService.open(ObrasUploadModalComponent, { size: 'lg' });
+      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Obra';
+      activeModal.componentInstance.id = id;
+    }
+
+    filesObrasModalShow(id: number) {
+      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
+      activeModal.componentInstance.modalHeader = 'Ver Archivos de Obra';
+      activeModal.componentInstance.id = id;
+      activeModal.componentInstance.referencia = 'Obras';
     }
 
     onDeleteConfirm(event, id): void {
@@ -74,6 +89,6 @@ export class ObrasTableComponent implements OnInit {
                 this.data = data;
               },
               error => console.log(error),
-              () => console.log('Get all Items complete'));
+              () => console.log('Get all Items complete'))
     } 
 }

@@ -84,6 +84,15 @@ export class TipoObraService {
             .map((response: Response) => <any[]>response.json())
             .catch(this.handleError);
     }
+    
+    setFile = (archivo: any): Observable<any> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarArchivo`;
+        const toAdd = JSON.stringify(archivo);
+
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <any>response.json())
+            .catch(this.handleError);
+    }
 
     private handleError(error: Response) {
         console.error(error);

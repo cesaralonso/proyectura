@@ -1,5 +1,5 @@
 export interface GroupsInterface {
-    idrol: number;
+    idrol?: number;
     rol: string;
     descripcion: string;
     visible?: boolean;

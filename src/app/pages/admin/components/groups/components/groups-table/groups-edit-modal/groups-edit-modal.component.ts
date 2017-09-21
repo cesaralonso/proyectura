@@ -87,8 +87,15 @@ export class GroupsEditModalComponent implements OnInit {
   onSubmit(values: GroupsInterface): void {
     this.submitted = true;
     if (this.form.valid) {
+      const group = {
+        idrol: values.idrol,
+        rol: values.rol,
+        descripcion: values.descripcion,
+        visible: ((!values.visible) ? false : true),
+      }
+
       this.service
-        .editGroups(values)
+        .editGroups(group)
         .subscribe(
             (data: any) => this.showToast(data, values));
     }

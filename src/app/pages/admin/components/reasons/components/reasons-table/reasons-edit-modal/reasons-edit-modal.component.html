@@ -11,10 +11,12 @@
 
         <ba-card cardTitle="Información de Razón Social">
 
+            <input [formControl]="idrazonsocial" type="hidden" value="{{reasons.idrazonsocial}}">
+
             <div class="form-group row" [ngClass]="{'has-error': (!razonsocial.valid && razonsocial.touched), 'has-success': (razonsocial.valid && razonsocial.touched)}">
               <label for="inputrazonsocial" class="col-sm-2 form-control-label">Razón social</label>
               <div class="col-sm-10">
-                <input [formControl]="razonsocial" type="text" class="form-control" id="inputrazonsocial" placeholder="razonsocial" value="{{reasons.razonsocial}}">
+                <input [formControl]="razonsocial" [formControl]="razonsocial" type="text" class="form-control" id="inputrazonsocial" placeholder="razonsocial" value="{{reasons.razonsocial}}">
               </div>
             </div>
             
@@ -96,7 +98,7 @@
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!idtiporazonsocial.valid && idtiporazonsocial.touched), 'has-success': (idtiporazonsocial.valid && idtiporazonsocial.touched)}">
-              <label for="inputidtiporazonsocial" class="col-sm-2 form-control-label">Tipo de obra</label>
+              <label for="inputidtiporazonsocial" class="col-sm-2 form-control-label">Tipo</label>
               <div class="col-sm-10">
                 <select id="inputidtiporazonsocial" class="form-control" [formControl]="idtiporazonsocial" value="{{reasons.idtipo}}">
                   <option value="{{value.idtiporazonsocial}}" *ngFor="let value of _tiporazonsocial">

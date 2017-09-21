@@ -39,6 +39,10 @@ export class AuthLocalstorage {
       return credentials;
   }
 
+  getIdUsuario(): string {
+      return this.localStorageService.get('idusuario').toString();
+  }
+
   clearAll(): void {
       this.localStorageService.clearAll();
   }

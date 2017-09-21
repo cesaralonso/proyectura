@@ -30,7 +30,7 @@ export class ReasonsTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Razón Social';
     }
 
-    editReasonsModalShow(id: any) {
+    editReasonsModalShow(id: number) {
       const activeModal = this.modalService.open(ReasonsEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Razón Social';
       activeModal.componentInstance.id = id;

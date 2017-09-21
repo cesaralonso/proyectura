@@ -1,3 +1,5 @@
+
+import { ProfileEditService } from './components/profile-edit/profile-edit.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule as AngularFormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -51,6 +53,7 @@ import { TipoObraService } from './components/tipo-obra/components/tipo-obra-tab
 import { TipoObraTableComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-table.component';
 import { TipoObraEditModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-edit-modal/tipo-obra-edit-modal.component';
 import { TipoObraAddModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-add-modal/tipo-obra-add-modal.component';
+import { TipoObraUploadModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-upload-modal/tipo-obra-upload-modal.component';
 
 import { ObracategoriesComponent } from './components/obracategories/obracategories.component';
 import { ObracategoriesService } from './components/obracategories/components/obracategories-table/obracategories.service';
@@ -58,7 +61,7 @@ import { ObracategoriesTableComponent } from './components/obracategories/compon
 import { ObracategoriesEditModalComponent } from './components/obracategories/components/obracategories-table/obracategories-edit-modal/obracategories-edit-modal.component';
 import { ObracategoriesAddModalComponent } from './components/obracategories/components/obracategories-table/obracategories-add-modal/obracategories-add-modal.component';
 
-
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 
 @NgModule({
   imports: [
@@ -70,7 +73,8 @@ import { ObracategoriesAddModalComponent } from './components/obracategories/com
     NgbRatingModule,
     routing,
     DataTableModule,
-    NgbModalModule
+    NgbModalModule,
+    BootstrapModalModule.forRoot({ container: document.body })    
   ],
   declarations: [
     Users,
@@ -102,6 +106,7 @@ import { ObracategoriesAddModalComponent } from './components/obracategories/com
     TipoObraTableComponent,
     TipoObraAddModalComponent,
     TipoObraEditModalComponent,
+    TipoObraUploadModalComponent,
     ObracategoriesComponent,
     ObracategoriesTableComponent,
     ObracategoriesAddModalComponent,
@@ -120,6 +125,7 @@ import { ObracategoriesAddModalComponent } from './components/obracategories/com
     ReasonsEditModalComponent,
     TipoObraAddModalComponent,
     TipoObraEditModalComponent,
+    TipoObraUploadModalComponent,
     ObracategoriesAddModalComponent,
     ObracategoriesEditModalComponent
   ],
@@ -130,7 +136,8 @@ import { ObracategoriesAddModalComponent } from './components/obracategories/com
     LogsService,
     ReasonsService,
     TipoObraService,
-    ObracategoriesService
+    ObracategoriesService,
+    ProfileEditService
   ]
 })
 export class AdminModule {

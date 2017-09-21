@@ -11,5 +11,4 @@ export interface UserResponseInterface {
     statususuario?: string;
     rol?: string;
     descripcion?: string;
-    urlimagenperfilusuario?: string;
 }

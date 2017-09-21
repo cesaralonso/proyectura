@@ -1,81 +1,88 @@
-<div class="modal-content">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
-    <div class="modal-header">
-      <h4 class="modal-title">{{modalHeader}}  ID: {{id}}</h4>
-      <button class="close" aria-label="Close" (click)="closeModal()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+
+<div class="row mt-3">
+  <div class="col-md-8 col-md-offset-2">
+
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">{{modalHeader}}  ID: {{id}}</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+
+          <ba-card cardTitle="Información de Usuario">
+
+              <div class="form-group row" [ngClass]="{'has-success': (!idrolAC.valid && idrolAC.touched), 'has-success': (idrolAC.valid && idrolAC.touched)}">
+                <label for="inputidrolAC" class="col-sm-2 form-control-label">Id Rol</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="idrol" [formControl]="idrolAC" type="number" class="form-control" id="inputidrolAC" placeholder="">
+                </div>
+              </div>
+
+              <div class="form-group row" [ngClass]="{'has-success': (!usuarioAC.valid && usuarioAC.touched), 'has-success': (usuarioAC.valid && usuarioAC.touched)}">
+                <label for="inputusuarioAC" class="col-sm-2 form-control-label">Usuario</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="usuario" [formControl]="usuarioAC" type="text" class="form-control" id="inputusuarioAC" placeholder="">
+                </div>
+              </div>
+              
+              <div class="form-group row" [ngClass]="{'has-success': (!contrasenaAC.valid && contrasenaAC.touched), 'has-success': (contrasenaAC.valid && contrasenaAC.touched)}">
+                <label for="inputcontrasenaAC" class="col-sm-2 form-control-label">Contraseña</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="contrasena" [formControl]="contrasenaAC" type="password" class="form-control" id="inputcontrasenaAC" placeholder="">
+                </div>
+              </div>
+
+              <div class="form-group row" [ngClass]="{'has-success': (!nombreAC.valid && nombreAC.touched), 'has-success': (nombreAC.valid && nombreAC.touched)}">
+                <label for="inputnombreAC" class="col-sm-2 form-control-label">Nombre</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="nombre" [formControl]="nombreAC" type="text" class="form-control" id="inputnombreAC" placeholder="nombreAC">
+                </div>
+              </div>
+
+              <div class="form-group row" [ngClass]="{'has-success': (!emailAC.valid && emailAC.touched), 'has-success': (emailAC.valid && emailAC.touched)}">
+                <label for="inputemailAC" class="col-sm-2 form-control-label">Email</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="email" [formControl]="emailAC" type="email" class="form-control" id="inputemailAC" placeholder="">
+                </div>
+              </div>
+
+              <div class="form-group row" [ngClass]="{'has-success': (!telefonoAC.valid && telefonoAC.touched), 'has-success': (telefonoAC.valid && telefonoAC.touched)}">
+                <label for="inputtelefonoAC" class="col-sm-2 form-control-label">Teléfono</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="telefono" [formControl]="telefonoAC" type="text" class="form-control" id="inputtelefonoAC" placeholder="">
+                </div>
+              </div>
+
+              <div class="form-group row" [ngClass]="{'has-error': (!idstatususuarioAC.valid && idstatususuarioAC.touched), 'has-success': (idstatususuarioAC.valid && idstatususuarioAC.touched)}">
+                <label for="inputidstatususuarioAC" class="col-sm-2 form-control-label">Estatus Usuario</label>
+                <div class="col-sm-10">
+                  <select id="inputidstatususuarioAC" class="form-control" [(ngModel)]="idstatususuario" [formControl]="idstatususuarioAC">
+                    <option value="{{value.idestatususuario}}" *ngFor="let value of _estatususuarios">
+                      {{value.estatususuario}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group row" [ngClass]="{'has-success': (!emailsmsAC.valid && emailsmsAC.touched), 'has-success': (emailsmsAC.valid && emailsmsAC.touched)}">
+                <label for="inputemailsmsAC" class="col-sm-2 form-control-label">Email SMS</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="emailsms" [formControl]="emailsmsAC" type="email" class="form-control" id="inputemailsmsAC" placeholder="">
+                </div>
+              </div>
+
+          </ba-card>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" type="submit" (click)="onSubmit(form)">Aceptar</button>
+        </div>
+      </form>
     </div>
-    <div class="modal-body">
 
-      <ba-card cardTitle="Información de Usuario">
-
-          <div class="form-group row" [ngClass]="{'has-success': (!idrol.valid && idrol.touched), 'has-success': (idrol.valid && idrol.touched)}">
-            <label for="inputidrol" class="col-sm-2 form-control-label">Id Rol</label>
-            <div class="col-sm-10">
-              <input [formControl]="idrol" type="number" class="form-control" id="inputidrol" placeholder="idrol" value="{{user.idrol}}">
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-success': (!usuario.valid && usuario.touched), 'has-success': (usuario.valid && usuario.touched)}">
-            <label for="inputusuario" class="col-sm-2 form-control-label">Usuario</label>
-            <div class="col-sm-10">
-              <input [formControl]="usuario" type="text" class="form-control" id="inputusuario" placeholder="usuario" value="{{user.usuario}}">
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-success': (!contrasena.valid && contrasena.touched), 'has-success': (contrasena.valid && contrasena.touched)}">
-            <label for="inputcontrasena" class="col-sm-2 form-control-label">Contraseña</label>
-            <div class="col-sm-10">
-              <input [formControl]="contrasena" type="password" class="form-control" id="inputcontrasena" placeholder="contraseña" value="{{user.contrasena}}">
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-success': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
-            <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
-            <div class="col-sm-10">
-              <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="nombre" value="{{user.nombre}}">
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-success': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
-            <label for="inputemail" class="col-sm-2 form-control-label">Email</label>
-            <div class="col-sm-10">
-              <input [formControl]="email" type="email" class="form-control" id="inputemail" placeholder="email" value="{{user.email}}">
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-success': (!telefono.valid && telefono.touched), 'has-success': (telefono.valid && telefono.touched)}">
-            <label for="inputtelefono" class="col-sm-2 form-control-label">Teléfono</label>
-            <div class="col-sm-10">
-              <input [formControl]="telefono" type="text" class="form-control" id="inputtelefono" placeholder="teléfono" value="{{user.telefono}}">
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-error': (!idstatususuario.valid && idstatususuario.touched), 'has-success': (idstatususuario.valid && idstatususuario.touched)}">
-            <label for="inputidstatususuario" class="col-sm-2 form-control-label">Estatus Usuario</label>
-            <div class="col-sm-10">
-              <select id="inputidstatususuario" class="form-control" [formControl]="idstatususuario">
-                <option value="{{value.idestatususuario}}" *ngFor="let value of _estatususuarios">
-                  {{value.estatususuario}}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group row" [ngClass]="{'has-success': (!emailsms.valid && emailsms.touched), 'has-success': (emailsms.valid && emailsms.touched)}">
-            <label for="inputemailsms" class="col-sm-2 form-control-label">Email SMS</label>
-            <div class="col-sm-10">
-              <input [formControl]="emailsms" type="email" class="form-control" id="inputemailsms" placeholder="emailsms" value="{{user.emailsms}}">
-            </div>
-          </div>
-
-      </ba-card>
-
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-danger cancel-btn" (click)="closeModal()">Cancelar</button>
-      <button class="btn btn-primary confirm-btn" type="submit">Aceptar</button>
-    </div>
-  </form>
+  </div>
 </div>

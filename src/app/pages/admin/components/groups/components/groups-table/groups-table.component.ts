@@ -32,7 +32,7 @@ export class GroupsTableComponent implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Rol';
     }
 
-    editGroupsModalShow(id: any) {
+    editGroupsModalShow(id: number) {
       const activeModal = this.modalService.open(GroupsEditModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Editar Rol';
       activeModal.componentInstance.id = id;

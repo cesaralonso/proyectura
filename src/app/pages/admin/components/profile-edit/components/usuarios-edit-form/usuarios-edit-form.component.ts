@@ -28,15 +28,14 @@ export class UsuariosEditForm implements OnInit {
   nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
-  idusuario: AbstractControl;
-  idrol: AbstractControl;
-  usuario: AbstractControl;
-  contrasena: AbstractControl;
-  nombre: AbstractControl;
-  email: AbstractControl;
-  telefono: AbstractControl;
-  idstatususuario: AbstractControl;
-  emailsms: AbstractControl;
+  idusuarioAC: AbstractControl;
+  usuarioAC: AbstractControl;
+  contrasenaAC: AbstractControl;
+  nombreAC: AbstractControl;
+  emailAC: AbstractControl;
+  telefonoAC: AbstractControl;
+  idstatususuarioAC: AbstractControl;
+  emailsmsAC: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -61,25 +60,23 @@ export class UsuariosEditForm implements OnInit {
       'claveauth': this._claveauth,
       'nicknameauth': this._nicknameauth,
       'usuarioauth': this._usuarioauth,
-      'idusuario': [this.id],
-      'idrol': [''],
-      'usuario': [''],
-      'contrasena': [''],
-      'nombre': [''],
-      'email': [''],
-      'telefono': [''],
-      'idstatususuario': [''],
-      'emailsms': [''],
+      'idusuarioAC': [this.id],
+      'usuarioAC': [''],
+      'contrasenaAC': [''],
+      'nombreAC': [''],
+      'emailAC': [''],
+      'telefonoAC': [''],
+      'idstatususuarioAC': [''],
+      'emailsmsAC': [''],
     });
 
-    this.idrol = this.form.controls['idrol'];
-    this.usuario = this.form.controls['usuario'];
-    this.contrasena = this.form.controls['contrasena'];
-    this.nombre = this.form.controls['nombre'];
-    this.email = this.form.controls['email'];
-    this.telefono = this.form.controls['telefono'];
-    this.idstatususuario = this.form.controls['idstatususuario'];
-    this.emailsms = this.form.controls['emailsms'];
+    this.usuarioAC = this.form.controls['usuarioAC'];
+    this.contrasenaAC = this.form.controls['contrasenaAC'];
+    this.nombreAC = this.form.controls['nombreAC'];
+    this.emailAC = this.form.controls['emailAC'];
+    this.telefonoAC = this.form.controls['telefonoAC'];
+    this.idstatususuarioAC = this.form.controls['idstatususuarioAC'];
+    this.emailsmsAC = this.form.controls['emailsmsAC'];
   }
 
 

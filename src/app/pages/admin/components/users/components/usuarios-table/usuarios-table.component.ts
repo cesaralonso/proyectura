@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserAddModalComponent } from './user-add-modal/user-add-modal.component';
 import { UserEditModalComponent } from './user-edit-modal/user-edit-modal.component';
+import { DialogService } from 'ng2-bootstrap-modal';
 
 
 @Component({
@@ -14,13 +15,14 @@ import { UserEditModalComponent } from './user-edit-modal/user-edit-modal.compon
 })
 export class UsuariosTable implements OnInit {
 
-    data;
+    data: UserInterface[];
     filterQuery = "";
     rowsOnPage = 10;
     sortBy = "nombre";
     sortOrder = "asc";
 
-    constructor(private service: UserService, private modalService: NgbModal, private toastrService: ToastrService) {
+    constructor(private service: UserService, private modalService: NgbModal, private toastrService: ToastrService, 
+    private dialogService: DialogService) {
     }
 
     toInt(num: string) {
@@ -32,13 +34,30 @@ export class UsuariosTable implements OnInit {
       activeModal.componentInstance.modalHeader = 'Agregar Usuario';
     }
 
-    editUserModalShow(id: any) {
-      const activeModal = this.modalService.open(UserEditModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Editar Usuario';
-      activeModal.componentInstance.id = id;
+    editUserModalShow( user ) {
 
-      // AQUÍ PODRÍA CARGAR LOS DATOS DEL USUARIO Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
+      console.log("user", user);
 
+      const _user: UserInterface = {
+          idusuario: user.idusuario,
+          idrol: user.idrol,
+          usuario: user.usuario,
+          contrasena: user.contrasena,
+          nombre: user.nombre,
+          email: user.email,
+          telefono: user.telefono,
+          idstatususuario: user.idstatususuario,
+          emailsms: user.emailsms,
+        }
+
+      const disposable = this.dialogService.addDialog(UserEditModalComponent, _user)
+      .subscribe( data => {
+          if (data) { 
+            this.showToast(data);
+          }
+      },
+      error => console.log(error),
+      () => console.log('Modified complete'));
     }
     
     onDeleteConfirm(event, id): void {
