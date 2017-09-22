@@ -1,13 +1,12 @@
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { UserService } from './../user.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
 import { UserInterface } from './../user.interface';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'add-service-modal',
@@ -15,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './user-add-modal.component.html'
 })
 
-export class UserAddModalComponent implements OnInit {
+export class UserAddModalComponent extends DialogComponent<UserInterface, any> implements OnInit {
 
   _estatususuarios: string[];
   modalHeader: string;
@@ -35,18 +34,20 @@ export class UserAddModalComponent implements OnInit {
   idstatususuario: AbstractControl;
   emailsms: AbstractControl;
   clave: AbstractControl;
-
+  
+  data: any;
+  
   private _claveauth: string;
   private _usuarioauth: string;
   private _nicknameauth: string;
 
   constructor(private service: UserService,
-              private activeModal: NgbActiveModal,
               fb: FormBuilder,
               private toastrService: ToastrService,
               private localStorageService: LocalStorageService,
-              private authLocalstorage: AuthLocalstorage) {
-
+              private authLocalstorage: AuthLocalstorage,
+              dialogService: DialogService) {
+    super(dialogService);
     this._estatususuarios = [];
 
     const credenciales = this.authLocalstorage.getCredentials();
@@ -92,10 +93,10 @@ export class UserAddModalComponent implements OnInit {
       );
   }
 
-  closeModal() {
-    this.activeModal.close();
+  confirm() {
+    this.result = this.data;
+    this.close();
   }
-
   onSubmit(values: UserInterface): void {
     this.submitted = true;
 
@@ -103,19 +104,10 @@ export class UserAddModalComponent implements OnInit {
       this.service
         .addUser(values)
         .subscribe(
-            (data: any) => this.showToast(data, values));
-    }
-  }
-
-  private showToast(data: any, values: UserInterface) {
-    if (data.idRespuesta === 0) {
-
-      this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
-    }
-
-    if (data.idRespuesta === -1) {
-      this.toastrService.error(data.mensajeRespuesta);
+            (data: any) => {
+              this.data = data;
+              this.confirm();
+            });
     }
   }
 

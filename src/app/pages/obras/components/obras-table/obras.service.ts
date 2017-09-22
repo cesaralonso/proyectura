@@ -36,6 +36,7 @@ export class ObrasService {
     }
 
     editObras = (obras: ObrasInterface): Observable<ObrasResponseInterface> =>  {
+        console.log(obras.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarObra`;
         const toAdd = JSON.stringify(obras);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

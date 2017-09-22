@@ -1,3 +1,5 @@
+import { DialogService } from 'ng2-bootstrap-modal';
+import { ReasonsInterface } from './reasons.interface';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { ReasonsService } from './reasons.service';
@@ -18,7 +20,12 @@ export class ReasonsTableComponent implements OnInit {
     sortBy = 'idrazonsocial';
     sortOrder = 'asc';
 
-    constructor(private service: ReasonsService, private modalService: NgbModal, private toastrService: ToastrService) {
+    constructor(
+      private service: ReasonsService, 
+      private modalService: NgbModal, 
+      private toastrService: ToastrService,
+      private dialogService: DialogService
+    ) {
     }
 
     toInt(num: string) {
@@ -26,16 +33,23 @@ export class ReasonsTableComponent implements OnInit {
     }
 
     addReasonsModalShow() {
-      const activeModal = this.modalService.open(ReasonsAddModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Razón Social';
+      const disposable = this.dialogService.addDialog(ReasonsAddModalComponent)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        })
     }
 
-    editReasonsModalShow(id: number) {
-      const activeModal = this.modalService.open(ReasonsEditModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Editar Razón Social';
-      activeModal.componentInstance.id = id;
-      // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
-
+    editReasonsModalShow( groups: ReasonsInterface ) {
+      const disposable = this.dialogService.addDialog(ReasonsEditModalComponent, groups)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        },
+        error => console.log(error),
+        () => console.log('Modified complete'));
     }
     
     onDeleteConfirm(event, id): void {

@@ -1,10 +1,10 @@
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ReasonsService } from './../reasons.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
 import { ReasonsInterface } from './../reasons.interface';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,11 +15,13 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './reasons-add-modal.component.html'
 })
 
-export class ReasonsAddModalComponent implements OnInit {
+export class ReasonsAddModalComponent extends DialogComponent<ReasonsInterface, any> implements OnInit {
 
   _tiporazonsocial: string[];
   _estatusrazonsocial: string[];
-
+  
+  data: any;
+  
   modalHeader: string;
 
   form: FormGroup;
@@ -49,13 +51,16 @@ export class ReasonsAddModalComponent implements OnInit {
   private _nicknameauth: string;
 
 
-  constructor(private service: ReasonsService,
-              private activeModal: NgbActiveModal,
-              fb: FormBuilder,
-              private toastrService: ToastrService,
-              private localStorageService: LocalStorageService,
-              private authLocalstorage: AuthLocalstorage) {
-                
+  constructor(
+    private service: ReasonsService,
+    fb: FormBuilder,
+    private toastrService: ToastrService,
+    private localStorageService: LocalStorageService,
+    private authLocalstorage: AuthLocalstorage,
+    dialogService: DialogService
+  ) {
+    
+    super(dialogService);           
     this._tiporazonsocial = [];
     this._estatusrazonsocial = [];
 
@@ -118,34 +123,22 @@ export class ReasonsAddModalComponent implements OnInit {
       );
 
   }
-
-  closeModal() {
-    this.activeModal.close();
+  confirm() {
+    this.result = this.data;
+    this.close()
   }
-
   onSubmit(values: ReasonsInterface): void {
     this.submitted = true;
     if (this.form.valid) {
       this.service
         .addReasons(values)
         .subscribe(
-            (data: any) => this.showToast(data, values));
+            (data: any) => {
+              this.data = data;
+              this.confirm();
+            });
     }
   }
-
-  private showToast(data: any, values: ReasonsInterface) {
-    if (data.idRespuesta === 0) {
-
-      this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
-    }
-
-    if (data.idRespuesta === -1) {
-      this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
-    }
-  }
-
 
 }
 

@@ -1,10 +1,10 @@
+import { DialogService, DialogComponent } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { GroupsService } from './../groups.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
 import { GroupsInterface } from './../groups.interface';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,10 +15,10 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './groups-add-modal.component.html'
 })
 
-export class GroupsAddModalComponent implements OnInit {
+export class GroupsAddModalComponent extends DialogComponent<GroupsInterface, any> implements OnInit {
 
   modalHeader: string;
-
+  data: any;
   form: FormGroup;
   submitted: boolean = false;
 
@@ -34,13 +34,15 @@ export class GroupsAddModalComponent implements OnInit {
   private _usuarioauth: string;
   private _nicknameauth: string;
 
-  constructor(private service: GroupsService,
-              private activeModal: NgbActiveModal,
-              fb: FormBuilder,
-              private toastrService: ToastrService,
-              private localStorageService: LocalStorageService,
-              private authLocalstorage: AuthLocalstorage) {
-
+  constructor(
+    private service: GroupsService,
+    fb: FormBuilder,
+    private toastrService: ToastrService,
+    private localStorageService: LocalStorageService,
+    private authLocalstorage: AuthLocalstorage,
+    dialogService: DialogService
+  ) {
+    super(dialogService);
 
     const credenciales = this.authLocalstorage.getCredentials();
 
@@ -65,39 +67,23 @@ export class GroupsAddModalComponent implements OnInit {
 
   ngOnInit() {}
 
-  closeModal() {
-    this.activeModal.close();
+  confirm() {
+    this.result = this.data;
+    this.close();
   }
-
   onSubmit(values: GroupsInterface): void {
     this.submitted = true;
     if (this.form.valid) {
 
-      const group: GroupsInterface = {
-        rol: values.rol,
-        descripcion: values.descripcion,
-        visible: ((!values.visible) ? false : true),
-      }
       this.service
-        .addGroups(group)
+        .addGroups(values)
         .subscribe(
-            (data: any) => this.showToast(data, values));
+            (data: any) => {
+              this.data = data;
+              this.confirm();
+            });
     }
   }
-
-  private showToast(data: any, values: GroupsInterface) {
-    if (data.idRespuesta === 0) {
-
-      this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
-    }
-
-    if (data.idRespuesta === -1) {
-      this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
-    }
-  }
-
 
 }
 

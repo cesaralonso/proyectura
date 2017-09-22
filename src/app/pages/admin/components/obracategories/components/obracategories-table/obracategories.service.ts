@@ -39,6 +39,7 @@ export class ObracategoriesService {
     }
 
     editObracategories = (obracategories: ObracategoriesInterface): Observable<any> =>  {
+        console.log(obracategories);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}ModificarCategoria`;
         const toAdd = JSON.stringify(obracategories);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

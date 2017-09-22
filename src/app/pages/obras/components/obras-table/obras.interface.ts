@@ -22,4 +22,7 @@ export interface ObrasInterface {
     razonsocialasociado?: string;
     claveestatusobra?: string;
     tipoobra?: string;
+    claveauth?: string;
+    nicknameauth?: string;
+    usuarioauth?: string;
 }

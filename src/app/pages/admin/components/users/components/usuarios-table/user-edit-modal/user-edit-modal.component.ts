@@ -12,10 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class UserEditModalComponent extends DialogComponent<UserInterface, any> implements OnInit, UserInterface {
-    claveauth: '';
-    usuarioauth: '';
-    nicknameauth: '';
-    idusuario: 0;
+
+    idusuario?: 0;
     idrol: 0;
     usuario: '';
     contrasena: '';
@@ -24,8 +22,10 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
     telefono: '';
     idstatususuario: 0;
     emailsms: '';
-
-     _estatususuarios: string[];
+    
+    data: any;
+    
+    _estatususuarios: string[];
 
     form: FormGroup;
     submitted: boolean = false;
@@ -61,6 +61,7 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
           'emailsmsAC': [''],
         });
 
+        this.idrolAC = this.form.controls['idrolAC'];
         this.usuarioAC = this.form.controls['usuarioAC'];
         this.contrasenaAC = this.form.controls['contrasenaAC'];
         this.nombreAC = this.form.controls['nombreAC'];
@@ -88,8 +89,8 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
         );
     }
 
-    confirm( data ) {
-        this.result = data;
+    confirm() {
+        this.result = this.data;
         this.close();
     }
 
@@ -112,7 +113,10 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
                 emailsms: this.emailsms,
                 
             })
-          .subscribe((data: any) => this.showToast(data));
+          .subscribe((data: any) => {
+            this.data = data;
+            this.confirm();
+          });
       }
     }  
     

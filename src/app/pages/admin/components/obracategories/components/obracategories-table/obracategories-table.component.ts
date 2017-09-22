@@ -1,3 +1,5 @@
+import { ObracategoriesInterface } from './obracategories.interface';
+import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { ObracategoriesService } from './obracategories.service';
@@ -18,7 +20,12 @@ export class ObracategoriesTableComponent implements OnInit {
     sortBy = 'idcategoria';
     sortOrder = 'asc';
 
-    constructor(private service: ObracategoriesService, private modalService: NgbModal, private toastrService: ToastrService) {
+    constructor(
+      private service: ObracategoriesService, 
+      private modalService: NgbModal, 
+      private toastrService: ToastrService,
+      private dialogService: DialogService
+    ) {
     }
 
     toInt(num: string) {
@@ -26,16 +33,23 @@ export class ObracategoriesTableComponent implements OnInit {
     }
 
     addObracategoriesModalShow() {
-      const activeModal = this.modalService.open(ObracategoriesAddModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Categoría de Obra';
+      const disposable = this.dialogService.addDialog(ObracategoriesAddModalComponent)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        })
     }
 
-    editObracategoriesModalShow(id: number) {
-      const activeModal = this.modalService.open(ObracategoriesEditModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Editar Categoría de Obra';
-      activeModal.componentInstance.id = id;
-      // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
-
+    editObracategoriesModalShow( obraCategories: ObracategoriesInterface ) {
+      const disposable = this.dialogService.addDialog(ObracategoriesEditModalComponent, obraCategories)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        },
+        error => console.log(error),
+        () => console.log('Modified complete'));
     }
     
     onDeleteConfirm(event, id): void {
