@@ -12,7 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class UserEditModalComponent extends DialogComponent<UserInterface, any> implements OnInit, UserInterface {
-
+    claveauth: '';
+    usuarioauth: '';
+    nicknameauth: '';
     idusuario: 0;
     idrol: 0;
     usuario: '';
