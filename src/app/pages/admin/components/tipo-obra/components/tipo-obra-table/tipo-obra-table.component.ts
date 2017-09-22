@@ -1,3 +1,4 @@
+import { DialogService } from 'ng2-bootstrap-modal';
 import { TipoObraResponseInterface } from './tipo-obra-response.interface';
 import { ToastrService } from 'ngx-toastr';
 import { TipoObraInterface } from './tipo-obra.interface';
@@ -24,21 +25,32 @@ export class TipoObraTableComponent implements OnInit {
     constructor(
       private service: TipoObraService, 
       private modalService: NgbModal, 
-      private toastrService: ToastrService) {}
+      private toastrService: ToastrService,
+      private dialogService: DialogService
+    ) {}
 
     toInt(num: string) {
         return +num;
     }
 
     addTipoObraModalShow() {
-      const activeModal = this.modalService.open(TipoObraAddModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Tipo de Obra';
+      const disposable = this.dialogService.addDialog(TipoObraAddModalComponent)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        })
     }
 
-    editTipoObraModalShow(id: number) {
-      const activeModal = this.modalService.open(TipoObraEditModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Editar Tipo de Obra';
-      activeModal.componentInstance.id = id;
+    editTipoObraModalShow( tipoObra: TipoObraInterface ) {
+      const disposable = this.dialogService.addDialog(TipoObraEditModalComponent, tipoObra)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        },
+        error => console.log(error),
+        () => console.log('Modified complete'));
     }
 
     uploadTipoObraModalShow(id: number) {

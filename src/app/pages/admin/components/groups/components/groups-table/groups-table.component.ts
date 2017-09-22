@@ -1,3 +1,4 @@
+import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { GroupsService } from './groups.service';
@@ -20,7 +21,12 @@ export class GroupsTableComponent implements OnInit {
     sortBy = "nombre";
     sortOrder = "asc";
 
-    constructor(private service: GroupsService, private modalService: NgbModal, private toastrService: ToastrService) {
+    constructor( 
+      private service: GroupsService, 
+      private modalService: NgbModal, 
+      private toastrService: ToastrService,
+      private dialogService: DialogService
+    ) {
     }
 
     toInt(num: string) {
@@ -28,15 +34,23 @@ export class GroupsTableComponent implements OnInit {
     }
 
     addGroupsModalShow() {
-      const activeModal = this.modalService.open(GroupsAddModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Rol';
+      const disposable = this.dialogService.addDialog(GroupsAddModalComponent)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        })
     }
 
-    editGroupsModalShow(id: number) {
-      const activeModal = this.modalService.open(GroupsEditModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Editar Rol';
-      activeModal.componentInstance.id = id;
-      // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
+    editGroupsModalShow( groups: GroupsInterface ) {
+      const disposable = this.dialogService.addDialog(GroupsEditModalComponent, groups)
+        .subscribe( data => {
+          if (data) {
+            this.showToast(data);
+          }
+        },
+        error => console.log(error),
+        () => console.log('Modified complete'));
     }
     
     onDeleteConfirm(event, id): void {

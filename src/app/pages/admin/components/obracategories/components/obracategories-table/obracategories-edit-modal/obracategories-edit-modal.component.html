@@ -1,37 +1,43 @@
-<div class="modal-content">
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+    
+      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+          <div class="modal-header">
+            <h4 class="modal-title">{{modalHeader}} - {{id}}</h4>
+            <button class="close" aria-label="Close" (click)="close()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="height: 50vh; overflow-y: auto;">
+    
+            <ba-card cardTitle="Información de Categoría de Obra">
+    
+                <div class="form-group row" [ngClass]="{'has-error': (!clavecategoriaAC.valid && clavecategoriaAC.touched), 'has-success': (clavecategoriaAC.valid && clavecategoriaAC.touched)}">
+                  <label for="clavecategoriaAC" class="col-sm-2 form-control-label">Clave Categoria</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="clavecategoria" [formControl]="clavecategoriaAC" type="text" class="form-control" id="clavecategoriaAC" placeholder="">
+                  </div>
+                </div>
+                
+                <div class="form-group row" [ngClass]="{'has-error': (!descripcionAC.valid && descripcionAC.touched), 'has-success': (descripcionAC.valid && descripcionAC.touched)}">
+                  <label for="descripcionAC" class="col-sm-2 form-control-label">Descripción</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="descripcion" [formControl]="descripcionAC" type="text" class="form-control" id="descripcionAC" placeholder="Descripción" >
+                  </div>
+                </div>
+                
+    
+            </ba-card>
+    
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+            <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" type="submit">Aceptar</button>
+          </div>
+      </form>
+    </div>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
-      <div class="modal-header">
-        <h4 class="modal-title">{{modalHeader}} - {{id}}</h4>
-        <button class="close" aria-label="Close" (click)="closeModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <ba-card cardTitle="Información de Categoría de Obra">
-
-            <div class="form-group row" [ngClass]="{'has-error': (!clavecategoria.valid && clavecategoria.touched), 'has-success': (clavecategoria.valid && clavecategoria.touched)}">
-              <label for="clavecategoria" class="col-sm-2 form-control-label">Clave Categoria</label>
-              <div class="col-sm-10">
-                <input [formControl]="clavecategoria" type="text" class="form-control" id="clavecategoria" placeholder="" value="{{obracategories.clavecategoria}}">
-              </div>
-            </div>
-            
-            <div class="form-group row" [ngClass]="{'has-error': (!descripcion.valid && descripcion.touched), 'has-success': (descripcion.valid && descripcion.touched)}">
-              <label for="descripcion" class="col-sm-2 form-control-label">Descripción</label>
-              <div class="col-sm-10">
-                <input [formControl]="descripcion" type="text" class="form-control" id="descripcion" placeholder="" value="{{obracategories.descripcion}}">
-              </div>
-            </div>
-            
-
-        </ba-card>
-
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-danger cancel-btn" (click)="closeModal()">Cancelar</button>
-        <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" type="submit">Aceptar</button>
-      </div>
-  </form>
+  </div>
 </div>

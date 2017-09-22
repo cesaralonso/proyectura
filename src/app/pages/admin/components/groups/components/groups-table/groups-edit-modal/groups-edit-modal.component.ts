@@ -1,10 +1,10 @@
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { GroupsService } from './../groups.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
 import { GroupsInterface } from './../groups.interface';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,22 +15,29 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './groups-edit-modal.component.html'
 })
 
-export class GroupsEditModalComponent implements OnInit {
+export class GroupsEditModalComponent extends DialogComponent<GroupsInterface, any> implements OnInit, GroupsInterface {
+
+  idrol: number; 
+  rol: string;
+  descripcion: string;
+  visible: boolean;
 
   modalHeader: string;
   id: number;
   item: GroupsInterface;
 
+  data: any;
+  
   form: FormGroup;
   submitted: boolean = false;
 
-  nicknameauth: AbstractControl;
-  usuarioauth: AbstractControl;
-  claveauth: AbstractControl;
-  idrol: AbstractControl;
-  rol: AbstractControl;
-  descripcion: AbstractControl;
-  visible: AbstractControl;
+  nicknameauthAC: AbstractControl;
+  usuarioauthAC: AbstractControl;
+  claveauthAC: AbstractControl;
+  idrolAC: AbstractControl;
+  rolAC: AbstractControl;
+  descripcionAC: AbstractControl;
+  visibleAC: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -38,20 +45,21 @@ export class GroupsEditModalComponent implements OnInit {
   private _idusuario: string;
 
 
-  constructor(private service: GroupsService,
-              private activeModal: NgbActiveModal,
-              fb: FormBuilder,
-              private toastrService: ToastrService,
-              private localStorageService: LocalStorageService,
-              private authLocalstorage: AuthLocalstorage) {
-
-    this.item = {
-      idrol: 0,
-      rol: '',
-      descripcion: '',
-      visible: false,
-    }
-
+  constructor(
+    private service: GroupsService,
+    fb: FormBuilder,
+    private toastrService: ToastrService,
+    private localStorageService: LocalStorageService,
+    private authLocalstorage: AuthLocalstorage,
+    dialogService: DialogService
+  ) {
+    super(dialogService);
+    
+    this.idrol = 0;
+    this.rol = '';
+    this.descripcion = '';
+    this.visible = false;
+        
     const credenciales = this.authLocalstorage.getCredentials();
 
     this._claveauth = credenciales.claveauth;
@@ -59,18 +67,18 @@ export class GroupsEditModalComponent implements OnInit {
     this._nicknameauth = credenciales.nicknameauth;
 
     this.form = fb.group({
-      'claveauth': this._claveauth,
-      'nicknameauth': this._nicknameauth,
-      'usuarioauth': this._usuarioauth,
-      'idrol': this.id,
-      'rol': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'descripcion': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'visible': [''],
+      'claveauthAC': this._claveauth,
+      'nicknameauthAC': this._nicknameauth,
+      'usuarioauthAC': this._usuarioauth,
+      'idrolAC': this.id,
+      'rolAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'descripcionAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'visibleAC': [''],
     });
 
-    this.rol = this.form.controls['rol'];
-    this.descripcion = this.form.controls['descripcion'];
-    this.visible = this.form.controls['visible'];
+    this.rolAC = this.form.controls['rolAC'];
+    this.descripcionAC = this.form.controls['descripcionAC'];
+    this.visibleAC = this.form.controls['visibleAC'];
   }
 
   ngOnInit() {
@@ -79,25 +87,28 @@ export class GroupsEditModalComponent implements OnInit {
       .subscribe(
         (item: GroupsInterface) => this.item = item[1]);
   }
-
-  closeModal() {
-    this.activeModal.close();
+  confirm() {
+    this.result = this.data;
+    this.close();
   }
-
   onSubmit(values: GroupsInterface): void {
     this.submitted = true;
     if (this.form.valid) {
-      const group = {
-        idrol: values.idrol,
-        rol: values.rol,
-        descripcion: values.descripcion,
-        visible: ((!values.visible) ? false : true),
-      }
-
       this.service
-        .editGroups(group)
+        .editGroups({
+          claveauth: this._claveauth,
+          nicknameauth: this._nicknameauth,
+          usuarioauth: this._usuarioauth,
+          idrol: this.idrol,
+          rol: this.rol,
+          descripcion: this.descripcion,
+          visible: this.visible
+        })
         .subscribe(
-            (data: any) => this.showToast(data, values));
+            (data: any) => {
+              this.data = data;
+              this.confirm();
+            });
     }
   }
 
@@ -105,7 +116,6 @@ export class GroupsEditModalComponent implements OnInit {
     if (data.idRespuesta === 0) {
 
       this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
     } else {
       this.toastrService.error(data.mensajeRespuesta);
     }

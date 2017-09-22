@@ -7,5 +7,8 @@ export interface TipoObraInterface {
     idtipoobra: number;
     idusuarioalta: number;
     idusuariocambio: number;
+    claveauth?: string;
+    nicknameauth?: string;
+    usuarioauth?: string;
 }
 

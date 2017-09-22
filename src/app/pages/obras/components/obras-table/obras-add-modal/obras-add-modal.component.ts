@@ -1,9 +1,9 @@
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { ObrasService } from './../obras.service';
 import { Modals } from './../../../../ui/components/modals/modals.component';
 import { ObrasInterface } from './../obras.interface';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './obras-add-modal.component.html'
 })
 
-export class ObrasAddModalComponent implements OnInit {s
+export class ObrasAddModalComponent extends DialogComponent<ObrasInterface, any> implements OnInit {s
 
   _estatusobras: string[];
   _razonsocialasociado: string[];
@@ -24,7 +24,7 @@ export class ObrasAddModalComponent implements OnInit {s
   _tipoobra: string[];
 
   modalHeader: string;
-
+  data: any;
   form: FormGroup;
   submitted: boolean = false;
 
@@ -49,12 +49,15 @@ export class ObrasAddModalComponent implements OnInit {s
   private _nicknameauth: string;
 
 
-  constructor(private service: ObrasService,
-              private activeModal: NgbActiveModal,
-              fb: FormBuilder,
-              private toastrService: ToastrService,
-              private authLocalstorage: AuthLocalstorage) {
-    
+  constructor(
+    private service: ObrasService,
+    fb: FormBuilder,
+    private toastrService: ToastrService,
+    private authLocalstorage: AuthLocalstorage,
+    dialogService: DialogService
+  ) {
+    super(dialogService);
+
     this._estatusobras = [];
     this._razonsocialasociado = [];
     this._razonsocialconstructor = [];
@@ -138,33 +141,20 @@ export class ObrasAddModalComponent implements OnInit {s
       );
 
   }
-
-  closeModal() {
-    this.activeModal.close();
+  confirm() {
+    this.result = this.data;
+    this.close();
   }
-
   onSubmit(values: ObrasInterface): void {
     this.submitted = true;
     if (this.form.valid) {
       this.service
         .addObras(values)
         .subscribe(
-            (data: any) => this.showToast(data, values));
+            (data: any) => {
+              this.data = data;
+              this.confirm();
+            });
     }
   }
-
-  private showToast(data: any, values: ObrasInterface) {
-    if (data.idRespuesta === 0) {
-
-      this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
-    }
-
-    if (data.idRespuesta === -1) {
-      this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
-    }
-  }
-
-
 }

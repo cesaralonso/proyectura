@@ -1,3 +1,4 @@
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule as AngularFormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +31,9 @@ import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
     NgbRatingModule,
     routing,
     DataTableModule,
-    NgbModalModule
+    NgbModalModule,
+    BootstrapModalModule.forRoot({ container: document.body })    
+    
   ],
   declarations: [
     ObrasComponent,

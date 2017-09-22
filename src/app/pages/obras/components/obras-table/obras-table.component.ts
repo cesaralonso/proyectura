@@ -1,3 +1,4 @@
+import { DialogService } from 'ng2-bootstrap-modal';
 import { FilesUploadModalComponent } from './files-upload-modal/files-upload-modal.component';
 import { ObrasUploadModalComponent } from './obras-upload-modal/obras-upload-modal.component';
 import { ToastrService } from 'ngx-toastr';
@@ -23,7 +24,7 @@ export class ObrasTableComponent implements OnInit {
     sortBy = 'idobra';
     sortOrder = 'asc';
 
-    constructor(private service: ObrasService, private modalService: NgbModal, private toastrService: ToastrService) {
+    constructor(private service: ObrasService, private modalService: NgbModal, private toastrService: ToastrService, private dialogService: DialogService) {
     }
 
     toInt(num: string) {
@@ -31,16 +32,24 @@ export class ObrasTableComponent implements OnInit {
     }
 
     addObrasModalShow() {
-      const activeModal = this.modalService.open(ObrasAddModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Obra';
+      const disposable = this.dialogService.addDialog(ObrasAddModalComponent)
+      .subscribe( data => {
+        if (data) {
+          this.showToast(data);
+        }
+      })
     }
 
-    editObrasModalShow(id: number) {
-      const activeModal = this.modalService.open(ObrasEditModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Editar Obra';
-      activeModal.componentInstance.id = id;
-      // AQUÍ ES DONDE SE VA A CARGAR LOS DATOS DEL USUARIO Y AGREGARSE POR MEDIO DEL COMPONENT INSTANCE
-    }
+    editObrasModalShow(obras: ObrasInterface) {
+      const disposable = this.dialogService.addDialog(ObrasEditModalComponent, obras)
+      .subscribe( data => {
+        if (data) {
+          this.showToast(data);
+        }
+      },
+      error => console.log(error),
+      () => console.log('Modified complete'));
+  }
 
     uploadObrasModalShow(id: number) {
       const activeModal = this.modalService.open(ObrasUploadModalComponent, { size: 'lg' });

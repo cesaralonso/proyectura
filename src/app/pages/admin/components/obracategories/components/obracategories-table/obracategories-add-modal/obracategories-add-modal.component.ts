@@ -1,10 +1,10 @@
+import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { ObracategoriesService } from './../obracategories.service';
 import { Modals } from './../../../../../../ui/components/modals/modals.component';
 import { ObracategoriesInterface } from './../obracategories.interface';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,13 +15,13 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './obracategories-add-modal.component.html'
 })
 
-export class ObracategoriesAddModalComponent implements OnInit {
+export class ObracategoriesAddModalComponent extends DialogComponent<ObracategoriesInterface, any> implements OnInit {
 
  
   modalHeader: string;
   id: number;
   obracategories: ObracategoriesInterface;
-
+  data: any;
   form: FormGroup;
   submitted: boolean = false;
 
@@ -37,13 +37,15 @@ export class ObracategoriesAddModalComponent implements OnInit {
   private _nicknameauth: string;
 
 
-  constructor(private service: ObracategoriesService,
-              private activeModal: NgbActiveModal,
-              fb: FormBuilder,
-              private toastrService: ToastrService,
-              private localStorageService: LocalStorageService,
-              private authLocalstorage: AuthLocalstorage) {
-
+  constructor(
+    private service: ObracategoriesService,
+    fb: FormBuilder,
+    private toastrService: ToastrService,
+    private localStorageService: LocalStorageService,
+    private authLocalstorage: AuthLocalstorage,
+    dialogService: DialogService
+  ) {
+    super(dialogService);
     const credenciales = this.authLocalstorage.getCredentials();
 
     this._claveauth = credenciales.claveauth;
@@ -65,34 +67,24 @@ export class ObracategoriesAddModalComponent implements OnInit {
 
   ngOnInit() {}
 
-  closeModal() {
-    this.activeModal.close();
+  confirm() {
+    this.result = this.data;
+    this.close();
   }
-
+  
   onSubmit(values: ObracategoriesInterface): void {
     this.submitted = true;
     if (this.form.valid) {
       this.service
         .addObracategories(values)
         .subscribe(
-            (data: any) => this.showToast(data, values));
+            (data: any) => {
+              this.data = data;
+              this.confirm();
+            }
+        );
     }
   }
-
-  private showToast(data: any, values: ObracategoriesInterface) {
-    if (data.idRespuesta === 0) {
-
-      this.toastrService.success(data.mensajeRespuesta);
-      this.closeModal();
-    }
-
-    if (data.idRespuesta === -1) {
-      this.toastrService.error(data.mensajeRespuesta);
-      // this.closeModal();
-    }
-  }
-
-
 }
 
 

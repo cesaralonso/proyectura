@@ -30,27 +30,19 @@ export class UsuariosTable implements OnInit {
     }
 
     addUserModalShow() {
-      const activeModal = this.modalService.open(UserAddModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Usuario';
+      const disposable = this.dialogService.addDialog(UserAddModalComponent)
+        .subscribe( data => {
+          if (data) {
+            console.log(11);
+            this.showToast(data);
+          }
+        },
+        error => console.log(error),
+        () => console.log('Modified complete'));
     }
 
-    editUserModalShow( user ) {
-
-      console.log("user", user);
-
-      const _user: UserInterface = {
-          idusuario: user.idusuario,
-          idrol: user.idrol,
-          usuario: user.usuario,
-          contrasena: user.contrasena,
-          nombre: user.nombre,
-          email: user.email,
-          telefono: user.telefono,
-          idstatususuario: user.idstatususuario,
-          emailsms: user.emailsms,
-        }
-
-      const disposable = this.dialogService.addDialog(UserEditModalComponent, _user)
+    editUserModalShow( user: UserInterface ) {
+      const disposable = this.dialogService.addDialog(UserEditModalComponent, user)
       .subscribe( data => {
           if (data) { 
             this.showToast(data);
