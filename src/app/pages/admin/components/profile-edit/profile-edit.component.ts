@@ -31,7 +31,7 @@ export class ProfileEdit implements OnInit {
   };
 
   fileUploaderOptions: NgUploaderOptions = {
-    url: 'http://localhost/slim/v1/uploadImagen/profile-',
+    url: 'http://localhost/proyectura_api/v1/uploadImagen/profile-',
   };
 
   uploadCompled(event: any) {

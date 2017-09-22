@@ -36,7 +36,7 @@ export class TipoObraUploadModalComponent implements OnInit {
   };
 
   fileUploaderOptions: NgUploaderOptions = {
-    url: 'http://localhost/slim/v1/uploadImagen/tipoobra-',
+    url: 'http://localhost/proyectora_api/v1/uploadImagen/tipoobra-',
   };
 
   uploadCompled(event: any) {

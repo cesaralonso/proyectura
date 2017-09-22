@@ -16,53 +16,53 @@
                         </tr>
                         <tr>
                             <th style="width: 10%"></th>
-    
                             <th style="width: 10%">
                                 <mfDefaultSorter by="razonsocial">Razón social</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 10%">
                                 <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 10%">
                                 <mfDefaultSorter by="rfc">RFC</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 10%">
                                 <mfDefaultSorter by="direccion">Dirección</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 10%">
                                 <mfDefaultSorter by="calle">Calle</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
-                                <mfDefaultSorter by="numexterior">Núm exterior</mfDefaultSorter>
+                                <mfDefaultSorter by="numeroexterior">Núm exterior</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
-                                <mfDefaultSorter by="numinterior">Núm interior</mfDefaultSorter>
+                                <mfDefaultSorter by="numerointerior">Núm interior</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
                                 <mfDefaultSorter by="colonia">Colonia</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
                                 <mfDefaultSorter by="municipio">Municipio</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
                                 <mfDefaultSorter by="ciudad">Ciudad</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
                                 <mfDefaultSorter by="estado">Estado</mfDefaultSorter>
                             </th>
-    
                             <th style="width: 5%">
                                 <mfDefaultSorter by="pais">Pais</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="fechahoraalta">Fecha hora alta</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="fechahoracambio">Fecha hora cambio</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="descripciontipo">Tipo</mfDefaultSorter>
+                            </th>
+                            <th style="width: 5%">
+                                <mfDefaultSorter by="descripcionestatus">Estatus</mfDefaultSorter>
                             </th>
                         </tr>
                     </thead>
@@ -77,13 +77,17 @@
                             <td>{{item.rfc}}</td>
                             <td>{{item.direccion}}</td>
                             <td>{{item.calle}}</td>
-                            <td>{{item.numexterior}}</td>
-                            <td>{{item.numinterior}}</td>
+                            <td>{{item.numeroexterior}}</td>
+                            <td>{{item.numerointerior}}</td>
                             <td>{{item.colonia}}</td>
                             <td>{{item.municipio}}</td>
                             <td>{{item.ciudad}}</td>
                             <td>{{item.estado}}</td>
                             <td>{{item.pais}}</td>
+                            <td>{{item.fechahoraalta | date:'dd/MM/y'}}</td>
+                            <td>{{item.fechahoracambio | date:'dd/MM/y'}}</td>
+                            <td>{{item.descripciontipo}}</td>
+                            <td>{{item.descripcionestatus}}</td>
                         </tr>
                     </tbody>
                     <tfoot>

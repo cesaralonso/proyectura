@@ -1,3 +1,4 @@
+import { FilesUploadModalComponent } from './../../../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { TipoObraResponseInterface } from './tipo-obra-response.interface';
 import { ToastrService } from 'ngx-toastr';
@@ -57,9 +58,14 @@ export class TipoObraTableComponent implements OnInit {
       const activeModal = this.modalService.open(TipoObraUploadModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Agregar Archivo a Tipo de Obra';
       activeModal.componentInstance.id = id;
-      console.log('Upload Modal opened');
     }
 
+    filesModalShow(id: number) {
+      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
+      activeModal.componentInstance.modalHeader = 'Ver Archivos de Tipo de Obra';
+      activeModal.componentInstance.id = id;
+      activeModal.componentInstance.referencia = 'TipoObra';
+    }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {

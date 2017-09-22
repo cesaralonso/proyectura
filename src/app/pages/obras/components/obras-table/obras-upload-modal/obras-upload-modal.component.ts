@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObrasService } from './../obras.service';
 import { ProfileEditService } from './../../../../admin/components/profile-edit/profile-edit.service';
@@ -36,11 +37,10 @@ export class ObrasUploadModalComponent implements OnInit {
   };
 
   fileUploaderOptions: NgUploaderOptions = {
-    url: 'http://localhost/slim/v1/uploadImagen/obra-',
+    url: 'http://localhost/proyectura_api/v1/uploadImagen/obra-',
   };
 
   uploadCompled(event: any) {
-
     if (event.done) {
       const response = JSON.parse(event.response);
       if (response.status === 'success') {
@@ -49,21 +49,31 @@ export class ObrasUploadModalComponent implements OnInit {
             usuarioauth: this.credentials.usuarioauth,
             claveauth: this.credentials.claveauth,
             idreferencia: this.id,
-            proceso: 'Obra',
+            proceso: 'Obras',
             tipoarchivo: response.type,
             urlarchivo: response.src,
         }
         this.service.setFile(archivo)
           .subscribe(
-            (data: any) => console.log(data)
-          );
+            (data: any) => this.showToast(data),
+            error => console.log(error),
+            () => this.activeModal.close());
       }
+    }
+  }
+
+  showToast(data) {
+    if (data.idRespuesta === 0) {
+      this.toastrService.success(data.mensajeRespuesta);
+    } else {
+      this.toastrService.error(data.mensajeRespuesta);
     }
   }
 
   constructor(private service: ObrasService, 
               private authLocalstorage: AuthLocalstorage, 
-              private activeModal: NgbActiveModal) {
+              private activeModal: NgbActiveModal,
+              private toastrService: ToastrService) {
   }
 
   closeModal() {

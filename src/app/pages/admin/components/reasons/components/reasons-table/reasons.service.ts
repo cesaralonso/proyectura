@@ -40,7 +40,7 @@ export class ReasonsService {
     }
 
     editReasons = (reasons: ReasonsInterface): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}EditarRazonSocial`;
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}ModificarRazonSocial`;
         const toAdd = JSON.stringify(reasons);
         console.log('toAdd', toAdd);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

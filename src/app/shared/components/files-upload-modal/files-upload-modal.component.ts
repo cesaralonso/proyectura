@@ -1,9 +1,5 @@
+import { FilesUploadModalService } from './file-upload-modal.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ObrasService } from './../obras.service';
-import { ProfileEditService } from './../../../../admin/components/profile-edit/profile-edit.service';
-
-import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
-import { CredentialsInterface } from './../../../../../shared/credentials.interface';
 import { Response } from '@angular/http';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
@@ -15,14 +11,11 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 })
 export class FilesUploadModalComponent implements OnInit {
 
-  private credentials: CredentialsInterface = this.authLocalstorage.getCredentials();
-
   id: number;
   referencia: string;
   files: any[];
 
-  constructor(private service: ObrasService, 
-              private authLocalstorage: AuthLocalstorage, 
+  constructor(private service: FilesUploadModalService, 
               private activeModal: NgbActiveModal) {
   }
 

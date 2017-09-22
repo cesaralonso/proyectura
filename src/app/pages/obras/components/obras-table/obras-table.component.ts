@@ -1,5 +1,5 @@
+import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { FilesUploadModalComponent } from './files-upload-modal/files-upload-modal.component';
 import { ObrasUploadModalComponent } from './obras-upload-modal/obras-upload-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { ObrasInterface } from './obras.interface';
@@ -57,7 +57,7 @@ export class ObrasTableComponent implements OnInit {
       activeModal.componentInstance.id = id;
     }
 
-    filesObrasModalShow(id: number) {
+    filesModalShow(id: number) {
       const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Ver Archivos de Obra';
       activeModal.componentInstance.id = id;

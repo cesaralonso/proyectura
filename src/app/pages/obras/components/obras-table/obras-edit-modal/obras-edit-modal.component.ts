@@ -94,7 +94,7 @@ export class ObrasEditModalComponent extends DialogComponent<ObrasInterface, any
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
-    dialogService: DialogService
+    dialogService: DialogService,
   ) {
     super(dialogService);
     this._estatusobras = [];
@@ -111,7 +111,6 @@ export class ObrasEditModalComponent extends DialogComponent<ObrasInterface, any
         this._nicknameauth = credenciales.nicknameauth;
 
     this.form = fb.group({
-
       'claveauthAC': this._claveauth,
       'nicknameauthAC': this._nicknameauth,
       'usuarioauthAC': this._usuarioauth,
@@ -151,10 +150,9 @@ export class ObrasEditModalComponent extends DialogComponent<ObrasInterface, any
     this.observacionesAC = this.form.controls['observacionesAC'];
   }
 
-
   ngOnInit() {
     // Obtiene una obra
-    this.getObras();
+    // this.getObras();
     
     // Obtiene Estatus de Obras
     this.obtenerEstatusObras();
@@ -193,13 +191,13 @@ export class ObrasEditModalComponent extends DialogComponent<ObrasInterface, any
         },
       );
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
 
   onSubmit(values: ObrasInterface): void {
-
     this.submitted = true;
     if (this.form.valid) {
       this.service
@@ -222,7 +220,7 @@ export class ObrasEditModalComponent extends DialogComponent<ObrasInterface, any
           idrazonsocialasociado: this.idrazonsocialasociado,
           posiciongps: this.posiciongps,
           idestatusobra: this.idestatusobra,
-          observaciones: this.observaciones
+          observaciones: this.observaciones,
         })
         .subscribe(
             (data: any) => {
@@ -231,7 +229,6 @@ export class ObrasEditModalComponent extends DialogComponent<ObrasInterface, any
             });
     }
   }
-
 
   private getObras(): void {
     this.service.getObras(this.id)

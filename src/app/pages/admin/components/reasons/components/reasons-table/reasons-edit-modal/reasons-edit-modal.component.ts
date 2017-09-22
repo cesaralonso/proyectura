@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: [('./reasons-edit-modal.component.scss')],
   templateUrl: './reasons-edit-modal.component.html'
 })
-
 export class ReasonsEditModalComponent extends DialogComponent<ReasonsInterface, any> implements OnInit, ReasonsInterface {
   
   idrazonsocial: number;
@@ -55,12 +54,6 @@ export class ReasonsEditModalComponent extends DialogComponent<ReasonsInterface,
 
   form: FormGroup;
   submitted: boolean = false;
-
-  nicknameauth: AbstractControl;
-  usuarioauth: AbstractControl;
-  claveauth: AbstractControl;
-
-  idrazonsocialAC: AbstractControl;
   razonsocialAC: AbstractControl;
   nombreAC: AbstractControl;
   rfcAC: AbstractControl;
@@ -87,7 +80,7 @@ export class ReasonsEditModalComponent extends DialogComponent<ReasonsInterface,
     private toastrService: ToastrService,
     private localStorageService: LocalStorageService,
     private authLocalstorage: AuthLocalstorage,
-    dialogService: DialogService
+    dialogService: DialogService,
   ) {
     super(dialogService);
 
@@ -100,17 +93,13 @@ export class ReasonsEditModalComponent extends DialogComponent<ReasonsInterface,
     this._nicknameauth = credenciales.nicknameauth;
 
     this.form = fb.group({
-      'claveauthAC': this._claveauth,
-      'nicknameauthAC': this._nicknameauth,
-      'usuarioauthAC': this._usuarioauth,
-      'idrazonsocialAC': [''],
       'razonsocialAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'nombreAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'rfcAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'direccionAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'calleAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'numeroexteriorAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'numerointeriorAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'numerointeriorAC': [''],
       'coloniaAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'municipioAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'ciudadAC': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -136,43 +125,58 @@ export class ReasonsEditModalComponent extends DialogComponent<ReasonsInterface,
     this.idtiporazonsocialAC = this.form.controls['idtiporazonsocialAC'];
   }
 
-
   ngOnInit() {
-    console.log(this.idrazonsocial);
-    console.log(this.razonsocial);
-    console.log(this.nombre);
+
     // Obtiene Tipos de Razón Social
-    this.service.obtenerTiposRazonSocial()
-      .subscribe(
-        (data: any) => this._tiporazonsocial = data,
-      );
-
+    this.obtenerTiposRazonSocial();
     // Obtiene Estatus de Razón Social
-    this.service.obtenerEstatusRazonSocial()
-      .subscribe(
-        (data: any) => this._estatusrazonsocial = data,
-      );
-
-    this.getReasons();
+    this.obtenerEstatusRazonSocial();
 
   }
 
-
-  getReasons() {
+  obtenerTiposRazonSocial() {
     this.service
-        .getReasons(this.id)
+        .obtenerTiposRazonSocial()
         .subscribe(
-            (data: any) => this.reasons = data[1]);
+            (data: any) => this._tiporazonsocial = data);
   }
+
+  obtenerEstatusRazonSocial() {
+    this.service
+        .obtenerEstatusRazonSocial()
+        .subscribe(
+            (data: any) => this._estatusrazonsocial = data);
+  }
+
   confirm() {
     this.result = this.data;
-    this.close()
+    this.close();
   }
+
   onSubmit(values: ReasonsInterface): void {
     this.submitted = true;
     if (this.form.valid) {
       this.service
-        .editReasons(values)
+        .editReasons({
+          claveauth: this._claveauth,
+          nicknameauth: this._nicknameauth,
+          usuarioauth: this._usuarioauth,
+          idrazonsocial: this.idrazonsocial,
+          razonsocial: this.razonsocial,
+          nombre: this.nombre,
+          rfc: this.rfc,
+          direccion: this.direccion,
+          calle: this.calle,
+          numeroexterior: this.numeroexterior,
+          numerointerior: this.numerointerior,
+          colonia: this.colonia,
+          municipio: this.municipio,
+          ciudad: this.ciudad,
+          estado: this.estado,
+          pais: this.pais,
+          idtiporazonsocial: this.idtiporazonsocial,
+          idstatusrazonsocial: this.idstatusrazonsocial,
+        })
         .subscribe(
             (data: any) => {
               this.data = data;
@@ -180,6 +184,8 @@ export class ReasonsEditModalComponent extends DialogComponent<ReasonsInterface,
             });
     }
   }
+
+
 
 }
 

@@ -1,4 +1,7 @@
 export interface ObrasInterface {
+    claveauth?: string;
+    nicknameauth?: string;
+    usuarioauth?: string;
     idobra?: number;
     descripcion: string;
     direccion: string;
@@ -22,7 +25,4 @@ export interface ObrasInterface {
     razonsocialasociado?: string;
     claveestatusobra?: string;
     tipoobra?: string;
-    claveauth?: string;
-    nicknameauth?: string;
-    usuarioauth?: string;
 }

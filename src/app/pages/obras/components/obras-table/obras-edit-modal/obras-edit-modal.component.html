@@ -2,7 +2,7 @@
   <div class="col-md-2"></div>
   <div class="col-md-8">
     <div class="modal-content" style="overflow-y: initial !important">
-      <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+      <form [formGroup]="form" class="form-horizontal">
         <div class="modal-header">
           <h4 class="modal-title">{{modalHeader}} - {{id}}</h4>
           <button class="close" aria-label="Close" (click)="close()">
@@ -67,8 +67,8 @@
             <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialclienteAC.valid && idrazonsocialclienteAC.touched), 'has-success': (idrazonsocialclienteAC.valid && idrazonsocialclienteAC.touched)}">
               <label for="inputidrazonsocialclienteAC" class="col-sm-2 form-control-label">Razón Social Cliente</label>
               <div class="col-sm-10">
-                <select id="idrazonsocialclienteAC" class="form-control" [(ngModel)]="idrazonsocialcliente" [formControl]="idrazonsocialclienteAC">
-                  <option  *ngFor="let value of _razonsocialcliente">
+                <select id="inputidrazonsocialclienteAC" class="form-control" [(ngModel)]="idrazonsocialcliente" [formControl]="idrazonsocialclienteAC">
+                  <option *ngFor="let value of _razonsocialcliente" value="{{value.idrazonsocial}}">
                     {{value.razonsocial}}
                   </option>
                 </select>
@@ -77,8 +77,8 @@
             <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialcontratistaAC.valid && idrazonsocialcontratistaAC.touched), 'has-success': (idrazonsocialcontratistaAC.valid && idrazonsocialcontratistaAC.touched)}">
               <label for="inputidrazonsocialcontratistaAC" class="col-sm-2 form-control-label">Razón Social Contratista</label>
               <div class="col-sm-10">
-                <select id="idrazonsocialcontratistaAC" class="form-control" [(ngModel)]="idrazonsocialcontratista" [formControl]="idrazonsocialcontratistaAC">
-                  <option  *ngFor="let value of _razonsocialcontratista">
+                <select id="inputidrazonsocialcontratistaAC" class="form-control" [(ngModel)]="idrazonsocialcontratista" [formControl]="idrazonsocialcontratistaAC">
+                  <option *ngFor="let value of _razonsocialcontratista" value="{{value.idrazonsocial}}">
                     {{value.razonsocial}}
                   </option>
                 </select>
@@ -87,8 +87,8 @@
             <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialconstructorAC.valid && idrazonsocialconstructorAC.touched), 'has-success': (idrazonsocialconstructorAC.valid && idrazonsocialconstructorAC.touched)}">
               <label for="inputidrazonsocialconstructorAC" class="col-sm-2 form-control-label">Razón Social Constructor</label>
               <div class="col-sm-10">
-                <select id="idrazonsocialconstructorAC" class="form-control" [(ngModel)]="idrazonsocialconstructor" [formControl]="idrazonsocialconstructorAC">
-                  <option  *ngFor="let value of _razonsocialconstructor">
+                <select id="inputidrazonsocialconstructorAC" class="form-control" [(ngModel)]="idrazonsocialconstructor" [formControl]="idrazonsocialconstructorAC">
+                  <option *ngFor="let value of _razonsocialconstructor" value="{{value.idrazonsocial}}">
                     {{value.razonsocial}}
                   </option>
                 </select>
@@ -97,8 +97,8 @@
             <div class="form-group row" [ngClass]="{'has-error': (!idrazonsocialasociadoAC.valid && idrazonsocialasociadoAC.touched), 'has-success': (idrazonsocialasociadoAC.valid && idrazonsocialasociadoAC.touched)}">
               <label for="inputidrazonsocialasociadoAC" class="col-sm-2 form-control-label">Razón Social Asociado</label>
               <div class="col-sm-10">
-                <select id="idrazonsocialasociadoAC" class="form-control" [(ngModel)]="idrazonsocialasociado" [formControl]="idrazonsocialasociadoAC">
-                  <option  *ngFor="let value of _razonsocialasociado">
+                <select id="inputidrazonsocialasociadoAC" class="form-control" [(ngModel)]="idrazonsocialasociado" [formControl]="idrazonsocialasociadoAC">
+                  <option *ngFor="let value of _razonsocialasociado" value="{{value.idrazonsocial}}">
                     {{value.razonsocial}}
                   </option>
                 </select>
@@ -113,8 +113,8 @@
             <div class="form-group row" [ngClass]="{'has-error': (!idestatusobraAC.valid && idestatusobraAC.touched), 'has-success': (idestatusobraAC.valid && idestatusobraAC.touched)}">
               <label for="inputidestatusobraAC" class="col-sm-2 form-control-label">Estatus Obra</label>
               <div class="col-sm-10">
-                <select id="idestatusobraAC" class="form-control" [(ngModel)]="idestatusobra" [formControl]="idestatusobraAC">
-                  <option  *ngFor="let value of _estatusobras">
+                <select id="inputidestatusobraAC" class="form-control" [(ngModel)]="idestatusobra" [formControl]="idestatusobraAC">
+                  <option *ngFor="let value of _estatusobras" value="{{value.idestatusobra}}">
                     {{value.descripcion}}
                   </option>
                 </select>
@@ -130,7 +130,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
-          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" type="submit">Aceptar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form)">Aceptar</button>
         </div>
       </form>
     </div>

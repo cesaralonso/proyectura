@@ -1,3 +1,4 @@
+import { FilesUploadModalModule } from './../../shared/components/files-upload-modal/file-upload-modal.module';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,12 +15,12 @@ import { ObrasComponent } from './obras.component';
 import { ObrasAddModalComponent } from './components/obras-table/obras-add-modal/obras-add-modal.component';
 import { ObrasEditModalComponent } from './components/obras-table/obras-edit-modal/obras-edit-modal.component';
 import { ObrasUploadModalComponent } from './components/obras-table/obras-upload-modal/obras-upload-modal.component';
-import { FilesUploadModalComponent } from './components/obras-table/files-upload-modal/files-upload-modal.component';
-
 import { ObrasService } from './components/obras-table/obras.service';
 
 import { ObrasTableComponent } from './components/obras-table/obras-table.component';
 import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
+
+
 
 @NgModule({
   imports: [
@@ -32,8 +33,8 @@ import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
     routing,
     DataTableModule,
     NgbModalModule,
-    BootstrapModalModule.forRoot({ container: document.body })    
-    
+    BootstrapModalModule.forRoot({ container: document.body }),
+    FilesUploadModalModule,
   ],
   declarations: [
     ObrasComponent,
@@ -42,16 +43,14 @@ import { DataFilterPipe } from './components/obras-table/data-filter.pipe';
     ObrasAddModalComponent,
     ObrasEditModalComponent,
     ObrasUploadModalComponent,
-    FilesUploadModalComponent
   ],
   entryComponents: [
     ObrasAddModalComponent,
     ObrasEditModalComponent,
     ObrasUploadModalComponent,
-    FilesUploadModalComponent
   ],
   providers: [
-    ObrasService
+    ObrasService,
   ]
 })
 export class ObrasModule {

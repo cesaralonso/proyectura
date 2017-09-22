@@ -1,4 +1,7 @@
 export interface ReasonsInterface {
+    claveauth?: string;
+    nicknameauth?: string;
+    usuarioauth?: string;
     idrazonsocial: number;
     razonsocial: string;
     nombre: string;
