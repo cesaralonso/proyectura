@@ -1,4 +1,6 @@
-import { FilesUploadModalModule } from './../../shared/components/files-upload-modal/file-upload-modal.module';
+import { FilesUploadModalService } from './../../shared/components/files-upload-modal/file-upload-modal.service';
+import { FilesUploadModalComponent } from './../../shared/components/files-upload-modal/files-upload-modal.component';
+
 
 import { ProfileEditService } from './components/profile-edit/profile-edit.service';
 import { NgModule } from '@angular/core';
@@ -75,8 +77,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     routing,
     DataTableModule,
     NgbModalModule,
-    BootstrapModalModule.forRoot({ container: document.body }),
-    FilesUploadModalModule,
+    BootstrapModalModule.forRoot({ container: document.body })    
   ],
   declarations: [
     Users,
@@ -113,6 +114,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     ObracategoriesTableComponent,
     ObracategoriesAddModalComponent,
     ObracategoriesEditModalComponent,
+    FilesUploadModalComponent,
   ],
   entryComponents: [
     UserAddModalComponent,
@@ -130,6 +132,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     TipoObraUploadModalComponent,
     ObracategoriesAddModalComponent,
     ObracategoriesEditModalComponent,
+    FilesUploadModalComponent,
   ],
   providers: [
     UserService,
@@ -140,6 +143,7 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     TipoObraService,
     ObracategoriesService,
     ProfileEditService,
+    FilesUploadModalService,
   ]
 })
 export class AdminModule {
