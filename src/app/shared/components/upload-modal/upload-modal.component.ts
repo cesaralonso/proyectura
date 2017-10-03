@@ -1,10 +1,9 @@
 import { ToastrService } from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ObrasService } from './../obras.service';
-import { ProfileEditService } from './../../../../admin/components/profile-edit/profile-edit.service';
+import { UploadModalService } from './upload-modal.service';
 
-import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
-import { CredentialsInterface } from './../../../../../shared/credentials.interface';
+import { AuthLocalstorage } from './../../../shared/auth-localstorage.service';
+import { CredentialsInterface } from './../../../shared/credentials.interface';
 import { Response } from '@angular/http';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { NgUploaderOptions } from 'ngx-uploader';
@@ -21,14 +20,17 @@ export interface ArchivoInterface {
 
 @Component({
   selector: 'upload-service-modal',
-  styleUrls: [('./obras-upload-modal.component.scss')],
-  templateUrl: './obras-upload-modal.component.html'
+  styleUrls: [('./upload-modal.component.scss')],
+  templateUrl: './upload-modal.component.html'
 })
-export class ObrasUploadModalComponent implements OnInit {
+export class UploadModalComponent implements OnInit {
 
   private credentials: CredentialsInterface = this.authLocalstorage.getCredentials();
 
   id: number;
+  descripcion: string;
+  referencia: string;
+  modalHeader: string;
 
   defaultPicture = 'assets/img/theme/no-photo.png';
 
@@ -37,7 +39,7 @@ export class ObrasUploadModalComponent implements OnInit {
   };
 
   fileUploaderOptions: NgUploaderOptions = {
-    url: 'http://localhost/proyectura_api/v1/uploadImagen/obra-',
+    url: `http://aidihosting.com/proyectos/proyectura_api/v1/uploadImagen/${this.referencia}-`,
   };
 
   uploadCompled(event: any) {
@@ -49,7 +51,7 @@ export class ObrasUploadModalComponent implements OnInit {
             usuarioauth: this.credentials.usuarioauth,
             claveauth: this.credentials.claveauth,
             idreferencia: this.id,
-            proceso: 'Obras',
+            proceso: this.referencia,
             tipoarchivo: response.type,
             urlarchivo: response.src,
         }
@@ -70,7 +72,7 @@ export class ObrasUploadModalComponent implements OnInit {
     }
   }
 
-  constructor(private service: ObrasService, 
+  constructor(private service: UploadModalService, 
               private authLocalstorage: AuthLocalstorage, 
               private activeModal: NgbActiveModal,
               private toastrService: ToastrService) {

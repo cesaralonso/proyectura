@@ -1,6 +1,6 @@
+import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
 import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { ObrasUploadModalComponent } from './obras-upload-modal/obras-upload-modal.component';
 import { ToastrService } from 'ngx-toastr';
 import { ObrasInterface } from './obras.interface';
 import { ObrasResponseInterface } from './obras-response.interface';
@@ -24,7 +24,11 @@ export class ObrasTableComponent implements OnInit {
     sortBy = 'idobra';
     sortOrder = 'asc';
 
-    constructor(private service: ObrasService, private modalService: NgbModal, private toastrService: ToastrService, private dialogService: DialogService) {
+    constructor(
+      private service: ObrasService, 
+      private modalService: NgbModal, 
+      private toastrService: ToastrService, 
+      private dialogService: DialogService) {
     }
 
     toInt(num: string) {
@@ -51,17 +55,19 @@ export class ObrasTableComponent implements OnInit {
       () => console.log('Modified complete'));
   }
 
-    uploadObrasModalShow(id: number) {
-      const activeModal = this.modalService.open(ObrasUploadModalComponent, { size: 'lg' });
+    uploadModalShow(id: number, descripcion: string) {
+      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Agregar Archivo a Obra';
       activeModal.componentInstance.id = id;
+      activeModal.componentInstance.descripcion = descripcion;
+      activeModal.componentInstance.referencia = 'Obra';
     }
 
     filesModalShow(id: number) {
       const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Ver Archivos de Obra';
       activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Obras';
+      activeModal.componentInstance.referencia = 'Obra';
     }
 
     onDeleteConfirm(event, id): void {

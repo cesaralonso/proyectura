@@ -24,15 +24,6 @@ export class FilesUploadModalService {
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
     
-    setFile = (archivo: any): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarArchivo`;
-        const toAdd = JSON.stringify(archivo);
-
-        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <any>response.json())
-            .catch(this.handleError);
-    }
-
     getFiles = (idreferencia: number, proceso: string): Observable<any> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}ObtenerArchivosPorProcesoPorIdReferencia`;
         const credenciales = this.authLocalstorage.getCredentials();
@@ -46,6 +37,22 @@ export class FilesUploadModalService {
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <any>response.json())
+            .catch(this.handleError);
+    }
+
+    deleteArchivo = (id: string): Observable<any> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaArchivo`;
+       
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toSend = JSON.stringify({
+            'nicknameauth': credenciales.nicknameauth,
+            'usuarioauth': credenciales.usuarioauth,
+            'claveauth': credenciales.claveauth,
+            'idarchivo': id,
+        });
+
+        return this._http.post(this.actionUrl, toSend, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
             .catch(this.handleError);
     }
 

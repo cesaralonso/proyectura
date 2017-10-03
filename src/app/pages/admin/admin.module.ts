@@ -1,6 +1,3 @@
-import { FilesUploadModalService } from './../../shared/components/files-upload-modal/file-upload-modal.service';
-import { FilesUploadModalComponent } from './../../shared/components/files-upload-modal/files-upload-modal.component';
-
 
 import { ProfileEditService } from './components/profile-edit/profile-edit.service';
 import { NgModule } from '@angular/core';
@@ -56,7 +53,6 @@ import { TipoObraService } from './components/tipo-obra/components/tipo-obra-tab
 import { TipoObraTableComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-table.component';
 import { TipoObraEditModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-edit-modal/tipo-obra-edit-modal.component';
 import { TipoObraAddModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-add-modal/tipo-obra-add-modal.component';
-import { TipoObraUploadModalComponent } from './components/tipo-obra/components/tipo-obra-table/tipo-obra-upload-modal/tipo-obra-upload-modal.component';
 
 import { ObracategoriesComponent } from './components/obracategories/obracategories.component';
 import { ObracategoriesService } from './components/obracategories/components/obracategories-table/obracategories.service';
@@ -109,12 +105,10 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     TipoObraTableComponent,
     TipoObraAddModalComponent,
     TipoObraEditModalComponent,
-    TipoObraUploadModalComponent,
     ObracategoriesComponent,
     ObracategoriesTableComponent,
     ObracategoriesAddModalComponent,
     ObracategoriesEditModalComponent,
-    FilesUploadModalComponent,
   ],
   entryComponents: [
     UserAddModalComponent,
@@ -129,10 +123,8 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     ReasonsEditModalComponent,
     TipoObraAddModalComponent,
     TipoObraEditModalComponent,
-    TipoObraUploadModalComponent,
     ObracategoriesAddModalComponent,
     ObracategoriesEditModalComponent,
-    FilesUploadModalComponent,
   ],
   providers: [
     UserService,
@@ -143,7 +135,6 @@ import { BootstrapModalModule } from 'ng2-bootstrap-modal';
     TipoObraService,
     ObracategoriesService,
     ProfileEditService,
-    FilesUploadModalService,
   ]
 })
 export class AdminModule {

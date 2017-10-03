@@ -1,3 +1,5 @@
+import { AuthService } from './../../../../shared/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { CredentialsInterface } from './../../../../shared/credentials.interface';
 import { AuthLocalstorage } from './../../../../shared/auth-localstorage.service';
 import { Response } from '@angular/http';
@@ -21,17 +23,19 @@ export interface ArchivoInterface {
 })
 export class ProfileEdit implements OnInit {
 
+  urlProfile: string;
+
   private credentials: CredentialsInterface = this.authLocalstorage.getCredentials();
   private idusuario: string = this.authLocalstorage.getIdUsuario();
 
   defaultPicture = 'assets/img/theme/no-photo.png';
 
   profile: any = {
-    picture: 'assets/img/app/profile/Cesar.png',
+    picture: this.urlProfile,
   };
 
   fileUploaderOptions: NgUploaderOptions = {
-    url: 'http://localhost/proyectura_api/v1/uploadImagen/profile-',
+    url: 'http://aidihosting.com/proyectos/proyectura_api/v1/uploadImagen/profile-',
   };
 
   uploadCompled(event: any) {
@@ -39,9 +43,7 @@ export class ProfileEdit implements OnInit {
     console.log("event", event);
 
     if (event.done) {
-
       const response = JSON.parse(event.response);
-
       if (response.status === 'success') {
         const archivo: ArchivoInterface = {
             nicknameauth: this.credentials.nicknameauth,
@@ -54,15 +56,38 @@ export class ProfileEdit implements OnInit {
         }
         this.service.setProfileImage(archivo)
           .subscribe(
-            (data: any) => console.log(data)
-          );
+            (data: any) => this.showToast(data),
+            error => console.log(error),
+            () => this.authLocalstorage.setAvatar(response.src));
       }
     }
   }
 
-  constructor(private service: ProfileEditService, private authLocalstorage: AuthLocalstorage) {
+  showToast(data) {
+    if (data.idRespuesta === 0) {
+      this.toastrService.success(data.mensajeRespuesta);
+    } else {
+      this.toastrService.error(data.mensajeRespuesta);
+    }
+  }
+
+  constructor(
+    private service: ProfileEditService,
+    private authLocalstorage: AuthLocalstorage,
+    private toastrService: ToastrService,
+    private authService: AuthService) {
+
+      this.authService.profileAvatar()
+        .then(
+          data => {
+            this.urlProfile = data;
+            console.log('data',data);
+          },
+        );
   }
 
   ngOnInit() {
   }
+  
 }
+

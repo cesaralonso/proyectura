@@ -1,3 +1,4 @@
+import { UploadModalComponent } from './../../../../../../shared/components/upload-modal/upload-modal.component';
 import { FilesUploadModalComponent } from './../../../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { TipoObraResponseInterface } from './tipo-obra-response.interface';
@@ -8,7 +9,6 @@ import { TipoObraService } from './tipo-obra.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TipoObraAddModalComponent } from './tipo-obra-add-modal/tipo-obra-add-modal.component';
 import { TipoObraEditModalComponent } from './tipo-obra-edit-modal/tipo-obra-edit-modal.component';
-import { TipoObraUploadModalComponent } from './tipo-obra-upload-modal/tipo-obra-upload-modal.component';
 
 @Component({
   selector: 'tipo-obra-table',
@@ -54,10 +54,12 @@ export class TipoObraTableComponent implements OnInit {
         () => console.log('Modified complete'));
     }
 
-    uploadTipoObraModalShow(id: number) {
-      const activeModal = this.modalService.open(TipoObraUploadModalComponent, { size: 'lg' });
+    uploadTipoObraModalShow(id: number, descripcion: string) {
+      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
       activeModal.componentInstance.modalHeader = 'Agregar Archivo a Tipo de Obra';
       activeModal.componentInstance.id = id;
+      activeModal.componentInstance.descripcion = descripcion;
+      activeModal.componentInstance.referencia = 'TipoObra';
     }
 
     filesModalShow(id: number) {

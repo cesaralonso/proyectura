@@ -4,7 +4,7 @@
     <div class="modal-content" style="overflow-y: initial !important">
       <form [formGroup]="form" class="form-horizontal">
         <div class="modal-header">
-          <h4 class="modal-title">{{modalHeader}} - {{id}}</h4>
+          <h4 class="modal-title">Modificar Categoría de Obra {{clavecategoria}}</h4>
           <button class="close" aria-label="Close" (click)="close()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -27,7 +27,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
-          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form)">Aceptar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
         </div>
       </form>
     </div>

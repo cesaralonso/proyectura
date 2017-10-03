@@ -61,19 +61,26 @@ export class LoginComponent {
       const userId = this.toInt(response.valorRespuesta.split('|')[1]);
 
       this.userService
-        .getUser(userId)
+        .getUserAvatar(userId)
         .subscribe(
-          (data: any) => this.authLocalstorage.setAvatar(data.urlimagenperfilusuario));
+          (data: any) => {
+            if (data.length) {
+              this.authLocalstorage.setAvatar(data[1].urlarchivo);
+            } else {
+              this.authLocalstorage.setAvatar('');
+            }
+          });
   }
 
   private showModal(response: LoginResponseInterface, credentials: LoginInterface) {
     if (response.idRespuesta === 0) {
 
-      // Cargar datos de usuario logeado para guardar en Localstorage su imagen de perfil
-      // this.setAvatarInLocalStorage(response);
-
       this.toastrService.success(response.mensajeRespuesta);
       this.authLocalstorage.setCredentials(credentials, response);
+
+      // Cargar datos de usuario logeado para guardar en Localstorage su imagen de perfil
+      this.setAvatarInLocalStorage(response);
+
       this.router.navigate(['pages/dashboard']);
     } else {
       this.toastrService.error(response.mensajeRespuesta);

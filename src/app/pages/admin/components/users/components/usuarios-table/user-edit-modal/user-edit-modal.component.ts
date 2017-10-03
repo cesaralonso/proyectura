@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 
 export class UserEditModalComponent extends DialogComponent<UserInterface, any> implements OnInit, UserInterface {
 
+    _roles: string[];
+
     idusuario?: 0;
     idrol: 0;
     usuario: '';
@@ -36,7 +38,6 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
     emailAC: AbstractControl;
     telefonoAC: AbstractControl;
     idstatususuarioAC: AbstractControl;
-    emailsmsAC: AbstractControl;
 
     private _claveauth: string;
     private _usuarioauth: string;
@@ -58,8 +59,9 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
           'emailAC': [''],
           'telefonoAC': [''],
           'idstatususuarioAC': [''],
-          'emailsmsAC': [''],
         });
+
+        this._roles = [];
 
         this.idrolAC = this.form.controls['idrolAC'];
         this.usuarioAC = this.form.controls['usuarioAC'];
@@ -68,7 +70,6 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
         this.emailAC = this.form.controls['emailAC'];
         this.telefonoAC = this.form.controls['telefonoAC'];
         this.idstatususuarioAC = this.form.controls['idstatususuarioAC'];
-        this.emailsmsAC = this.form.controls['emailsmsAC'];
 
         const credenciales = this.authLocalstorage.getCredentials();
         this._claveauth = credenciales.claveauth;
@@ -79,6 +80,15 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
 
     ngOnInit() {
       this.obtenerEstatusUsuarios();
+      this.obtenerRoles();
+    }
+
+    obtenerRoles() {
+      // Obtiene Roles de Usuario
+      this.userService.obtenerRoles()
+        .subscribe(
+          (data: any) => this._roles = data,
+        );
     }
 
     obtenerEstatusUsuarios() {
@@ -110,8 +120,7 @@ export class UserEditModalComponent extends DialogComponent<UserInterface, any> 
                 email: this.email,
                 telefono: this.telefono,
                 idstatususuario: this.idstatususuario,
-                emailsms: this.emailsms,
-                
+                emailsms: '',
             })
           .subscribe((data: any) => {
             this.data = data;

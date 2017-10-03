@@ -28,14 +28,11 @@ export class UsuariosEditForm implements OnInit {
   nicknameauth: AbstractControl;
   usuarioauth: AbstractControl;
   claveauth: AbstractControl;
-  idusuarioAC: AbstractControl;
   usuarioAC: AbstractControl;
-  contrasenaAC: AbstractControl;
   nombreAC: AbstractControl;
   emailAC: AbstractControl;
   telefonoAC: AbstractControl;
   idstatususuarioAC: AbstractControl;
-  emailsmsAC: AbstractControl;
 
   private _claveauth: string;
   private _usuarioauth: string;
@@ -57,26 +54,18 @@ export class UsuariosEditForm implements OnInit {
 
 
     this.form = fb.group({
-      'claveauth': this._claveauth,
-      'nicknameauth': this._nicknameauth,
-      'usuarioauth': this._usuarioauth,
-      'idusuarioAC': [this.id],
       'usuarioAC': [''],
-      'contrasenaAC': [''],
       'nombreAC': [''],
       'emailAC': [''],
       'telefonoAC': [''],
       'idstatususuarioAC': [''],
-      'emailsmsAC': [''],
     });
 
     this.usuarioAC = this.form.controls['usuarioAC'];
-    this.contrasenaAC = this.form.controls['contrasenaAC'];
     this.nombreAC = this.form.controls['nombreAC'];
     this.emailAC = this.form.controls['emailAC'];
     this.telefonoAC = this.form.controls['telefonoAC'];
     this.idstatususuarioAC = this.form.controls['idstatususuarioAC'];
-    this.emailsmsAC = this.form.controls['emailsmsAC'];
   }
 
 
@@ -113,7 +102,20 @@ export class UsuariosEditForm implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       this.service
-        .editUser(values)
+        .editUser({
+                claveauth: this._claveauth,
+                nicknameauth: this._nicknameauth,
+                usuarioauth: this._usuarioauth,
+                idusuario: this.user.idusuario,
+                idrol: this.user.idrol,
+                usuario: this.user.usuario,
+                contrasena: this.user.contrasena,
+                nombre: this.user.nombre,
+                email: this.user.email,
+                telefono: this.user.telefono,
+                idstatususuario: this.user.idstatususuario,
+                emailsms: '',
+            })
         .subscribe(
             (data: any) => this.showToast(data, values));
     }
@@ -126,24 +128,4 @@ export class UsuariosEditForm implements OnInit {
       this.toastrService.error(data.mensajeRespuesta);
     }
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

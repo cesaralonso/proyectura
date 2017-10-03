@@ -6,7 +6,7 @@
     <div class="modal-content" style="overflow-y: initial !important">
       <form [formGroup]="form" class="form-horizontal">
         <div class="modal-header">
-          <h4 class="modal-title">{{modalHeader}}  ID: {{id}}</h4>
+          <h4 class="modal-title">Modificar Usuario {{usuario}}</h4>
           <button class="close" aria-label="Close" (click)="close()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -15,10 +15,14 @@
 
           <ba-card cardTitle="Información de Usuario">
 
-              <div class="form-group row" [ngClass]="{'has-success': (!idrolAC.valid && idrolAC.touched), 'has-success': (idrolAC.valid && idrolAC.touched)}">
-                <label for="inputidrolAC" class="col-sm-2 form-control-label">Id Rol</label>
+              <div class="form-group row" [ngClass]="{'has-error': (!idrolAC.valid && idrolAC.touched), 'has-success': (idrolAC.valid && idrolAC.touched)}">
+                <label for="inputidrolAC" class="col-sm-2 form-control-label">Rol</label>
                 <div class="col-sm-10">
-                  <input [(ngModel)]="idrol" [formControl]="idrolAC" type="number" class="form-control" id="inputidrolAC" placeholder="">
+                  <select id="inputidrolAC" class="form-control" [(ngModel)]="idrol" [formControl]="idrolAC">
+                    <option value="{{value.idrol}}" *ngFor="let value of _roles">
+                      {{value.rol}}
+                    </option>
+                  </select>
                 </div>
               </div>
 
@@ -32,7 +36,7 @@
               <div class="form-group row" [ngClass]="{'has-success': (!contrasenaAC.valid && contrasenaAC.touched), 'has-success': (contrasenaAC.valid && contrasenaAC.touched)}">
                 <label for="inputcontrasenaAC" class="col-sm-2 form-control-label">Contraseña</label>
                 <div class="col-sm-10">
-                  <input [(ngModel)]="contrasena" [formControl]="contrasenaAC" type="password" class="form-control" id="inputcontrasenaAC" placeholder="">
+                  <input [(ngModel)]="contrasena" [formControl]="contrasenaAC" type="password" class="form-control" id="inputcontrasenaAC" placeholder="" readonly>
                 </div>
               </div>
 
@@ -65,13 +69,6 @@
                       {{value.estatususuario}}
                     </option>
                   </select>
-                </div>
-              </div>
-
-              <div class="form-group row" [ngClass]="{'has-success': (!emailsmsAC.valid && emailsmsAC.touched), 'has-success': (emailsmsAC.valid && emailsmsAC.touched)}">
-                <label for="inputemailsmsAC" class="col-sm-2 form-control-label">Email SMS</label>
-                <div class="col-sm-10">
-                  <input [(ngModel)]="emailsms" [formControl]="emailsmsAC" type="email" class="form-control" id="inputemailsmsAC" placeholder="">
                 </div>
               </div>
 

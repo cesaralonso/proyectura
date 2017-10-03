@@ -74,6 +74,29 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    obtenerRoles = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRoles`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
+            .map((response: Response) => <any[]>response.json())
+            .catch(this.handleError);
+    }
+
+    getUserAvatar = (id: any): Observable<UserResponseInterface> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}ObtenerArchivosPorProcesoPorIdReferencia`;
+        const credenciales = this.authLocalstorage.getCredentials();
+        const toAdd = JSON.stringify({
+            nicknameauth: credenciales.nicknameauth,
+            usuarioauth: credenciales.usuarioauth,
+            claveauth: credenciales.claveauth,
+            proceso: 'Usuario',
+            idreferencia: id,
+        });
+        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+            .map((response: Response) => <UserResponseInterface>response.json())
+            .catch(this.handleError);
+    }
+
     deleteUser = (id: string): Observable<UserResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaUsuario`;
        

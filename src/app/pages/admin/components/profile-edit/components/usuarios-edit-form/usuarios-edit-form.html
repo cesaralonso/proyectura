@@ -4,42 +4,35 @@
     <div class="form-group row" [ngClass]="{'has-success': (!usuarioAC.valid && usuarioAC.touched), 'has-success': (usuarioAC.valid && usuarioAC.touched)}">
       <label for="inputusuarioAC" class="col-sm-3 form-control-label">Usuario</label>
       <div class="col-sm-9">
-        <input [formControl]="usuarioAC" type="text" class="form-control" id="inputusuarioAC" placeholder="usuario" value="{{user.usuario}}">
-      </div>
-    </div>
-
-    <div class="form-group row" [ngClass]="{'has-success': (!contrasenaAC.valid && contrasenaAC.touched), 'has-success': (contrasenaAC.valid && contrasenaAC.touched)}">
-      <label for="inputcontrasenaAC" class="col-sm-3 form-control-label">Contraseña</label>
-      <div class="col-sm-9">
-        <input [formControl]="contrasenaAC" type="password" class="form-control" id="inputcontrasenaAC" placeholder="contraseña" value="{{user.contrasena}}">
+        <input [ngModel]="user.usuario" [formControl]="usuarioAC" type="text" class="form-control" id="inputusuarioAC" placeholder="usuario">
       </div>
     </div>
 
     <div class="form-group row" [ngClass]="{'has-success': (!nombreAC.valid && nombreAC.touched), 'has-success': (nombreAC.valid && nombreAC.touched)}">
       <label for="inputnombreAC" class="col-sm-3 form-control-label">Nombre</label>
       <div class="col-sm-9">
-        <input [formControl]="nombreAC" type="text" class="form-control" id="inputnombreAC" placeholder="nombre" value="{{user.nombre}}">
+        <input [ngModel]="user.nombre" [formControl]="nombreAC" type="text" class="form-control" id="inputnombreAC" placeholder="nombre">
       </div>
     </div>
 
     <div class="form-group row" [ngClass]="{'has-success': (!emailAC.valid && emailAC.touched), 'has-success': (emailAC.valid && emailAC.touched)}">
       <label for="inputemailAC" class="col-sm-3 form-control-label">Email</label>
       <div class="col-sm-9">
-        <input [formControl]="emailAC" type="email" class="form-control" id="inputemailAC" placeholder="email" value="{{user.email}}">
+        <input [ngModel]="user.email" [formControl]="emailAC" type="email" class="form-control" id="inputemailAC" placeholder="email">
       </div>
     </div>
 
-    <div class="form-group row" [ngClass]="{'has-success': (!telefono.valid && telefono.touched), 'has-success': (telefono.valid && telefono.touched)}">
-      <label for="inputtelefono" class="col-sm-3 form-control-label">Teléfono</label>
+    <div class="form-group row" [ngClass]="{'has-success': (!telefonoAC.valid && telefonoAC.touched), 'has-success': (telefonoAC.valid && telefonoAC.touched)}">
+      <label for="inputtelefonoAC" class="col-sm-3 form-control-label">Teléfono</label>
       <div class="col-sm-9">
-        <input [formControl]="telefono" type="text" class="form-control" id="inputtelefono" placeholder="teléfono" value="{{user.telefono}}">
+        <input [ngModel]="user.telefono" [formControl]="telefonoAC" type="text" class="form-control" id="inputtelefonoAC" placeholder="teléfono">
       </div>
     </div>
 
     <div class="form-group row" [ngClass]="{'has-error': (!idstatususuarioAC.valid && idstatususuarioAC.touched), 'has-success': (idstatususuarioAC.valid && idstatususuarioAC.touched)}">
       <label for="inputidstatususuarioAC" class="col-sm-3 form-control-label">Estatus Usuario</label>
       <div class="col-sm-9">
-        <select class="form-control" [formControl]="idstatususuarioAC">
+        <select [ngModel]="user.idstatususuario" class="form-control" [formControl]="idstatususuarioAC" id="inputidstatususuarioAC">
           <option value="{{value.idestatususuario}}" *ngFor="let value of _estatususuarios">
             {{value.estatususuario}}
           </option>
@@ -47,12 +40,6 @@
       </div>
     </div>
 
-    <div class="form-group row" [ngClass]="{'has-success': (!emailsmsAC.valid && emailsmsAC.touched), 'has-success': (emailsmsAC.valid && emailsmsAC.touched)}">
-      <label for="inputemailsmsAC" class="col-sm-3 form-control-label">Email SMS</label>
-      <div class="col-sm-9">
-        <input [formControl]="emailsmsAC" type="email" class="form-control" id="inputemailsmsAC" placeholder="emailsms" value="{{user.emailsms}}">
-      </div>
-    </div>
 
     <div class="form-group row">
       <div class="offset-sm-2 col-sm-10">

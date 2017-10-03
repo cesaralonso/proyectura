@@ -4,7 +4,7 @@
       <div class="modal-content" style="overflow-y: initial !important">
         <form [formGroup]="form" class="form-horizontal">
           <div class="modal-header">
-            <h4 class="modal-title">{{modalHeader}} {{id}}</h4>
+            <h4 class="modal-title">Modificar Rol {{rol}}</h4>
             <button type="button" class="close" aria-label="Close" (click)="close()">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -27,7 +27,7 @@
                   <label for="inputvisible" class="col-sm-2 form-control-label">Visible</label>
                   <div class="col-sm-10">
                     <div class="checkbox">
-                      <input [(ngModel)]="visible" [formControl]="visibleAC" type="checkbox" class="form-control" id="inputvisible" placeholder="Visible">
+                      <input [(ngModel)]="visible" [formControl]="visibleAC" type="checkbox" class="" id="inputvisible" placeholder="Visible">
                     </div>
                   </div>
                 </div>

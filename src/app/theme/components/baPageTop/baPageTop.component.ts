@@ -29,7 +29,13 @@ export class BaPageTop {
     });
 
     this.isAuth = this.authService.isLoggedIn;
-    this.profileAvatar = this.authService.profileAvatar;
+    
+    this.authService.profileAvatar()
+      .then(
+        (data) => {
+          this.profileAvatar = data;
+        },
+      );
   }
 
   toggleMenu() {

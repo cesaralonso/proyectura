@@ -20,9 +20,15 @@ export class AuthService {
         )
     );
 
-    profileAvatar: string = (
-        this.localStorageService.get('profileAvatar') ? this.localStorageService.get('isLoggedIn').toString() : ''
-    );
+    profileAvatar(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            if (this.localStorageService.get('profileAvatar')) { 
+               resolve(this.localStorageService.get('profileAvatar').toString());
+            } else {
+                resolve('');
+            }
+        });
+    }
 
     toBoolean(object: any): boolean {
         return (object.toString() === 'true') ? true : false;
@@ -49,7 +55,9 @@ export class AuthService {
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <LoginResponseInterface>response.json())
             .catch(this.handleError)
-            .do(val => this.isLoggedIn = true);
+            .do(val => {
+                this.isLoggedIn = true;
+            });
     }
 
     logout(): void {

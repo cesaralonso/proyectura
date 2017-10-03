@@ -1,3 +1,9 @@
+import { UploadModalComponent } from './shared/components/upload-modal/upload-modal.component';
+import { UploadModalService } from './shared/components/upload-modal/upload-modal.service';
+import { FilesUploadModalComponent } from './shared/components/files-upload-modal/files-upload-modal.component';
+import { FilesUploadModalService } from './shared/components/files-upload-modal/file-upload-modal.service';
+
+import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './shared/auth-localstorage.service';
 import { AuthService } from './shared/auth.service';
 import { AuthGuard } from './shared/auth-guard.service';
@@ -49,6 +55,8 @@ export type StoreType = {
   bootstrap: [App],
   declarations: [
     App,
+    FilesUploadModalComponent,
+    UploadModalComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -66,12 +74,19 @@ export type StoreType = {
         prefix: 'architectools',
         storageType: 'localStorage'
     }),
+    BootstrapModalModule.forRoot({ container: document.body }),
+  ],
+  entryComponents: [
+    FilesUploadModalComponent,
+    UploadModalComponent,
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     APP_PROVIDERS,
     AuthGuard,
     AuthService,
     AuthLocalstorage,
+    FilesUploadModalService,
+    UploadModalService,
   ]
 })
 
